@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: data_visualization_production
-  username: data_visualization
-  password: <%= ENV['DATA_VISUALIZATION_DATABASE_PASSWORD'] %>
+  database: d53tp17di990ul
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PW'] %>
