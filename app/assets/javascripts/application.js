@@ -13,9 +13,9 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require bootstrap-sprockets
 //= require charts
 //= require leaflet
 //= require bc-devx
-//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
