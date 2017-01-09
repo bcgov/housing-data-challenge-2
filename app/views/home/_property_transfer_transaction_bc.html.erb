@@ -1,0 +1,172 @@
+<input id="property_transfer_transaction_bc_data" value="<%= @property_transfer_transaction_bc_data %>" type="hidden" />
+
+<div class="row">
+	<div class="col-md-6">
+		<canvas id="property_transfer_transaction_chart_bc"></canvas>
+		<p class="chart-title">< Number of Property Transfer Transactions in B.C. ></p>
+	</div>
+	<div class="col-md-6">
+		<canvas id="property_transfer_transaction_chart_bc_invest"></canvas>
+		<p class="chart-title">< Total investment of all Property Transfers in B.C. ></p>
+	</div>
+</div>
+
+<br />
+
+<canvas id="property_transfer_transaction_chart_bc_foreign"></canvas>
+<p class="chart-title">< Total Number of Foreign Citizenship ></p>
+<p class="chart-source">Source: Housing Market Infomation (June 10~29, 2016)</p>
+
+<script>
+$(document).ready(function() {
+
+	var raw = $("#property_transfer_transaction_bc_data").val();
+	var json = JSON.parse(raw);
+	var data = json["area"][0];
+
+	// options
+	var options_basic = {
+		scales: {
+			yAxes: [{
+				scaleLabel: {
+					display: true,
+					labelString: 'Transactions'
+				}
+			}]
+		},
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					//console.log(data);
+					var dataset = data.datasets[tooltipItem.datasetIndex];
+					var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+						return previousValue + currentValue;
+					});
+
+					var currentValue = dataset.data[tooltipItem.index];
+					var currentValueDollar = currentValue.toFixed(0).replace(/./g, function(c, i, a) {
+						return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+					});
+					
+					var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+					return currentValueDollar + " (" + precentage + "%)";
+				}
+			}
+		}
+	};
+
+	var options_pie = {
+		responsive: false,
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					var dataset = data.datasets[tooltipItem.datasetIndex];
+					var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+						return previousValue + currentValue;
+					});
+					var currentValue = dataset.data[tooltipItem.index];
+					var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+					return currentValue + " (" + precentage + "%)";
+				}
+			}
+		}
+	};
+
+
+	var options_pie_invest = {
+		responsive: false,
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					//console.log(data);
+					var dataset = data.datasets[tooltipItem.datasetIndex];
+					var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+						return previousValue + currentValue;
+					});
+
+					var currentValue = dataset.data[tooltipItem.index];
+					var currentValueDollar = currentValue.toFixed(0).replace(/./g, function(c, i, a) {
+						return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+					});
+					
+					var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+					return "$" + currentValueDollar + " (" + precentage + "%)";
+				}
+			}
+		}
+	};
+
+
+	// data
+	var data_bc = {
+	    labels: ["Canadian/PR","Foreign nationals"],
+	    datasets: [
+	        {
+	            data: [
+	            	data['property transfer transactions'][0]['transaction']['total'],
+	            	data['property transfer transactions'][1]['transaction']['total']
+	            ],
+	            backgroundColor: ["#36A2EB","#FFCE56"],
+	            hoverBackgroundColor: ["#36A2EB","#FFCE56"]
+	        }
+	    ]
+	};
+
+	var data_bc_invest = {
+	    labels: ["Canadian/PR","Foreign nationals"],
+	    datasets: [
+	        {
+	            data: [7213719238,390054349],
+	            backgroundColor: ["#36A2EB","#FFCE56"],
+	            hoverBackgroundColor: ["#36A2EB","#FFCE56"]
+	        }
+	    ]
+	};
+	
+	var bc_foreign = data['property transfer transactions'][1]['transaction']['country'];
+	var data_bc_foreign = {
+	    labels: Object.keys(bc_foreign),
+	    datasets: [
+	        {
+	        	label: "Property Transfer Transactions",
+	        	data: Object.values(bc_foreign),
+	        	backgroundColor: 'rgba(255, 159, 64, 0.7)',
+	        	borderColor: 'rgba(255, 159, 64, 1)',
+	        	borderWidth: 1
+	        }
+	    ]
+	};
+
+	
+
+
+	// canvas charts
+
+	var property_transfer_transaction_chart_bc = document.getElementById("property_transfer_transaction_chart_bc").getContext("2d");
+	property_transfer_transaction_chart_bc.canvas.width = 300;
+	property_transfer_transaction_chart_bc.canvas.height = 300;
+	var pie_chart_bc = new Chart(property_transfer_transaction_chart_bc,{
+	    type: 'pie',
+	    data: data_bc,
+	    options: options_pie
+	});
+
+
+	var property_transfer_transaction_chart_bc_invest = document.getElementById("property_transfer_transaction_chart_bc_invest").getContext("2d");
+	property_transfer_transaction_chart_bc_invest.canvas.width = 300;
+	property_transfer_transaction_chart_bc_invest.canvas.height = 300;
+	var pie_chart_bc_invest = new Chart(property_transfer_transaction_chart_bc_invest,{
+	    type: 'pie',
+	    data: data_bc_invest,
+	    options: options_pie_invest
+	});
+
+	var pie_chart_bc_foreign = new Chart($("#property_transfer_transaction_chart_bc_foreign"),{
+	    type: 'bar',
+	    data: data_bc_foreign,
+	    options: options_basic
+	});
+
+
+});
+</script>

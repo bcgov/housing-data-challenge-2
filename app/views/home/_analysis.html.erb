@@ -1,0 +1,304 @@
+<div class="col-md-9">
+	
+	<div class="page-header">
+        <h2 class="color-darkgreen">Introduction</h2>
+     </div>
+	
+	<div class="introduction row">
+		<div class="col-md-6">
+			<div class="card card-block project-why">
+				<p class="card-title"><strong>Project Why - Housing Data</strong></p>
+				<hr />
+				<p class="text">Solve the BC Housing Market Data Challenge, to create a visualization that enables community and infrastructure planners, and the wider public, to make decisions.</p>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="card card-block project-why">
+				<p class="card-title"><strong>Project Why - Visualizations</strong></p>
+				<hr />
+				<p class="text">Using the Housing Market Data Challenge to inform and improve the data visualization capacity and usefulness of other Crown data. Whereby the data visualization solution(s) could be adapted, enhanced, and applied to needs in other areas of government.</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="objectives well">
+		<p class="title">Housing Objectives:</p>
+		<ol>
+			<li>Where is foreign participation in the residential real estate market occurring?</li>
+			<li>Is all foreign participation "at the top end of the market"?</li>
+			<li>What is the state of foreign participation in the commercial property market?</li>
+			<li>What is the trend in housing prices around B.C.?</li>
+			<li>What proportion of the housing stock has changed ownership?</li>
+		</ol>
+	</div>
+
+
+	<div class="page-header">
+        <h2 class="color-darkgreen">Statistics</h2>
+     </div>
+
+
+	<div class="stats">
+		<p class="title">Title: Average housing sold price in Greater Vancouver</p>
+		<p class="desc">Please add any statement of analysis here</p>
+
+		<div class="chart">
+			<canvas id="avg_prices_greater_van_chart"></canvas>
+			<p class="chart-title">< Average Sold Price in Greater Vancouver ></p>
+			<p class="chart-source">Source: zolo.ca</p>
+
+			<input id="avg_prices_greater_van" value="<%= @avg_prices_greater_van.to_json %>" type="hidden" />
+		</div>
+	</div>
+	<hr />
+
+
+	<div class="stats">
+		<p class="title">Title: All Property Transfer Transactions in B.C.</p>
+		<p class="desc">Please add any statement of analysis here</p>
+
+		<div class="chart">
+			<% @choropleth_map_data = @greater_van %>
+			<%= render "choropleth_map", json: @choropleth_map_data %>
+			<p class="chart-title">< Choropleth Map: Property Transfer Transactions ></p>
+			<p class="chart-source">Source: not real</p>
+		</div>
+	</div>
+	<hr />
+
+
+	<div class="stats">
+		<p class="title">Title: Property Transfer Transactions and Investment in B.C.</p>
+		<p class="desc">Please add any statement of analysis here</p>
+
+		<div class="chart">
+			<% @property_transfer_transaction_bc_data = @property_transfer_transaction %>
+			<%= render "property_transfer_transaction_bc", json: @property_transfer_transaction_bc_data %>
+		</div>
+	</div>
+	<hr />
+
+	<div class="stats">
+		<p class="title">Title: Property Transfer Transactions and Investment in Metro Vancouver</p>
+		<p class="desc">Please add any statement of analysis here</p>
+		
+		<div class="chart">
+			<% @property_transfer_transaction_van_data = @property_transfer_transaction %>
+			<%= render "property_transfer_transaction_van", json: @property_transfer_transaction_van_data %>
+		</div>
+	</div>
+	<hr />
+
+
+	<div class="stats">
+		<p class="title">Title: The Globe and Mail: Data show drop in B.C. foreign property buyers since targeted tax</p>
+		<p class="desc">
+			B.C.’s tax on foreign home buyers in Metro Vancouver introduced more uncertainty into a market that was already cooling, with international transactions slowing to a trickle in August after hundreds of such buyers rushed to close almost a billion dollars in deals just before the new levy took effect.
+			<a href="http://www.theglobeandmail.com/news/british-columbia/data-show-drop-in-bc-foreign-property-buyers-since-targeted-tax/article32000190/" target="_blank">View More</a>
+		</p>
+		<div class="chart">
+			<canvas id="foreign_buyers_before_after_tax_chart"></canvas>
+			<p class="chart-title">< Percentage of foreign buyers before and after the tax ></p>
+			<p class="chart-source">Source: B.C. Finance Ministry</p>
+		</div>
+	</div>
+
+
+</div>
+
+<div class="col-md-3">
+	<div class="information">
+		<div class="creation">
+			<p class="color-darkgrey">Creator: <a href="#">John Doe</a></p>
+			<p class="color-darkgrey">Created Date: Jan. 6, 2017</p>
+		</div>
+		<hr />
+		<div class="sns">
+			<a href="#"><%= fa_icon "facebook-square 2x", class: "facebook" %></a>
+			<a href="#"><%= fa_icon "twitter-square 2x", class: "twitter" %></a>
+			<a href="#"><%= fa_icon "google-plus 2x", class: "google-plus" %></a>
+			<a href="#"><%= fa_icon "linkedin-square 2x", class: "linkedin" %></a>
+			<a href="#"><%= fa_icon "tumblr-square 2x", class: "tumblr" %></a>
+		</div>
+
+		<div class="dropdown">
+			<button class="btn btn-sm btn-success" id="dLabel" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Click to download <span class="caret"></span>
+			</button>
+			<ul class="dropdown-menu" aria-labelledby="dLabel">
+				<li><a href="#"><%= fa_icon "file-pdf-o" %> Statement as PDF</a></li>
+				<li><a href="#"><%= fa_icon "bar-chart" %> Charts</a></li>
+				<li><a href="#"><%= fa_icon "database" %> Data</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<hr />
+
+	<div class="more-articles">
+		<p class="color-darkgrey">Recommended Articles</p>
+		<ul style="list-style-type:none">
+			<li>
+				<a href="#">Article 1</a>
+			</li>
+			<li>
+				<a href="#">Article 2</a>
+			</li>
+			<li>
+				<a href="#">Article 3</a>
+			</li>
+			<li>
+				<a href="#">Article 4</a>
+			</li>
+			<li>
+				<a href="#">Article 5</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+	var options_basic = {
+		responsive: false,
+		scales: {
+			yAxes: [{
+				scaleLabel: {
+					display: true,
+					labelString: 'Percentage (%)'
+				}
+			}]
+		},
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					return tooltipItem.yLabel + "%";
+				}
+			}
+		}
+	};
+
+	var options_price = {
+		scales: {
+			yAxes: [{
+				ticks: {
+					callback: function(label, index, labels) {
+						return label/1000+'k';
+					}
+				},
+				scaleLabel: {
+					display: true,
+					labelString: 'Price (1k=1000)'
+				}
+			}]
+		},
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					return "$" + Number(tooltipItem.yLabel).toFixed(0).replace(/./g, function(c, i, a) {
+						return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+					});
+				}
+			}
+		}
+	};
+
+
+    var avg_sold_months = ["Jan 16", "Feb 16", "Mar 16", "Apr 16", "May 16", "June 16", "July 16", "Aug 16", "Sept 16", "Oct 16", "Nov 16", "Dec 16"];
+    var avg_sold_prices_west_van = [3620955, 3215892, 3555663, 3304361, 2876155, 3162485, 2778054, 1980733, 2784184, 2677054, 2949458];
+    var avg_sold_prices_vancouver = [1336871, 1359592, 1470781, 1422686, 1429054, 1379533, 1360277, 1213303, 1175808, 1127140, 1172082, 1175051];
+    var avg_sold_prices_north_van = [974359, 1055253, 1144327, 1223508, 1255571, 1210004, 1188592, 1002732, 1086280, 971991, 1004365, 1059840];
+    var avg_sold_prices_burnaby = [735062, 857895, 889463, 932661, 932629, 875320, 808498, 715156, 709240, 798380, 693008, 701231];
+    var avg_sold_prices_richmond = [948466, 982736, 1027071, 1029593, 972520, 961972, 966925, 752345, 938316, 908381, 848498, 840512];
+    var avg_sold_prices_coquitlam = [852199, 757966, 797636, 835253, 858569, 799123, 761269, 746609, 641148, 676888, 664178, 730638];
+    var avg_sold_prices_new_west = [521640, 544049, 657623, 587864, 600909, 604538, 560420, 523154, 451772, 503274, 542533, 527965];
+    
+
+	var avg_prices_greater_van = {
+        labels: avg_sold_months,
+        datasets: [{
+            label: 'West Vancouver',
+            data: avg_sold_prices_west_van,
+            backgroundColor: 'rgba(255, 99, 132, 0.7)',
+            borderColor: 'rgba(255, 99, 132, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Vancouver',
+            data: avg_sold_prices_vancouver,
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }, {
+            label: 'North Vancouver',
+            data: avg_sold_prices_north_van,
+            backgroundColor: 'rgba(255, 206, 86, 0.7)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Richmond',
+            data: avg_sold_prices_richmond,
+            backgroundColor: 'rgba(153, 102, 255, 0.7)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Burnaby',
+            data: avg_sold_prices_burnaby,
+            backgroundColor: 'rgba(75, 192, 192, 0.7)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Coquitlam',
+            data: avg_sold_prices_coquitlam,
+            backgroundColor: 'rgba(255, 159, 64, 0.7)',
+            borderColor: 'rgba(255, 159, 64, 1)',
+            borderWidth: 1
+        }, {
+            label: 'New Westminster',
+            data: avg_sold_prices_new_west,
+            backgroundColor: 'rgba(154, 162, 235, 0.7)',
+            borderColor: 'rgba(154, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+
+  	var foreign_buyers_before_after_tax = {
+        labels: ["B.C.", "Metro Vancouver", "Richmond", "Victoria"],
+        datasets: [{
+            label: 'June 10 - Aug. 1',
+            data: [8.4, 13.2, 24.7, 3.9],
+            backgroundColor: 'rgba(255, 206, 86, 0.7)',
+            borderColor: 'rgba(255, 206, 86, 1)',
+            borderWidth: 1
+        }, {
+            label: 'Aug. 2 - 31',
+            data: [1.4, 0.9, 1.9, 3.7],
+            backgroundColor: 'rgba(54, 162, 235, 0.7)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+        }]
+    };
+
+
+	var avg_prices_greater_van_chart = new Chart($("#avg_prices_greater_van_chart"), {
+	    type: "bar",
+	    data: avg_prices_greater_van,
+	    options: options_price
+	});
+
+
+
+    var foreign_buyers_before_after_tax_chart = document.getElementById("foreign_buyers_before_after_tax_chart").getContext("2d");
+	foreign_buyers_before_after_tax_chart.canvas.width = 450;
+	foreign_buyers_before_after_tax_chart.canvas.height = 300;
+
+	var foreign_buyers_before_after_tax_chart = new Chart(foreign_buyers_before_after_tax_chart, {
+	    type: "bar",
+	    data: foreign_buyers_before_after_tax,
+	    options: options_basic
+	});
+
+
+});
+</script>

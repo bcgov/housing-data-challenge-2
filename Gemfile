@@ -8,6 +8,8 @@ end
 gem 'devise'
 gem 'activeadmin', github: 'activeadmin'
 gem 'inherited_resources', github: 'activeadmin/inherited_resources'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'font-awesome-rails'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
