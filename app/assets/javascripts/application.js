@@ -10,12 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require bootstrap-sprockets
+
 //= require jquery
 //= require jquery_ujs
 //= require charts
 //= require leaflet
 //= require bc-devx
-
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
