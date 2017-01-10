@@ -579,6 +579,18 @@ $(document).ready(function() {
 			yAxes: [{
 				stacked: true
 			}]
+		},
+		tooltips: {
+			callbacks: {
+				label: function(tooltipItem, data) {
+					var dataset = data.datasets[tooltipItem.datasetIndex];
+					var total = data.datasets[2].data[tooltipItem.index];
+
+					var currentValue = dataset.data[tooltipItem.index];					
+					var precentage = Math.floor(((currentValue/total) * 100)+0.5);
+					return currentValue + " (" + precentage + "%)";
+				}
+			}
 		}
 	};
 
