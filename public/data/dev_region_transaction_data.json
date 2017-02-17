@@ -1,0 +1,2472 @@
+{
+  "months": ["June 01","July 01","Aug 01","Sep 01","Oct 01","Nov 01","Dec 01"],
+  "development_region": [
+    {
+      "id": "Cariboo",
+      "name": "Cariboo",
+      "monthly_total_trans": [638,519,487,463,422,313,253],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "Cariboo",
+          "name": "Cariboo",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [296,230,209,208,166,133,101],
+            "total": 1343,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [243,214,192,194,158,117,98],
+                "total": 1216,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [81,77,60,54,41,24,33],
+                    "total": 370
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [3,3,1,3,0,5,0],
+                    "total": 15
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [11,5,2,5,7,5,2],
+                    "total": 37
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [6,1,1,3,1,1,0],
+                    "total": 13
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [130,119,119,105,70,77,54],
+                    "total": 674
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [7,8,7,8,5,3,6],
+                    "total": 44
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,1,0,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [5,1,2,16,33,2,3],
+                    "total": 62
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [8,6,1,6,3,8,3],
+                "total": 35
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [8,8,4,2,3,2,0],
+                "total": 27
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [31,2,12,4,0,5,0],
+                "total": 54
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [6,0,0,2,2,1,0],
+                "total": 11
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "FraserFortGeorge",
+          "name": "Fraser-Fort George",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [342,289,278,255,256,180,152],
+            "total": 1752,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [324,279,265,248,241,168,140],
+                "total": 1665,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [56,45,50,29,46,34,28],
+                    "total": 288
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [2,1,1,6,1,2,2],
+                    "total": 15
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [2,2,1,1,4,2,0],
+                    "total": 12
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [3,3,1,1,1,3,1],
+                    "total": 13
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [233,182,189,169,146,105,95],
+                    "total": 1119
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [20,21,17,26,8,9,11],
+                    "total": 112
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,1,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [8,25,6,16,35,12,3],
+                    "total": 105
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [15,5,5,4,11,5,9],
+                "total": 54
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [2,4,5,3,0,3,1],
+                "total": 18
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [1,1,1,0,2,3,2],
+                "total": 10
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,2,0,2,1,0],
+                "total": 5
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Kootenay",
+      "name": "Kootenay",
+      "monthly_total_trans": [631,483,442,469,465,422,312],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "CentralKootenay",
+          "name": "Central Kootenay",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [240,198,183,170,180,126,131],
+            "total": 1228,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [228,195,173,166,168,120,124],
+                "total": 1174,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [57,45,34,30,19,18,24],
+                    "total": 227
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [6,3,4,4,2,3,6],
+                    "total": 28
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,4,0,1,1,3,0],
+                    "total": 10
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [3,0,1,2,0,0,0],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [143,132,118,99,77,81,87],
+                    "total": 737
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [14,10,12,15,8,8,3],
+                    "total": 7
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [4,1,4,15,61,7,4],
+                    "total": 96
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [10,0,6,1,2,2,5],
+                "total": 26
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [2,2,2,3,7,2,1],
+                "total": 19
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,1,0,0,2,2,0],
+                "total": 5
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,2,0,1,0,1],
+                "total": 4
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "EastKootenay",
+          "name": "East Kootenay",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [241,184,169,213,206,222,134],
+            "total": 1369,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [227,168,157,202,191,188,122],
+                "total": 1255,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [13,8,7,9,14,22,11],
+                    "total": 84
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [2,1,0,3,1,3,3],
+                    "total": 13
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [2,2,1,3,0,3,0],
+                    "total": 11
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [2,2,4,1,0,6,2],
+                    "total": 17
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [160,118,103,122,119,99,73],
+                    "total": 794
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [43,28,35,36,26,52,31],
+                    "total": 251
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,1,2,1,0,1],
+                    "total": 5
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [5,9,6,26,30,3,1],
+                    "total": 80
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [8,5,7,6,5,19,5],
+                "total": 55
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [6,11,3,4,8,8,5],
+                "total": 45
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,1,0,1,4,2],
+                "total": 8
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,1,1,1,3,0],
+                "total": 6
+              }
+            ]
+          }
+        },
+        {
+          "order": 3,
+          "id": "KootenayBoundary",
+          "name": "Kootenay Boundary",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [79,150,101,90,86,74,47],
+            "total": 627,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [74,144,94,83,77,72,46],
+                "total": 590,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [6,21,15,12,3,6,4],
+                    "total": 67
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [1,2,1,0,0,1,0],
+                    "total": 5
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,2,1,0,0,1,1],
+                    "total": 5
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,0,1,0,0,2],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [56,101,65,61,62,55,33],
+                    "total": 433
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [0,16,10,8,5,8,5],
+                    "total": 52
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,1,0,0,0,0,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [11,1,2,1,7,1,1],
+                    "total": 24
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [3,2,2,7,7,2,0],
+                "total": 23
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [2,4,5,3,0,3,1],
+                "total": 12
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,1,0,0,0,0,0],
+                "total": 1
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [1,0,0,0,0,0,0],
+                "total": 1
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "MainlandSouthwest",
+      "name": "Mainland/Southwest",
+      "monthly_total_trans": [11417,10973,8838,7363,6116,6314,5257],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "FraserValley",
+          "name": "Fraser Valley",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [966,1528,1431,1329,1094,870,647],
+            "total": 7865,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [861,1496,1385,1293,1052,849,617],
+                "total": 7553,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [25,54,43,51,36,33,14],
+                    "total": 256
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [9,12,2,14,5,5,5],
+                    "total": 52
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [14,33,19,25,19,14,15],
+                    "total": 139
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [2,4,6,3,2,6,1],
+                    "total": 24
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [345,929,862,771,526,377,300],
+                    "total": 4110
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [218,390,370,368,272,261,236],
+                    "total": 2115
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [4,4,8,3,1,8,17],
+                    "total": 45
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [244,70,75,58,191,145,29],
+                    "total": 812
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [44,16,27,18,17,12,16],
+                "total": 150
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [10,9,13,8,13,6,2],
+                "total": 61
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [23,7,6,7,10,2,8],
+                "total": 63
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [28,0,0,3,2,1,4],
+                "total": 38
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "MetroVancouver",
+          "name": "Metro Vancouver",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [4839,9292,9040,7094,5868,5120,4365],
+            "total": 45618,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [4694,9075,8886,6948,5644,5013,4216],
+                "total": 44476,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [24,98,71,68,66,44,38],
+                    "total": 409
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [10,16,19,23,11,16,15],
+                    "total": 110
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [9,16,25,26,21,11,13],
+                    "total": 121
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [35,74,74,57,50,38,38],
+                    "total": 366
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [1071,3852,3656,2705,1807,1358,1075],
+                    "total": 15524
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [1660,3811,3764,3109,2563,2214,1954],
+                    "total": 19075
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [23,45,42,52,45,34,72],
+                    "total": 313
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [1862,1163,1235,908,1081,1298,1011],
+                    "total": 8558
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [124,193,131,127,204,99,134],
+                "total": 1012
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [3,4,2,3,6,1,2],
+                "total": 21
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [2,13,3,9,10,2,4],
+                "total": 43
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [16,7,18,7,4,5,9],
+                "total": 66
+              }
+            ]
+          }
+        },
+        {
+          "order": 3,
+          "id": "SquamishLillooet",
+          "name": "Squamish-Lillooet",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [236,331,285,273,270,247,179],
+            "total": 1821,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [217,294,240,255,251,219,163],
+                "total": 1639,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [16,13,12,11,13,11,6],
+                    "total": 82
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [5,3,7,2,0,2,1],
+                    "total": 20
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,1,0,1,4,2,0],
+                    "total": 9
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,2,1,0,0,5],
+                    "total": 8
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [55,116,88,92,67,67,35],
+                    "total": 520
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [68,120,93,101,109,90,83],
+                    "total": 664
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [26,37,19,15,38,22,29],
+                    "total": 186
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [46,4,19,32,20,25,4],
+                    "total": 150
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [6,6,31,6,7,14,3],
+                "total": 73
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [13,30,12,5,10,14,12],
+                "total": 96
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,2,6,0,0,1],
+                "total": 9
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,1,0,1,2,0,0],
+                "total": 4
+              }
+            ]
+          }
+        },
+        {
+          "order": 4,
+          "id": "SunshineCoast",
+          "name": "Sunshine Coast",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [131,75,266,217,142,77,66],
+            "total": 974,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [122,72,250,209,142,73,61],
+                "total": 929,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [14,6,29,28,6,6,7],
+                    "total": 96
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [3,0,0,2,2,1,0],
+                    "total": 8
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,1,0,0,1,0],
+                    "total": 2
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,1,1,1,0,0],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [81,34,176,150,99,44,40],
+                    "total": 624
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [12,15,30,24,26,14,11],
+                    "total": 132
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,2,1,0,0,0],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [12,17,11,3,8,7,3],
+                    "total": 61
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [5,0,4,1,0,1,3],
+                "total": 14
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [2,1,9,6,0,2,1],
+                "total": 21
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [2,1,0,0,0,0,0],
+                "total": 3
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,1,3,1,0,1,1],
+                "total": 7
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "NechakoNorthCoast",
+      "name": "Nechako & North Coast",
+      "monthly_total_trans": [272,25,196,198,133,154,115],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "BulkleyNechako",
+          "name": "Bulkley Nechako",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [114,71,131,118,112,67,59],
+            "total": 672,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [104,64,119,106,109,62,49],
+                "total": 613,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [30,13,50,43,36,22,12],
+                    "total": 206
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [3,0,0,4,8,1,1],
+                    "total": 17
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [3,2,4,2,3,0,0],
+                    "total": 14
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [2,0,3,0,0,0,1],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [54,39,55,54,60,33,28],
+                    "total": 323
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [0,0,3,0,1,2,5],
+                    "total": 11
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,1],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [12,10,4,3,1,4,1],
+                    "total": 35
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [2,4,5,5,1,2,3],
+                "total": 22
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [1,2,4,1,1,0,3],
+                "total": 12
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [4,1,2,5,0,2,4],
+                "total": 18
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [3,0,1,1,1,1,0],
+                "total": 7
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "KitimatStikine",
+          "name": "Kitimat-Stikine",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [54,33,96,59,44,45,29],
+            "total": 360,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [44,31,90,56,40,45,27],
+                "total": 333,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [5,2,16,3,5,9,2],
+                    "total": 42
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [0,0,0,1,0,1,2],
+                    "total": 4
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,1,0,0,0,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [34,19,68,48,34,33,19],
+                    "total": 255
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [4,4,4,3,1,2,4],
+                    "total": 22
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [1,6,1,1,0,0,0],
+                    "total": 9
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [3,2,5,1,3,0,1],
+                "total": 15
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,0,1,2,0,0,0],
+                "total": 3
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,0,0,0,0],
+                "total": 0
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [7,0,0,0,1,0,1],
+                "total": 9
+              }
+            ]
+          }
+        },
+        {
+          "order": 3,
+          "id": "NorthCoast",
+          "name": "North Coast",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [54,33,96,59,44,45,29],
+            "total": 261,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [28,27,41,48,35,40,19],
+                "total": 238,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [2,2,3,1,1,1,1],
+                    "total": 11
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [1,1,1,1,0,0,2],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,1,0,0,0,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [20,22,35,44,33,36,16],
+                    "total": 206
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [0,1,0,2,0,3,0],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [1,0,1,0,0,0,0],
+                    "total": 2
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [4,1,0,0,1,0,0],
+                    "total": 6
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [1,0,4,0,4,1,3],
+                "total": 13
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,0,0,0,0,1,0],
+                "total": 1
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,0,0,0,0],
+                "total": 0
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,3,0,0,1,0,5],
+                "total": 9
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Northeast",
+      "name": "Northeast",
+      "monthly_total_trans": [142,113,116,127,120,134,118],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "NorthernRockiesPeaceRiver",
+          "name": "Northern Rockies-Peace River",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [116,127,120,142,113,134,118],
+            "total": 870,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [243,214,192,194,158,117,98],
+                "total": 1216,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [12,14,14,12,17,15,16],
+                    "total": 100
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [0,1,0,1,1,0,0],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [2,5,2,3,4,1,1],
+                    "total": 18
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [71,68,64,72,66,76,46],
+                    "total": 463
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [4,5,1,8,2,9,3],
+                    "total": 32
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,1,2,2,0,0,1],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [4,13,13,16,1,7,0],
+                    "total": 54
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [14,5,10,8,4,10,19],
+                "total": 70
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [1,1,1,1,1,0,0],
+                "total": 5
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [7,14,11,15,16,16,32],
+                "total": 111
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [1,0,2,4,1,0,0],
+                "total": 8
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "ThompsonOkanagan",
+      "name": "Thompson/Okanagan",
+      "monthly_total_trans": [2740,2399,2535,2367,1833,1757,1312],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "CentralOkanagan",
+          "name": "Central Okanagan",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [1048,931,716,1077,983,680,529],
+            "total": 5964,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [1031,904,697,1047,975,652,517],
+                "total": 5823,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [17,20,22,30,27,24,11],
+                    "total": 151
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [7,5,0,5,3,2,3],
+                    "total": 25
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,5,8,7,3,5,4],
+                    "total": 33
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,4,1,5,4,3,3],
+                    "total": 20
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [596,435,303,664,582,304,267],
+                    "total": 3151
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [315,272,165,291,262,207,199],
+                    "total": 1711
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [4,5,3,0,3,5,2],
+                    "total": 22
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [91,158,195,45,91,102,28],
+                    "total": 710
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [13,20,12,15,5,19,7],
+                "total": 91
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [1,5,3,6,2,5,0],
+                "total": 22
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [1,2,4,7,1,3,5],
+                "total": 23
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [2,0,0,2,0,1,0],
+                "total": 5
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "ColumbiaShuswap",
+          "name": "Columbia Shuswap",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [212,208,151,283,231,156,84],
+            "total": 1325,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [191,195,139,261,214,149,74],
+                "total": 1223,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [18,25,15,37,30,12,11],
+                    "total": 148
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [5,1,3,3,0,3,1],
+                    "total": 16
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [7,3,2,5,3,4,1],
+                    "total": 25
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [1,0,4,3,0,1,0],
+                    "total": 9
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [128,124,80,176,150,93,45],
+                    "total": 796
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [24,18,11,30,22,23,9],
+                    "total": 137
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [8,24,24,7,9,13,7],
+                    "total": 92
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [7,6,4,12,4,3,4],
+                "total": 40
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [12,4,3,7,9,1,4],
+                "total": 40
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [1,1,2,3,0,3,0],
+                "total": 10
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [1,2,3,0,4,0,2],
+                "total": 12
+              }
+            ]
+          }
+        },
+        {
+          "order": 3,
+          "id": "NorthOkanagan",
+          "name": "North Okanagan",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [307,395,382,439,395,302,203],
+            "total": 2423,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [281,388,362,422,383,282,188],
+                "total": 2306,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [20,28,34,31,28,27,21],
+                    "total": 189
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [1,1,1,3,2,2,3],
+                    "total": 13
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [10,10,8,71,11,8,6],
+                    "total": 124
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [2,0,3,0,3,0,1],
+                    "total": 9
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [148,242,211,232,267,170,125],
+                    "total": 1395
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [38,80,69,70,59,58,27],
+                    "total": 401
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,1,0,0,2,1],
+                    "total": 4
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [62,27,35,15,13,15,4],
+                    "total": 171
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [14,6,15,8,7,6,12],
+                "total": 68
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [8,0,5,1,3,7,1],
+                "total": 25
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [4,1,0,7,1,6,1],
+                "total": 20
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,0,1,1,1,1],
+                "total": 4
+              }
+            ]
+          }
+        },
+        {
+          "order": 4,
+          "id": "OkanaganSimilkameen",
+          "name": "Okanagan-Similkameen",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [358,376,396,284,450,297,239],
+            "total": 2400,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [335,351,366,273,425,265,222],
+                "total": 2237,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [27,29,26,12,40,30,20],
+                    "total": 184
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [2,5,2,2,5,3,2],
+                    "total": 21
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [6,6,5,5,12,4,3],
+                    "total": 41
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [2,5,4,3,4,5,1],
+                    "total": 24
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [200,209,204,135,266,129,122],
+                    "total": 1265
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [83,72,82,55,79,71,66],
+                    "total": 508
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [1,2,2,0,1,2,6],
+                    "total": 14
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [14,23,41,61,18,21,2],
+                    "total": 180
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [5,11,16,6,11,9,6],
+                "total": 64
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [9,8,8,2,4,16,6],
+                "total": 53
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [7,6,5,3,5,6,4],
+                "total": 36
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [2,0,1,0,5,1,1],
+                "total": 10
+              }
+            ]
+          }
+        },
+        {
+          "order": 5,
+          "id": "ThompsonNicola",
+          "name": "Thompson-Nicola",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [432,504,450,375,491,322,257],
+            "total": 2831,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [422,481,429,360,462,292,243],
+                "total": 2689,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [34,33,40,17,41,32,21],
+                    "total": 218
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [2,3,5,2,1,1,6],
+                    "total": 20
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [6,11,4,4,8,5,6],
+                    "total": 44
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,1,1,2,0,0],
+                    "total": 4
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [294,343,252,207,312,204,166],
+                    "total": 1778
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [76,77,72,46,68,37,37],
+                    "total": 413
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [1,2,2,4,5,4,5],
+                    "total": 23
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [9,12,53,79,25,9,2],
+                    "total": 189
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [6,6,8,10,14,16,10],
+                "total": 70
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [2,4,6,3,4,4,4],
+                "total": 27
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [2,11,5,1,8,8,0],
+                "total": 35
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,2,2,1,3,2,0],
+                "total": 10
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "VancouverIslandCoast",
+      "name": "Vancouver Island/Coast",
+      "monthly_total_trans": [3647,2996,3075,2612,2180,1971,1625],
+      "regional_district": [
+        {
+          "order": 1,
+          "id": "AlberniClayoquot",
+          "name": "Alberni Clayoquot",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [130,107,135,142,122,119,74],
+            "total": 829,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [120,98,130,135,119,114,73],
+                "total": 789,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [11,6,8,9,2,15,9],
+                    "total": 60
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [4,3,5,3,0,0,2],
+                    "total": 17
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,0,0,0,1,2,0],
+                    "total": 4
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [4,0,1,0,3,2,0],
+                    "total": 10
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [91,88,98,97,71,72,52],
+                    "total": 569
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [5,1,13,14,9,9,3],
+                    "total": 54
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [3,0,2,0,1,7,6],
+                    "total": 19
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [1,0,3,12,32,7,1],
+                    "total": 56
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [5,5,3,6,1,4,1],
+                "total": 25
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [5,4,2,1,2,1,0],
+                "total": 15
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,0,0,0],
+                "total": 0
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,0,0,0,0],
+                "total": 0
+              }
+            ]
+          }
+        },
+        {
+          "order": 2,
+          "id": "Capital",
+          "name": "Capital",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [1595,1308,1317,1097,907,879,790],
+            "total": 7893,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [1567,1291,1306,1074,879,848,735],
+                "total": 7700,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [32,26,33,30,26,34,21],
+                    "total": 202
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [5,5,5,5,4,6,6],
+                    "total": 36
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [4,4,4,4,1,3,0],
+                    "total": 20
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [16,16,21,24,8,17,5],
+                    "total": 107
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [802,696,716,485,313,431,338],
+                    "total": 3781
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [509,412,442,315,189,279,264],
+                    "total": 2410
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [95,3,5,5,3,11,7],
+                    "total": 129
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [104,129,80,206,335,67,94],
+                    "total": 1015
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [25,13,10,16,22,29,51],
+                "total": 166
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,0,0,2,1,0,0],
+                "total": 3
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [2,0,0,3,0,0,2],
+                "total": 7
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [1,4,1,2,5,2,2],
+                "total": 17
+              }
+            ]
+          }
+        },
+        {
+          "order": 3,
+          "id": "ComoxValley",
+          "name": "Comox Valley",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [348,314,338,247,213,172,166],
+            "total": 1798,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [337,310,319,238,199,166,156],
+                "total": 1725,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [17,15,22,13,13,11,13],
+                    "total": 104
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [0,1,0,1,3,2,1],
+                    "total": 8
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,5,0,0,0,1],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [1,0,0,2,0,0,0],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [247,220,219,147,107,107,93],
+                    "total": 1140
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [62,51,43,43,21,31,36],
+                    "total": 287
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [1,1,2,2,1,2,10],
+                    "total": 19
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [9,22,28,30,54,13,2],
+                    "total": 158
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [9,2,17,4,7,2,6],
+                "total": 47
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [1,0,1,1,3,2,4],
+                "total": 12
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,1,1,1,0,0,0],
+                "total": 3
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [1,1,0,3,4,2,0],
+                "total": 11
+              }
+            ]
+          }
+        },
+        {
+          "order": 4,
+          "id": "CowichanValley",
+          "name": "Cowichan Valley",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [172,379,324,249,243,159,109],
+            "total": 1635,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [168,367,318,245,227,153,108],
+                "total": 1586,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [12,30,24,26,22,16,6],
+                    "total": 136
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [3,3,2,3,0,2,2],
+                    "total": 15
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,4,2,4,2,1,0],
+                    "total": 14
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [1,0,1,0,2,1,1],
+                    "total": 6
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [86,283,251,161,135,104,71],
+                    "total": 1091
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [21,37,33,36,24,24,23],
+                    "total": 198
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [1,0,1,1,2,0,3],
+                    "total": 8
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [43,10,4,14,40,5,2],
+                    "total": 118
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [4,3,2,3,13,3,1],
+                "total": 29
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,5,1,1,2,1,0],
+                "total": 10
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,1,1,0,1,1,0],
+                "total": 4
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,3,2,0,0,1,0],
+                "total": 6
+              }
+            ]
+          }
+        },
+        {
+          "order": 5,
+          "id": "MountWaddington",
+          "name": "Mount Waddington",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [14,27,24,32,31,21,15],
+            "total": 164,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [13,25,24,31,30,21,13],
+                "total": 157,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [0,1,1,1,2,1,3],
+                    "total": 9
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [0,0,0,0,0,1,0],
+                    "total": 1
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,0,0,0,1,2],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [8,20,21,28,22,13,6],
+                    "total": 118
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [3,4,2,2,5,5,2],
+                    "total": 23
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [2,0,0,0,1,0,0],
+                    "total": 3
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [1,1,0,1,1,0,2],
+                "total": 6
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,0,0,0,0,0,0],
+                "total": 0
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,0,0,0,0],
+                "total": 0
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,1,0,0,0,0,0],
+                "total": 1
+              }
+            ]
+          }
+        },
+        {
+          "order": 6,
+          "id": "Nanaimo",
+          "name": "Alberni Clayoquot",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [551,918,683,758,635,461,320],
+            "total": 4326,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [539,873,657,740,607,447,304],
+                "total": 4167,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [33,51,39,42,28,25,15],
+                    "total": 233
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [1,5,3,4,3,6,2],
+                    "total": 24
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,1,1,2,2,0,1],
+                    "total": 7
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [1,3,2,2,5,3,3],
+                    "total": 19
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [249,544,439,506,345,284,183],
+                    "total": 2550
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [69,142,116,129,98,78,71],
+                    "total": 703
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [3,80,8,5,11,3,8],
+                    "total": 118
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [183,47,49,50,115,48,21],
+                    "total": 513
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [8,25,9,10,22,8,10],
+                "total": 92
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [4,14,17,4,4,4,5],
+                "total": 52
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,1,0,1,0],
+                "total": 2
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,6,0,3,2,1,1],
+                "total": 13
+              }
+            ]
+          }
+        },
+        {
+          "order": 7,
+          "id": "PowellRiver",
+          "name": "Powell River",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [57,87,96,81,58,36,41],
+            "total": 456,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [55,82,90,79,56,35,40],
+                "total": 437,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [2,10,11,7,4,4,6],
+                    "total": 44
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [1,0,0,0,0,0,1],
+                    "total": 2
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [1,0,0,1,0,0,1],
+                    "total": 3
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,3,1,1,0,0],
+                    "total": 5
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [30,63,69,61,39,30,30],
+                    "total": 322
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [4,6,3,2,3,0,2],
+                    "total": 20
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [17,3,4,7,9,1,0],
+                    "total": 41
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [1,3,4,1,2,1,1],
+                "total": 13
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [0,1,2,0,0,0,0],
+                "total": 3
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [1,0,0,0,0,0,0],
+                "total": 1
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,1,0,1,0,0,0],
+                "total": 2
+              }
+            ]
+          }
+        },
+        {
+          "order": 8,
+          "id": "Strathcona",
+          "name": "Strathcona",
+          "monthly_total_property_types": {
+            "id": "no_mkt_trans",
+            "name": "Total Market Transactions",
+            "monthly": [159,144,163,140,165,124,110],
+            "total": 1005,
+            "property_types": [
+              {
+                "id": "no_resid_trans",
+                "name": "Residential",
+                "monthly": [156,139,157,138,161,120,103],
+                "total": 974,
+                "residential_types": [
+                  {
+                    "id": "no_resid_acreage_trans",
+                    "name": "Acreage",
+                    "monthly": [7,3,2,1,7,3,2],
+                    "total": 25
+                  },
+                  {
+                    "id": "resid_comm_count",
+                    "name": "Commerce",
+                    "monthly": [3,1,0,0,1,4,1],
+                    "total": 10
+                  },
+                  {
+                    "id": "no_resid_farm",
+                    "name": "Residential Farm",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_fam",
+                    "name": "Multi-Family",
+                    "monthly": [0,0,1,0,2,3,1],
+                    "total": 7
+                  },
+                  {
+                    "id": "no_res_1fam",
+                    "name": "Single-Family",
+                    "monthly": [101,92,129,113,121,87,82],
+                    "total": 725
+                  },
+                  {
+                    "id": "no_resid_strata",
+                    "name": "Strata Residential",
+                    "monthly": [21,12,23,19,27,15,14],
+                    "total": 131
+                  },
+                  {
+                    "id": "no_resid_non_strata",
+                    "name": "Strata Non-Residential or Rental",
+                    "monthly": [0,0,0,0,0,0,0],
+                    "total": 0
+                  },
+                  {
+                    "id": "no_resid_other",
+                    "name": "Other",
+                    "monthly": [24,31,2,5,3,8,3],
+                    "total": 76
+                  }
+                ]
+              },
+              {
+                "id": "comm_tot",
+                "name": "Commercial",
+                "monthly": [2,1,4,2,4,4,3],
+                "total": 20
+              },
+              {
+                "id": "recr_tot",
+                "name": "Recreational",
+                "monthly": [1,4,2,0,0,0,0],
+                "total": 7
+              },
+              {
+                "id": "farm_tot",
+                "name": "Farm",
+                "monthly": [0,0,0,0,0,0,1],
+                "total": 1
+              },
+              {
+                "id": "unkn_tot",
+                "name": "Other/Unknown",
+                "monthly": [0,0,0,0,0,0,3],
+                "total": 3
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

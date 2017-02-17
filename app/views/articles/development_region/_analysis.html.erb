@@ -1,0 +1,42 @@
+
+<!-- Right panel -->
+<div class="col-md-9">
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Choropleth Map for Total Market Transactions</h3>
+      <p class="color-grey">Source: BC Data Catalogue</p>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/development_region/dev_region_map", json: [@dev_region_geo_data, @dev_region_transaction_data] %>
+    </div>
+
+    <div class="article-footer">
+      <div  class="bs-callout bs-callout-warning">
+        <h4>Data Dictionary</h4>
+        <%= render "articles/util/data_dictionary" %>
+      </div>
+    </div>
+  </div>  
+
+  <hr />
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">[Reference] B.C. Population in 2016</h3>
+      <p class="color-grey">Source: BC Stats</p>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/development_region/dev_region_population" %>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Left panel -->
+<div class="col-md-3">
+  <%= render "articles/util/right_panel_detail" %>
+</div>

@@ -1,0 +1,395 @@
+<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
+<% @dev_region_transaction_json = JSON.parse(@dev_region_transaction_data) %>
+
+
+<% @dev_region_transaction_json['development_region'].each do |data| %>
+
+  <div id="<%= data['id'] %>Modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h3 class="modal-title" id="myModalLabel">Details of <%= data['name'] %></h3>
+        </div>
+        <div class="modal-body">
+
+          <div id="<%= data['id'] %>Canvas"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours = [
+    {
+      "color": "blue",
+      "rgba": {"opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)"}
+    },
+    {
+      "color": "orange",
+      "rgba": {"opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)"}
+    },
+    {
+      "color": "yellow",
+      "rgba": {"opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)"} 
+    },
+    {
+      "color": "green",
+      "rgba": {"opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)"}
+    },
+    {
+      "color": "sky-blue",
+      "rgba": {"opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)"}
+    },
+    {
+      "color": "bluish-violet",
+      "rgba": {"opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)"}
+    },
+    {
+      "color": "purple",
+      "rgba": {"opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)"}
+    },
+    {
+      "color": "red",
+      "rgba": {"opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"} 
+    },
+    {
+      "color": "light-blue",
+      "rgba": {"opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
+    }
+  ];
+
+  // options
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+  var options_stack = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        stacked: true
+      }],
+      yAxes: [{
+        stacked: true
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = data.datasets[5].data[tooltipItem.index];
+
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+
+  var options_hori_bar = {
+    scales: {
+      xAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000+'k';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Transactions (1k=1000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+
+  var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
+  $canvas = $("#CaribooCanvas");
+  $canvas.append("here");
+
+  var months = dev_region_transaction_data['months'];
+  var dev_region = dev_region_transaction_data['development_region'];
+
+  var html = '';
+  for (var i = 0; i < dev_region.length; i++) {
+    var data = dev_region[i];
+    var id = data['id'];
+    var name = data['name'];
+    
+    html += '<div class="article">' +
+              '<div class="article-header">' +
+                '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
+              '</div>' +
+              '<div class="article-body">' +
+                '<div class="row">' +
+                  '<div class="col-md-2"></div>' +
+                  '<div class="col-md-8">' +
+                    '<canvas id="' + id + '_dev_region_canvas"></canvas>' +
+                  '</div>' +
+                '<div class="col-md-2"></div>' +
+              '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="article">' +
+              '<div class="article-header">' +
+                '<h3 class="color-darkblue">Comparison of Regional Districts</h3>' +
+              '</div>' +
+              '<div class="article-body">' +
+                '<div class="row">' +
+                  '<div class="col-md-8">' +
+                    '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
+                    '<canvas id="' + id + '_dev_region_district_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-4">' +
+                    '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
+                    '<canvas id="' + id + '_dev_region_compare_canvas"></canvas>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+
+
+    var dev_region_district_json = data['regional_district'];
+
+    for (var k = 0; k < dev_region_district_json.length; k++) {
+      var reg_district_id = dev_region_district_json[k]['id'];
+      var reg_district_name = dev_region_district_json[k]['name'];
+      html += '<div class="article">' +
+                '<div class="article-header">' +
+                  '<h3 class="color-darkblue">Overview of ' + reg_district_name + ' Regional Districts</h3>' +
+                '</div>' +
+                '<div class="article-body">' +
+                  '<div class="row">' +
+                    '<div class="col-md-8">' +
+                      '<p class="color-grey make-center make-bold">Property Types</p>' +
+                      '<canvas id="dev_region_district_' + reg_district_id + '_all_type_canvas"></canvas>' +
+                    '</div>' +
+                    '<div class="col-md-4">' +
+                      '<p class="color-grey make-center make-bold">Percentage of Property Types</p>' +
+                      '<canvas id="dev_region_district_' + reg_district_id + '_type_canvas"></canvas>' +
+                    '</div>' +
+                  '</div>' +
+                  '<p class="color-grey make-center make-bold">Detail of Residential Property</p>' +
+                  '<canvas id="dev_region_district_' + reg_district_id + '_resid_type_canvas"></canvas>' +
+                '</div>' +
+              '</div>';
+    }
+
+    html += '<div class="bs-callout bs-callout-warning">' +
+              '<h4>Data Dictionary for Regional Districts</h4>' +
+              '<%= j render "articles/util/data_dictionary_region_district" %>'
+            '</div>';
+
+
+    $("#" + id + "Canvas").html(html);
+    html = '';
+
+
+    // Trend Line for Total Market Transactions
+    var no_mkt_trans_data = {
+      labels: months,
+      datasets: [
+        {
+          label: "Total Market Transactions",
+          data: data['monthly_total_trans'],
+          fill: false,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 5,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        }
+      ]
+    };
+    var dev_region_canvas = new Chart($("#" + id + "_dev_region_canvas"), {
+      type: 'line',
+      data: no_mkt_trans_data
+    });
+
+
+    var dev_region_district_datasets = [];
+
+    var dev_region_compare_labels = [];
+    var dev_region_compare_data = [];
+    var dev_region_compare_bg_color = [];
+    
+    for (var j = 0; j < dev_region_district_json.length; j++) {
+      var name = dev_region_district_json[j]['name'];
+
+      var dev_region_district_dataset = {
+        "label": name,
+        "data": dev_region_district_json[j]['monthly_total_property_types']['monthly'],
+        "backgroundColor": colours[j]['rgba']['opacity-0.9'],
+        "borderColor": colours[j]['rgba']['opacity-1'],
+        "borderWidth": 3
+      };
+      dev_region_district_datasets.push(dev_region_district_dataset);
+
+      dev_region_compare_labels.push(name);
+      dev_region_compare_data.push( dev_region_district_json[j]['monthly_total_property_types']['total'] );
+      dev_region_compare_bg_color.push( colours[j]['rgba']['opacity-0.9'] );
+    }
+
+
+    // Comparison between Regional Districts
+    
+    // Transactions Monthly Summary
+    new Chart($("#" + id + "_dev_region_district_canvas"), {
+      type: "bar",
+      data: {
+        "labels": months,
+        "datasets": dev_region_district_datasets
+      }
+    });
+
+    // Percentage of Total Transactions
+    new Chart($("#" + id + "_dev_region_compare_canvas"), {
+      type: 'pie',
+      data: {
+        labels: dev_region_compare_labels,
+        datasets: [{
+          data: dev_region_compare_data,
+          backgroundColor: dev_region_compare_bg_color
+        }]
+      },
+      options: options_pie
+    });
+
+
+    // Overview of each Regional Districts
+    for (var j = 0; j < dev_region_district_json.length; j++) {
+      var reg_district_id = dev_region_district_json[j]['id'];
+      var reg_district_name = dev_region_district_json[j]['name'];
+     
+      // make datasets
+      var datasets = [];
+      
+      // region district property types
+      var region_district_property_types = [];
+      var region_district_property_types_data = [];
+      var region_district_property_types_bg_colors = [];
+
+      var reg_district_property_types = dev_region_district_json[j]['monthly_total_property_types']['property_types'];
+      for (var k = 0; k < reg_district_property_types.length; k++) {
+        var name = reg_district_property_types[k]['name'];
+        var dataset = {
+          "type": 'bar',
+          "label": name,
+          "data": reg_district_property_types[k]['monthly'],
+          "backgroundColor": colours[k]['rgba']['opacity-0.9']
+        };
+        datasets.push(dataset);
+
+        // add each property type
+        region_district_property_types.push(name);
+        region_district_property_types_data.push( reg_district_property_types[k]['total'] );
+        region_district_property_types_bg_colors.push( colours[k]['rgba']['opacity-0.9'] );
+      }
+
+      // add trend line
+      var trend_line = {
+        type: "line",
+        label: "Total Market Transactions",
+        data: dev_region_district_json[j]['monthly_total_property_types']['monthly'],
+        fill: false,
+        backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+        borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+        borderWidth: 3,
+        borderJoinStyle: 'round',
+        lineTension: 0.1
+      };
+      datasets.push(trend_line);
+
+      // Percentage of Total Transactions
+      var dev_region_district_resid_type_labels = [];
+      var dev_region_district_resid_type_data = [];
+
+      var reg_district_property_types_resid = dev_region_district_json[j]['monthly_total_property_types']['property_types'][0]['residential_types'];
+
+      for (var n = 0; n < reg_district_property_types_resid.length; n++) {
+        dev_region_district_resid_type_labels.push(reg_district_property_types_resid[n]['name']);
+        dev_region_district_resid_type_data.push(reg_district_property_types_resid[n]['total']);
+      }
+
+      // make charts for Property Types 
+      new Chart($("#dev_region_district_" + reg_district_id + "_all_type_canvas"), {
+        type: "bar",
+        data: {
+          labels: months,
+          datasets: datasets
+        },
+        options: options_stack
+      });
+
+      // make charts for Percentage of Property Types
+      new Chart($("#dev_region_district_" + reg_district_id + "_type_canvas"), {
+        type: "doughnut",
+        data: {
+          labels: region_district_property_types,
+          datasets: [{
+            data: region_district_property_types_data,
+            backgroundColor: region_district_property_types_bg_colors
+          }]
+        },
+        options: options_pie
+      });
+
+
+      // make charts for Percentage of Total Transactions
+      new Chart($("#dev_region_district_" + reg_district_id + "_resid_type_canvas"), {
+        type: "horizontalBar",
+        data: {
+          labels: dev_region_district_resid_type_labels,
+          datasets: [{
+            label: "Residential Transactions",
+            data: dev_region_district_resid_type_data,
+            backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9']
+          }]
+        },
+        options: options_hori_bar
+      });
+
+    }
+
+
+  }
+  
+
+});
+</script>

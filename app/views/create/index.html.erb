@@ -1,0 +1,80 @@
+<div class="container">
+    <h1>Create</h1>
+
+    <input id="myFile" type="file" accept="text/plain, .csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" />
+
+    <pre id="fileDisplayArea"><pre>
+</div>
+
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+    var $fileInput = $("#myFile");
+    var $fileDisplayArea = $('#fileDisplayArea');
+    var data = "";
+    $fileInput.on("change", function() {
+
+        if (validFile( $fileInput[0] ) == 1 ) {
+            var file = $fileInput[0].files[0];
+            
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                data += reader.result;
+                //console.log(reader.result);
+                //$fileDisplayArea.html(reader.result);
+            }
+            
+            reader.readAsText(file);
+        }
+
+    });
+
+
+
+   /* var fileInput = $('#myFile')[0];
+    
+
+console.log(fileInput);
+
+    fileInput.addEventListener('change', function(e) {
+    	var file = fileInput.files[0];
+    	console.log(file);
+    	
+ 		var reader = new FileReader();
+ 		reader.onload = function(e) {
+ 			console.log(reader.result);
+ 			fileDisplayArea.innerText = reader.result;
+ 		}
+
+            reader.readAsText(file);
+    	if (file.type.match(textType)) {
+    		var reader = new FileReader();
+    		reader.onload = function(e) {
+    			fileDisplayArea.innerText = reader.result;
+            }
+
+            reader.readAsText(file);
+        } else {
+        	fileDisplayArea.innerText = "File not supported!"
+       	}
+    });*/
+
+
+    function validFile(sender) {
+        var validExts = new Array(".txt", ".csv", ".xlsx", ".xls");
+        var fileExt = sender.value;
+        fileExt = fileExt.substring(fileExt.lastIndexOf('.'));
+
+        console.log( validExts.indexOf(fileExt) );
+
+        if (validExts.indexOf(fileExt) < 0) {
+          $fileDisplayArea.html("Invalid file selected, valid files are of " + validExts.toString() + " types.");
+          $fileInput.val("");
+          return -1;
+        }
+        return 1;
+    }
+
+});
+</script>

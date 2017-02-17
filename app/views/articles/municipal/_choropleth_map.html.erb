@@ -1,0 +1,154 @@
+
+<input id="municipal_monthly" value="<%= @municipal_monthly %>" type="hidden" />
+<div id="choropleth_map" class="choropleth_map"></div>
+
+<div class="click_features">
+  <%= render "articles/municipal/click_features" %>  
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+  var map = L.map('choropleth_map',{scrollWheelZoom:false}).setView([49.5800,-121.8000], 8);
+
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  
+
+  var municipal_monthly = $("#municipal_monthly").val();
+  var geojson;
+  
+  geojson = L.geoJson(JSON.parse(municipal_monthly), {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+
+
+  var info = L.control();
+  info.onAdd = function(map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+  info.update = function(props) {
+    this._div.innerHTML = '<h4>Total Market Transactions</h4>' +  (props ?
+          '<b>' + props.name + '</b><br />' + props.ptt + ' in total'
+          : 'Click or hover over each area');
+  };
+  info.addTo(map);
+
+
+  var legend = L.control({position: 'bottomright'});
+
+  legend.onAdd = function(map) {
+
+      var div = L.DomUtil.create('div', 'info legend'),
+          grades = [0, 500, 1000, 2000, 4000, 6000, 8000, 10000],
+          labels = [];
+
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+
+      return div;
+  };
+
+  legend.addTo(map);
+
+
+  function getColor(d) {
+    return d > 10000 ? '#800026' :
+      d > 8000  ? '#BD0026' :
+      d > 6000  ? '#E31A1C' :
+      d > 4000  ? '#FC4E2A' :
+      d > 2000   ? '#FD8D3C' :
+      d > 1000   ? '#FEB24C' :
+      d > 500   ? '#FED976' :
+      '#FFEDA0';
+  }
+
+  function style(feature) {
+      return {
+          fillColor: getColor(feature.properties.ptt),
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.7
+      };
+  }
+
+  function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+          weight: 3,
+          color: 'rgba(54, 162, 235, 1)',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+      }
+      info.update(layer.feature.properties);
+  }
+
+  function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+      info.update();
+  }
+
+  function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      //click: zoomToFeature
+      click: clickFeature
+    });
+  }
+
+  function clickFeature(e) {
+    switch(e.target.feature.properties.name) {
+      case "Abbotsford":
+        $('#AbbotsfordModal').modal('show');
+        break;
+      case "Chilliwack":
+        $('#ChilliwackModal').modal('show');
+        break;
+      case "Burnaby":
+        $('#BurnabyModal').modal('show');
+        break;
+      case "Richmond":
+        $('#RichmondModal').modal('show');
+        break;
+      case "Surrey":
+        $('#SurreyModal').modal('show');
+        break;
+      case "Vancouver":
+        $('#VancouverModal').modal('show');
+        break;
+      case "Whistler":
+        $('#WhistlerModal').modal('show');
+        break;
+      case "Kelowna":
+        $('#KelownaModal').modal('show');
+        break;
+      case "Nanaimo":
+        $('#NanaimoModal').modal('show');
+        break;
+      default:
+        console.log("There no relevant city");
+        break;
+    }
+  }
+});
+</script>

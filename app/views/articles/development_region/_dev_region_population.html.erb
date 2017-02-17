@@ -1,0 +1,134 @@
+<h4 class="color-grey">Horizontal Bar Chart</h4>
+<canvas id="dev_region_population_canvas"></canvas>
+
+<hr />
+
+<h4 class="color-grey">Pie Chart with percentage</h4>
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <canvas id="dev_region_population_pie_canvas"></canvas>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colors = {
+    "red": {"opacity-0.7":"rgba(255,99,132,0.7)", "opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"},
+    "orange": {"opacity-0.7":"rgba(255,159,64,0.7)", "opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)"},
+    "yellow": {"opacity-0.7":"rgba(244,232,66,0.7)", "opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)"},
+    "green": {"opacity-0.7":"rgba(80,244,66,0.7)", "opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)"},
+    "sky-blue": {"opacity-0.7":"rgba(66,244,206,0.7)", "opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)"},
+    "blue": {"opacity-0.7":"rgba(54,162,235,0.7)", "opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)"},
+    "bluish-violet": {"opacity-0.7":"rgba(153,102,255,0.7)", "opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)"},
+    "purple": {"opacity-0.7":"rgba(191,66,244,0.7)", "opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)"},
+    "light-blue": {"opacity-0.7":"rgba(75,192,192,0.7)", "opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
+  };
+
+  // options
+  var options_population = {
+    scales: {
+      xAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000+'k';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Population (1k=1000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          return Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+  var options_population_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+  // data
+  var regions = ["Cariboo","Kootenay","Mainland/Southwest","Nechako & North Coast","Northeast","Thompson/Okanagan","Vancouver Island/Coast"];
+  var dev_region_population = [155203,149661,2930041,41057+53659,72496,549956,800716];
+
+  var dev_region_population_data = {
+    labels: regions,
+    datasets: [{
+      label: "Residential Transactions",
+      data: dev_region_population,
+      backgroundColor: colors['blue']['opacity-0.7'],
+      hoverBackgroundColor: colors['blue']['opacity-1']
+    }]
+  };
+
+  var dev_region_population_pie_data = {
+    labels: regions,
+    datasets: [{
+      data: dev_region_population,
+      backgroundColor: [
+        colors['red']['opacity-0.9'],
+        colors['orange']['opacity-0.9'],
+        colors['yellow']['opacity-0.9'],
+        colors['green']['opacity-0.9'],
+        colors['sky-blue']['opacity-0.9'],
+        colors['blue']['opacity-0.9'],
+        colors['bluish-violet']['opacity-0.9'],
+        colors['purple']['opacity-0.9']
+      ],
+      hoverBackgroundColor: [
+        colors['red']['opacity-1'],
+        colors['orange']['opacity-1'],
+        colors['yellow']['opacity-1'],
+        colors['green']['opacity-1'],
+        colors['sky-blue']['opacity-1'],
+        colors['blue']['opacity-1'],
+        colors['bluish-violet']['opacity-1'],
+        colors['purple']['opacity-1']
+      ]
+    }]
+  };
+
+
+  var dev_region_population_canvas = new Chart($("#dev_region_population_canvas"), {
+    type: "horizontalBar",
+    data: dev_region_population_data,
+    options: options_population
+  });
+
+
+  var dev_region_population_pie_canvas = new Chart($("#dev_region_population_pie_canvas"), {
+    type: "pie",
+    data: dev_region_population_pie_data,
+    options: options_population_pie
+  });
+
+
+});
+</script>
