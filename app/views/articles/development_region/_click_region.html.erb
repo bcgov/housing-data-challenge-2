@@ -152,8 +152,6 @@ $(document).ready(function() {
     var id = data['id'];
     var name = data['name'];
 
-console.log("dev region: " + name);
-
     html += '<div class="article">' +
               '<div class="article-header">' +
                 '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
@@ -192,9 +190,6 @@ console.log("dev region: " + name);
     for (var k = 0; k < dev_region_district_json.length; k++) {
       var reg_district_id = dev_region_district_json[k]['id'];
       var reg_district_name = dev_region_district_json[k]['name'];
-
-console.log("reg_district_name: " + reg_district_name);
-
       html += '<div class="article">' +
                 '<div class="article-header">' +
                   '<h3 class="color-darkblue">Overview of ' + reg_district_name + ' Regional Districts</h3>' +
@@ -257,8 +252,6 @@ console.log("reg_district_name: " + reg_district_name);
     for (var j = 0; j < dev_region_district_json.length; j++) {
       var name = dev_region_district_json[j]['name'];
 
-console.log("dev_region_district_name: " + name);
-
       var dev_region_district_dataset = {
         "label": name,
         "data": dev_region_district_json[j]['monthly_total_property_types']['monthly'],
@@ -303,9 +296,7 @@ console.log("dev_region_district_name: " + name);
     for (var j = 0; j < dev_region_district_json.length; j++) {
       var reg_district_id = dev_region_district_json[j]['id'];
       var reg_district_name = dev_region_district_json[j]['name'];
-
-console.log("reg_district_name 2: " + name);
-
+     
       // make datasets
       var datasets = [];
       
@@ -317,9 +308,6 @@ console.log("reg_district_name 2: " + name);
       var reg_district_property_types = dev_region_district_json[j]['monthly_total_property_types']['property_types'];
       for (var k = 0; k < reg_district_property_types.length; k++) {
         var name = reg_district_property_types[k]['name'];
-
-console.log("reg_district_property_types: " + name);
-
         var dataset = {
           "type": 'bar',
           "label": name,
