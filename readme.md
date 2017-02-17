@@ -12,9 +12,10 @@ Testing Link: [Testing Link]
 - PostgreSQL
 
 ### How to run:
+1. Clone or Download this
 1. Go go the folder
-2. type: bundle install
-3. type: rails server
+2. Type: bundle install
+3. Type: rails server
 4. Open your browser at http://localhost:3000/
 
 [Testing Link]: <https://data-visualization-hoseokoh.herokuapp.com/>
