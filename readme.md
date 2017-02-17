@@ -18,4 +18,7 @@ Testing Link: [Testing Link]
 3. Type: rails server
 4. Open your browser at http://localhost:3000/
 
+### Note:
+- It may be slow to open the "Development Region Monthly" on the list because many visualizations are working
+
 [Testing Link]: <https://data-visualization-hoseokoh.herokuapp.com/>
