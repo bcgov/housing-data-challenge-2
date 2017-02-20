@@ -1,4 +1,6 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
+
 <% @dev_region_transaction_json = JSON.parse(@dev_region_transaction_data) %>
 
 
@@ -9,7 +11,7 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3 class="modal-title" id="myModalLabel">Details of <%= data['name'] %></h3>
+          <h3 class="modal-title color-grey" id="myModalLabel">Details of <%= data['name'] %></h3>
         </div>
         <div class="modal-body">
 
@@ -26,44 +28,8 @@
 $(document).ready(function() {
 
   // colours
-  var colours = [
-    {
-      "color": "blue",
-      "rgba": {"opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)"}
-    },
-    {
-      "color": "orange",
-      "rgba": {"opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)"}
-    },
-    {
-      "color": "yellow",
-      "rgba": {"opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)"} 
-    },
-    {
-      "color": "green",
-      "rgba": {"opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)"}
-    },
-    {
-      "color": "sky-blue",
-      "rgba": {"opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)"}
-    },
-    {
-      "color": "bluish-violet",
-      "rgba": {"opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)"}
-    },
-    {
-      "color": "purple",
-      "rgba": {"opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)"}
-    },
-    {
-      "color": "red",
-      "rgba": {"opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"} 
-    },
-    {
-      "color": "light-blue",
-      "rgba": {"opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
-    }
-  ];
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
 
   // options
   var options_pie = {
@@ -140,8 +106,6 @@ $(document).ready(function() {
 
 
   var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
-  $canvas = $("#CaribooCanvas");
-  $canvas.append("here");
 
   var months = dev_region_transaction_data['months'];
   var dev_region = dev_region_transaction_data['development_region'];
@@ -152,6 +116,7 @@ $(document).ready(function() {
     var id = data['id'];
     var name = data['name'];
 
+    // make charts to be added to a html page
     html += '<div class="article">' +
               '<div class="article-header">' +
                 '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
@@ -205,7 +170,7 @@ $(document).ready(function() {
                       '<canvas id="dev_region_district_' + reg_district_id + '_type_canvas"></canvas>' +
                     '</div>' +
                   '</div>' +
-                  '<p class="color-grey make-center make-bold">Detail of Residential Property</p>' +
+                  '<br /><p class="color-grey make-center make-bold">Detail of Residential Property</p>' +
                   '<canvas id="dev_region_district_' + reg_district_id + '_resid_type_canvas"></canvas>' +
                 '</div>' +
               '</div>';
@@ -222,26 +187,27 @@ $(document).ready(function() {
 
 
     // Trend Line for Total Market Transactions
-    var no_mkt_trans_data = {
-      labels: months,
-      datasets: [
-        {
-          label: "Total Market Transactions",
-          data: data['monthly_total_trans'],
-          fill: false,
-          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
-          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
-          borderWidth: 5,
-          borderJoinStyle: 'round',
-          lineTension: 0.1
-        }
-      ]
-    };
-    var dev_region_canvas = new Chart($("#" + id + "_dev_region_canvas"), {
+
+    new Chart($("#" + id + "_dev_region_canvas"), {
       type: 'line',
-      data: no_mkt_trans_data
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "Total Market Transactions",
+            data: data['monthly_total_trans'],
+            fill: false,
+            backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+            borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+            borderWidth: 5,
+            borderJoinStyle: 'round',
+            lineTension: 0.1
+          }
+        ]
+      }
     });
 
+    // development region 
 
     var dev_region_district_datasets = [];
 
@@ -292,7 +258,7 @@ $(document).ready(function() {
     });
 
 
-    // Overview of each Regional Districts
+    // Overview of each Regional District
     for (var j = 0; j < dev_region_district_json.length; j++) {
       var reg_district_id = dev_region_district_json[j]['id'];
       var reg_district_name = dev_region_district_json[j]['name'];
@@ -371,7 +337,7 @@ $(document).ready(function() {
       });
 
 
-      // make charts for Percentage of Total Transactions
+      // make charts for Detail of Residential Property
       new Chart($("#dev_region_district_" + reg_district_id + "_resid_type_canvas"), {
         type: "horizontalBar",
         data: {
@@ -379,7 +345,7 @@ $(document).ready(function() {
           datasets: [{
             label: "Residential Transactions",
             data: dev_region_district_resid_type_data,
-            backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9']
+            backgroundColor: colours[0]['rgba']['opacity-0.9']
           }]
         },
         options: options_hori_bar

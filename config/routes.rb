@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'articles/municipal_foreign_involvement'
+  get 'articles/foreign_involvement'
   get 'articles/municipal'
   get 'articles/development_region'
   get 'articles/index'

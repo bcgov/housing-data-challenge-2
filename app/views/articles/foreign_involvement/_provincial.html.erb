@@ -1,0 +1,178 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="provincial_data" value="<%= @provincial_data %>" type="hidden" />
+
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-9">
+    <canvas id="total_market_foreign_involvement_canvas"></canvas>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+<canvas id="foreign_involve_types_canvas"></canvas>
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+  // options
+
+
+  var provincial_data = JSON.parse( $("#provincial_data").val() );
+  var months = provincial_data['months'];
+
+  var trans_types = provincial_data['trans_types'];
+
+
+  // to find total market transactions - foreign involvement
+  var trans_types_mkt = [];
+  var trans_types_mkt_label = "";
+  var trans_types_foreign = [];
+  var trans_types_foreign_label = "";
+  var trans_types_mkt_foreign = [];
+
+  var no_foreign_types = {};
+  for (var i = 0; i < trans_types.length; i++) {
+    var value = trans_types[i]['data']['monthly'];
+
+    if (trans_types[i]['id'] == "no_mkt_trans") {
+      trans_types_mkt_label = trans_types[i]['name'];
+      trans_types_mkt = value;
+      trans_types_mkt_foreign.push(value);
+    } else if (trans_types[i]['id'] == "no_foreign") {
+      trans_types_foreign_label = trans_types[i]['name'];
+      trans_types_foreign = value;
+      trans_types_mkt_foreign.push(value);
+
+      no_foreign_types = trans_types[i]['data']['foreign_types'];
+    } 
+  }
+
+  var trans_types_mkt_minus_foreign = [];
+  for (var i = 0; i < trans_types_mkt_foreign[0].length; i++) {
+    var value = trans_types_mkt_foreign[0][i] - trans_types_mkt_foreign[1][i];
+    trans_types_mkt_minus_foreign.push( Math.abs(value) );
+  }
+
+  // chart for Total Market and Foreign Involvement Transactions Monthly
+  new Chart($("#total_market_foreign_involvement_canvas"), {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: [
+        {
+          "type": "bar",
+          "label": "Total-Foreign",
+          "data": trans_types_mkt_minus_foreign,
+          "backgroundColor": colours[0]['rgba']['opacity-0.9']
+        },
+        {
+          "type": "bar",
+          "label": trans_types_foreign_label,
+          "data": trans_types_foreign,
+          "backgroundColor": colours[1]['rgba']['opacity-0.9']
+        },
+        {
+          type: "line",
+          label: "Total Market Transactions",
+          data: trans_types_mkt,
+          fill: false,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 3,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000+'k';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Transactions (1k=1000)'
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = data.datasets[2].data[tooltipItem.index];
+
+            var currentValue = dataset.data[tooltipItem.index];
+            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+            return commaValue + " (" + precentage + "%)";
+          }
+        }
+      }
+    }
+  });
+
+  // chart for Overview of foreign involvement
+
+  var no_foreign_types_datasets = [];
+  for (var i = 0; i < no_foreign_types.length; i++) {
+    var dataset = {
+      label: no_foreign_types[i]['name'],
+      data: no_foreign_types[i]['data']['monthly'],
+      backgroundColor: colours[i]['rgba']['opacity-0.9'],
+    };
+
+    no_foreign_types_datasets.push(dataset);
+  }
+  console.log( no_foreign_types_datasets );
+
+  new Chart($("#foreign_involve_types_canvas"), {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: no_foreign_types_datasets
+    },
+    options: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000+'k';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Transactions (1k=1000)'
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+          }
+        }
+      }
+    }
+  });
+
+});
+</script>

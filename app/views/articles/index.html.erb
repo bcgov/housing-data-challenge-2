@@ -1,11 +1,9 @@
 <%= render "header"%>
 
 <div class="container articles-index">
-  
 
   <h3 class="color-darkgrey">List of Articles</h3>
   <table class="table table-hover table-bordered table-striped">
-    <caption>Property Transfer Tax Data (June ~ Dec. 2016)</caption>
     <tr>
       <th>#</th>
       <th>Title</th>
@@ -14,21 +12,22 @@
     </tr>
     <tr>
       <td>1</td>
-      <td><%= link_to "Development Region Monthly", articles_development_region_path %></td>
+      <td><%= link_to "Development Region Monthly for Property Transfer Tax", articles_development_region_path %></td>
       <td>John Doe</td>
       <td>2017-02-15</td>
     </tr>
     <tr>
       <td>2</td>
-      <td><%= link_to "Municipal Monthly", articles_municipal_path %> (in progess)</td>
+      <td><%= link_to "Municipal Monthly for Property Transfer Tax", articles_municipal_path %></td>
       <td>John Doe</td>
       <td>2017-02-15</td>
     </tr>
     <tr>
       <td>3</td>
-      <td><%= link_to "Municipal Monthly with Foreign Involvement", articles_municipal_foreign_involvement_path %> (in progess)</td>
+      <td><%= link_to "Foreign Involvement Transactions for Property Transfer Tax", articles_foreign_involvement_path %> (in progess)</td>
       <td>John Doe</td>
       <td>2017-02-15</td>
     </tr>
   </table>
+
 </div>

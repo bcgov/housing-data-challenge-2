@@ -1,0 +1,52 @@
+{
+  "months": ["June 01","July 01","Aug 01","Sep 01","Oct 01","Nov 01","Dec 01"],
+  "trans_types": [
+    {
+      "order": 1,
+      "id": "no_mkt_trans",
+      "name": "Total Market Transactions",
+      "data": {
+        "monthly": [19734,17951,16304,14158,11688,11478,9336],
+        "total": 100649
+      }
+    },
+    {
+      "order": 2,
+      "id": "no_foreign",
+      "name": "Foreign Involvement Transactions",
+      "data": {
+        "monthly": [1494,1620,254,374,378,395,386],
+        "total": 4901,
+        "foreign_types": [
+          {
+            "order": 1,
+            "id": "no_foreign_res",
+            "name": "Foreign Involvement-Residential",
+            "data": {
+              "monthly": [1407,1578,228,283,329,350,329],
+              "total": 4504
+            }
+          },
+          {
+            "order": 2,
+            "id": "no_foreign_comm",
+            "name": "Foreign Involvement-Commercial",
+            "data": {
+              "monthly": [68,21,10,61,26,14,22],
+              "total": 222
+            }
+          },
+          {
+            "order": 3,
+            "id": "no_foreign_oth",
+            "name": "Foreign Involvement-Other",
+            "data": {
+              "monthly": [19,21,16,30,23,31,35],
+              "total": 175
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

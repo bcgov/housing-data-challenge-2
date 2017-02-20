@@ -1,3 +1,7 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="bc_population" value="<%= @bc_population %>" type="hidden" />
+
+
 <h4 class="color-grey">Horizontal Bar Chart</h4>
 <canvas id="dev_region_population_canvas"></canvas>
 
@@ -17,17 +21,8 @@
 $(document).ready(function() {
 
   // colours
-  var colors = {
-    "red": {"opacity-0.7":"rgba(255,99,132,0.7)", "opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"},
-    "orange": {"opacity-0.7":"rgba(255,159,64,0.7)", "opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)"},
-    "yellow": {"opacity-0.7":"rgba(244,232,66,0.7)", "opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)"},
-    "green": {"opacity-0.7":"rgba(80,244,66,0.7)", "opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)"},
-    "sky-blue": {"opacity-0.7":"rgba(66,244,206,0.7)", "opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)"},
-    "blue": {"opacity-0.7":"rgba(54,162,235,0.7)", "opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)"},
-    "bluish-violet": {"opacity-0.7":"rgba(153,102,255,0.7)", "opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)"},
-    "purple": {"opacity-0.7":"rgba(191,66,244,0.7)", "opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)"},
-    "light-blue": {"opacity-0.7":"rgba(75,192,192,0.7)", "opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
-  };
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
 
   // options
   var options_population = {
@@ -75,57 +70,43 @@ $(document).ready(function() {
   };
 
   // data
-  var regions = ["Cariboo","Kootenay","Mainland/Southwest","Nechako & North Coast","Northeast","Thompson/Okanagan","Vancouver Island/Coast"];
-  var dev_region_population = [155203,149661,2930041,41057+53659,72496,549956,800716];
+  var bc_population = JSON.parse( $("#bc_population").val() );
+  var dev_region_population_data = bc_population['population'];
 
-  var dev_region_population_data = {
-    labels: regions,
-    datasets: [{
-      label: "Residential Transactions",
-      data: dev_region_population,
-      backgroundColor: colors['blue']['opacity-0.7'],
-      hoverBackgroundColor: colors['blue']['opacity-1']
-    }]
-  };
-
-  var dev_region_population_pie_data = {
-    labels: regions,
-    datasets: [{
-      data: dev_region_population,
-      backgroundColor: [
-        colors['red']['opacity-0.9'],
-        colors['orange']['opacity-0.9'],
-        colors['yellow']['opacity-0.9'],
-        colors['green']['opacity-0.9'],
-        colors['sky-blue']['opacity-0.9'],
-        colors['blue']['opacity-0.9'],
-        colors['bluish-violet']['opacity-0.9'],
-        colors['purple']['opacity-0.9']
-      ],
-      hoverBackgroundColor: [
-        colors['red']['opacity-1'],
-        colors['orange']['opacity-1'],
-        colors['yellow']['opacity-1'],
-        colors['green']['opacity-1'],
-        colors['sky-blue']['opacity-1'],
-        colors['blue']['opacity-1'],
-        colors['bluish-violet']['opacity-1'],
-        colors['purple']['opacity-1']
-      ]
-    }]
-  };
+  var regions = [];
+  var populations = [];
+  var dev_region_population_pie_bg = [];
+  for (var i = 0; i < dev_region_population_data.length; i++) {
+    regions.push( dev_region_population_data[i]['development region'] );
+    populations.push( dev_region_population_data[i]['total'] );
+    dev_region_population_pie_bg.push(colours[i]['rgba']['opacity-0.9']);
+  }
 
 
-  var dev_region_population_canvas = new Chart($("#dev_region_population_canvas"), {
+  // make a bar chart for population
+  new Chart($("#dev_region_population_canvas"), {
     type: "horizontalBar",
-    data: dev_region_population_data,
+    data: {
+      labels: regions,
+      datasets: [{
+        label: "Total",
+        data: populations,
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
     options: options_population
   });
 
-
-  var dev_region_population_pie_canvas = new Chart($("#dev_region_population_pie_canvas"), {
+  // make a pie chart for population of each development region
+  new Chart($("#dev_region_population_pie_canvas"), {
     type: "pie",
-    data: dev_region_population_pie_data,
+    data: {
+      labels: regions,
+      datasets: [{
+        data: populations,
+        backgroundColor: dev_region_population_pie_bg
+      }]
+    },
     options: options_population_pie
   });
 

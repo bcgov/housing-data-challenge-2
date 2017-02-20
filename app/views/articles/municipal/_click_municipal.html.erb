@@ -1,0 +1,315 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
+
+<% @municipal_transaction_data = JSON.parse(@municipal_transaction_data) %>
+
+<% @municipal_transaction_data['regional_district'].each do |data| %>
+
+  <div id="<%= data['id'] %>Modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title color-grey" id="myModalLabel">Details of <%= data['name'] %></h4>
+        </div>
+        <div class="modal-body">
+
+          <div id="<%= data['id'] %>Canvas"></div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+
+  var options_stack = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        stacked: true
+      }],
+      yAxes: [{
+        stacked: true
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = data.datasets[5].data[tooltipItem.index];
+
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+
+
+  var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
+  var months = municipal_transaction_data['months'];
+  var regional_district = municipal_transaction_data['regional_district'];
+
+  var html = '';
+  for (var i = 0; i < regional_district.length; i++) {
+    var data = regional_district[i];
+    var id = data['id'];
+    var name = data['name'];
+
+    // make charts to be added to a html page
+    html += '<div class="article">' +
+              '<div class="article-header">' +
+                '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
+              '</div>' +
+              '<div class="article-body">' +
+                '<div class="row">' +
+                  '<div class="col-md-2"></div>' +
+                  '<div class="col-md-8">' +
+                    '<canvas id="' + id + '_regional_district_canvas"></canvas>' +
+                  '</div>' +
+                '<div class="col-md-2"></div>' +
+              '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="article">' +
+              '<div class="article-header">' +
+                '<h3 class="color-darkblue">Comparison of Municipalities</h3>' +
+              '</div>' +
+              '<div class="article-body">' +
+                '<div class="row">' +
+                  '<div class="col-md-8">' +
+                    '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
+                    '<canvas id="' + id + '_regional_district_municipal_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-4">' +
+                    '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
+                    '<canvas id="' + id + '_regional_district_compare_canvas"></canvas>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>';
+
+
+    var region_district_municipality_json = data['municipality'];
+
+    for (var k = 0; k < region_district_municipality_json.length; k++) {
+      var region_district_municipality_id = region_district_municipality_json[k]['id'];
+      var region_district_municipality_name = region_district_municipality_json[k]['name'];
+      html += '<div class="article">' +
+                '<div class="article-header">' +
+                  '<h3 class="color-darkblue">Overview of ' + region_district_municipality_name + ' Regional Districts</h3>' +
+                '</div>' +
+                '<div class="article-body">' +
+                  '<div class="row">' +
+                    '<div class="col-md-8">' +
+                      '<p class="color-grey make-center make-bold">Property Types</p>' +
+                      '<canvas id="region_district_municipality_' + region_district_municipality_id + '_all_type_canvas"></canvas>' +
+                    '</div>' +
+                    '<div class="col-md-4">' +
+                      '<p class="color-grey make-center make-bold">Percentage of Property Types</p>' +
+                      '<canvas id="region_district_municipality_' + region_district_municipality_id + '_type_canvas"></canvas>' +
+                    '</div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>';
+    }
+
+    html += '<div class="bs-callout bs-callout-warning">' +
+              '<h4>Data Dictionary for Regional Districts</h4>' +
+              '<%= j render "articles/util/data_dictionary_region_district" %>'
+            '</div>';
+
+
+    $("#" + id + "Canvas").html(html);
+    html = '';
+
+
+    // Trend Line for Total Market Transactions
+    new Chart($("#" + id + "_regional_district_canvas"), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "Total Market Transactions",
+            data: data['monthly_total_trans'],
+            fill: false,
+            backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+            borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+            borderWidth: 5,
+            borderJoinStyle: 'round',
+            lineTension: 0.1
+          }
+        ]
+      }
+    });
+
+
+    // Comparison of municipalitiies
+
+    var region_district_municipality_datasets = [];
+
+    var region_district_municipality_compare_labels = [];
+    var region_district_municipality_compare_data = [];
+    var region_district_municipality_compare_bg_color = [];
+
+    for (var j = 0; j < region_district_municipality_json.length; j++) {
+      var name = region_district_municipality_json[j]['name'];
+      var region_district_municipality__dataset = {
+        "label": name,
+        "data": region_district_municipality_json[j]['monthly_total_property_types']['monthly'],
+        "backgroundColor": colours[j]['rgba']['opacity-0.9'],
+        "borderColor": colours[j]['rgba']['opacity-1'],
+        "borderWidth": 3
+      };
+      region_district_municipality_datasets.push(region_district_municipality__dataset);
+
+      region_district_municipality_compare_labels.push(name);
+      region_district_municipality_compare_data.push( region_district_municipality_json[j]['monthly_total_property_types']['total'] );
+      region_district_municipality_compare_bg_color.push( colours[j]['rgba']['opacity-0.9'] );
+    }
+
+    // Transactions Monthly Summary
+    new Chart($("#" + id + "_regional_district_municipal_canvas"), {
+      type: "bar",
+      data: {
+        "labels": months,
+        "datasets": region_district_municipality_datasets
+      }
+    });
+
+    // Percentage of Total Transactions
+    new Chart($("#" + id + "_regional_district_compare_canvas"), {
+      type: 'pie',
+      data: {
+        labels: region_district_municipality_compare_labels,
+        datasets: [{
+          data: region_district_municipality_compare_data,
+          backgroundColor: region_district_municipality_compare_bg_color
+        }]
+      },
+      options: options_pie
+    });
+
+
+
+    // Overview of each Municipality
+    for (var j = 0; j < region_district_municipality_json.length; j++) {
+      var region_district_municipality_id = region_district_municipality_json[j]['id'];
+      var region_district_municipality_name = region_district_municipality_json[j]['name'];
+     
+      // make datasets
+      var datasets = [];
+      
+      // municipal property types
+      var region_district_municipality_property_types = [];
+      var region_district_municipality_property_types_data = [];
+      var region_district_municipality_property_types_bg_colors = [];
+
+      var reg_district_municipality_property_types = region_district_municipality_json[j]['monthly_total_property_types']['property_types'];
+      for (var k = 0; k < reg_district_municipality_property_types.length; k++) {
+        var name = reg_district_municipality_property_types[k]['name'];
+
+        var dataset = {
+          "type": 'bar',
+          "label": name,
+          "data": reg_district_municipality_property_types[k]['monthly'],
+          "backgroundColor": colours[k]['rgba']['opacity-0.9']
+        };
+        datasets.push(dataset);
+
+        // add each property type
+        region_district_municipality_property_types.push(name);
+        region_district_municipality_property_types_data.push( reg_district_municipality_property_types[k]['total'] );
+        region_district_municipality_property_types_bg_colors.push( colours[k]['rgba']['opacity-0.9'] );
+      }
+
+      // add trend line
+      var trend_line = {
+        type: "line",
+        label: "Total Market Transactions",
+        data: region_district_municipality_json[j]['monthly_total_property_types']['monthly'],
+        fill: false,
+        backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+        borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+        borderWidth: 3,
+        borderJoinStyle: 'round',
+        lineTension: 0.1
+      };
+      datasets.push(trend_line);
+
+      // Percentage of Total Transactions
+      var region_district_municipality_resid_type_labels = [];
+
+      var region_district_municipality_property_types_resid = region_district_municipality_json[j]['monthly_total_property_types']['property_types'][0]['residential_types'];
+
+      for (var n = 0; n < region_district_municipality_property_types_resid.length; n++) {
+        region_district_municipality_resid_type_labels.push(region_district_municipality_property_types_resid[n]['name']);
+      }
+
+      // make charts for Property Types 
+      new Chart($("#region_district_municipality_" + region_district_municipality_id + "_all_type_canvas"), {
+        type: "bar",
+        data: {
+          labels: months,
+          datasets: datasets
+        },
+        options: options_stack
+      });
+
+      // make charts for Percentage of Property Types
+      new Chart($("#region_district_municipality_" + region_district_municipality_id + "_type_canvas"), {
+        type: "doughnut",
+        data: {
+          labels: region_district_municipality_property_types,
+          datasets: [{
+            data: region_district_municipality_property_types_data,
+            backgroundColor: region_district_municipality_property_types_bg_colors
+          }]
+        },
+        options: options_pie
+      });
+
+    }
+
+
+  }
+
+
+});
+</script>

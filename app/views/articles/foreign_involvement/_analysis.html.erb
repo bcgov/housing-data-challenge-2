@@ -1,0 +1,57 @@
+<!-- Right panel -->
+<div class="col-md-9">
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Total Market and Foreign Involvement Transactions Monthly</h3>
+      <p class="color-grey">Source: BC Data Catalogue</p>
+    </div>
+
+    <div class="article-body">
+     <%= render "articles/foreign_involvement/provincial" %>
+    </div>
+
+    <div class="article-footer">
+      <div  class="bs-callout bs-callout-warning">
+        <h4>Data Dictionary</h4>
+        <%= render "articles/util/data_dictionary_foreign" %>
+      </div>
+    </div>
+  </div>  
+
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Choropleth Map for Total Market Transactions</h3>
+      <p class="color-grey">Source: BC Data Catalogue</p>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/foreign_involvement/choropleth_map", json: @municipal_monthly_no_foreign %>
+    </div>
+
+    <div class="article-footer">
+      <div  class="bs-callout bs-callout-warning">
+        <h4>Data Dictionary</h4>
+        <%= render "articles/util/data_dictionary" %>
+      </div>
+    </div>
+  </div>  
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Camparison of each municipal transactions</h3>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/foreign_involvement/charts" %>
+    </div>
+  </div>
+
+
+</div>
+
+<!-- Left panel -->
+<div class="col-md-3">
+  <%= render "articles/util/right_panel_detail" %>
+</div>
