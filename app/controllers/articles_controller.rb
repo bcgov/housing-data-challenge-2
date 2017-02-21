@@ -47,6 +47,11 @@ class ArticlesController < ApplicationController
   def index
   end
   
+  def provincial
+    @colours_json = COLOURS
+    @bc_provincial_data = File.read("#{Rails.root}/public/data/bc_provincial_data.json")
+  end
+
   def development_region
     @colours_json = COLOURS
     @dev_region_transaction_data = File.read("#{Rails.root}/public/data/dev_region_transaction_data.json")

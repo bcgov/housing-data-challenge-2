@@ -45,6 +45,46 @@
               "total": 175
             }
           }
+        ],
+        "market value": [
+          {
+            "order": 1,
+            "id": "sum_FMV_foreign",
+            "name": "FMV sum of Foreign Involvement Transactions",
+            "data": {
+              "monthly": [1334731937,1910270115,234150750,481126471,292073102,318507284,291037133],
+              "total": 4861896792
+            }
+          }
+        ],
+        "size": [
+          {
+            "order": 1,
+            "id": "no_lt1M_foreign",
+            "name": "Under $1 million",
+            "data": {
+              "monthly": [1141,1065,195,268,296,304,329],
+              "total": 3598
+            }
+          },
+          {
+            "order": 2,
+            "id": "no_gt1M_foreign",
+            "name": "$1 million - $3 million",
+            "data": {
+              "monthly": [286,460,47,59,71,82,48],
+              "total": 1053
+            }
+          },
+          {
+            "order": 3,
+            "id": "Over $3 million",
+            "name": "FMV sum of Foreign Involvement Transactions",
+            "data": {
+              "monthly": [67,95,12,47,11,8,9],
+              "total": 249
+            }
+          }
         ]
       }
     }

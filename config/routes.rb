@@ -2,10 +2,10 @@ Rails.application.routes.draw do
   get 'articles/foreign_involvement'
   get 'articles/municipal'
   get 'articles/development_region'
+  get 'articles/provincial'
   get 'articles/index'
 
   get 'create/index'
-
   get 'admin/index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config
