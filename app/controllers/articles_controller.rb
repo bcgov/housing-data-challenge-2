@@ -71,5 +71,11 @@ class ArticlesController < ApplicationController
     @municipal_monthly_no_foreign = File.read("#{Rails.root}/public/data/foreign_involvement.geojson")
   end
 
+  def census_bc
+    @colours_json = COLOURS
+    @census_bc_data = File.read("#{Rails.root}/public/data/census_bc_data.json")
+    @census_divisions_data = File.read("#{Rails.root}/public/data/census_divisions_data.geojson")
+  end
+
 
 end

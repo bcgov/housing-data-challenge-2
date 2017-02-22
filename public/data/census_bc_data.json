@@ -1,0 +1,24 @@
+{
+  "canada_provinces_territories": [
+    {
+      "order": 1,
+      "id": "canada",
+      "name": "Canada",
+      "data": {
+        "year": [2011, 2016],
+        "population": [33476688, 35151728],
+        "population_change": 5
+      }
+    },
+    {
+      "order": 2,
+      "id": "bc",
+      "name": "British Columbia",
+      "data": {
+        "year": [2011, 2016],
+        "population": [4400057, 4648055],
+        "population_change": 5.6
+      }
+    }
+  ]
+}

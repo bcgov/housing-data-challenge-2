@@ -1,0 +1,206 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="census_bc_data" value="<%= @census_bc_data %>" type="hidden" />
+
+<div class="row canvases">
+  <div class="col-md-6">
+    <h4 class="color-grey">Canada Population</h4>
+    <canvas id="canada_population_canvas"></canvas>
+  </div>
+  <div class="col-md-6">
+    <h4 class="color-grey">B.C. Population</h4>
+    <canvas id="bc_population_canvas"></canvas>
+  </div>
+</div>
+
+
+<div class="row canvases">
+  <div class="col-md-1"></div>
+  <div class="col-md-5">
+    <h4 class="color-grey">Comparison of B.C. and Rest in 2011</h4>
+    <canvas id="bc_rest_2011_compare_pie_canvas"></canvas>
+  </div>
+  <div class="col-md-5">
+    <h4 class="color-grey">Comparison of B.C. and Rest in 2016</h4>
+    <canvas id="bc_rest_2016_compare_pie_canvas"></canvas>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
+
+<div class="row canvases">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h4 class="color-grey">Population Growth Rate (2011-2016) in Canada and B.C.</h4>
+    <canvas id="canada_bc_population_growth_rate_canvas"></canvas>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+
+
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+    var options_vertical_comma = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function(label, index, labels) {
+            return label/1000000+'M';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Population (1M=1,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+
+  // ----- options end -----//
+
+
+
+  var census_bc_data = JSON.parse( $("#census_bc_data").val() );
+  var canada_provinces_territories_data = census_bc_data['canada_provinces_territories'];
+
+
+  // Canada Population
+  new Chart($("#canada_population_canvas"), {
+    type: "bar",
+    data: {
+      labels: canada_provinces_territories_data[0]['data']['year'],
+      datasets: [{
+        label: "Population",
+        data: canada_provinces_territories_data[0]['data']['population'],
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+  // B.C. Population
+  new Chart($("#bc_population_canvas"), {
+    type: "bar",
+    data: {
+      labels: canada_provinces_territories_data[1]['data']['year'],
+      datasets: [{
+        label: "Population",
+        data: canada_provinces_territories_data[1]['data']['population'],
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+
+  // Comparison of B.C. and Rest in 2011
+  new Chart($("#bc_rest_2011_compare_pie_canvas"), {
+    type: "pie",
+    data: {
+      labels: ["Rest of B.C.", canada_provinces_territories_data[1]['name']],
+      datasets: [{
+        data: [
+          canada_provinces_territories_data[0]['data']['population'][0] - canada_provinces_territories_data[1]['data']['population'][0],
+          canada_provinces_territories_data[1]['data']['population'][0]
+        ],
+        backgroundColor: [ colours[0]['rgba']['opacity-0.9'], colours[1]['rgba']['opacity-0.9'] ]
+      }]
+    },
+    options: options_pie
+  });
+
+  // Comparison of B.C. and Rest in 2016
+  new Chart($("#bc_rest_2016_compare_pie_canvas"), {
+    type: "pie",
+    data: {
+      labels: ["Rest of B.C.", canada_provinces_territories_data[1]['name']],
+      datasets: [{
+        data: [
+          canada_provinces_territories_data[0]['data']['population'][1] - canada_provinces_territories_data[1]['data']['population'][1],
+          canada_provinces_territories_data[1]['data']['population'][1]
+        ],
+        backgroundColor: [ colours[0]['rgba']['opacity-0.9'], colours[1]['rgba']['opacity-0.9'] ]
+      }]
+    },
+    options: options_pie
+  });
+
+
+
+  // Population Growth Rate (2011-2016) in Canada and B.C.
+  new Chart($("#canada_bc_population_growth_rate_canvas"), {
+    type: "bar",
+    data: {
+      labels: [
+        canada_provinces_territories_data[0]['name'],
+        canada_provinces_territories_data[1]['name']
+      ],
+      datasets: [{
+        label: "Population Growth Rate (%)",
+        data: [
+          canada_provinces_territories_data[0]['data']['population_change'],
+          canada_provinces_territories_data[1]['data']['population_change']
+        ],
+        backgroundColor: [
+          colours[1]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: true
+          }
+        }]
+      }
+    }
+  });
+
+
+
+});
+</script>

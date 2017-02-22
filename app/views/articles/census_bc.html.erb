@@ -1,0 +1,41 @@
+<%= render "header"%>
+
+<div class="container articles">
+  <div class="navi">
+    <%= link_to "Articles Home", articles_index_path %> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> Census B.C. 2016
+  </div>
+
+  <h1 class="color-grey">Census B.C. 2016</h1>
+
+  <ul class="tab-list nav nav-tabs" role="tablist">
+    <li role="presentation" class="active">
+      <a href="#analysis" aria-controls="analysis" role="tab" data-toggle="tab">Analysis</a>
+    </li>
+    <li role="presentation">
+      <a href="#editorial" aria-controls="editorial" role="tab" data-toggle="tab">Editorial</a>
+    </li>
+    <li role="presentation">
+      <a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Comments</a>
+    </li>
+  </ul>
+
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="analysis">
+      <div class="row analysis">
+        <%= render "articles/census_bc/analysis" %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="editorial">
+      <div class="row editorial">
+        <%= render "articles/util/editorial" %>
+      </div>
+    </div>
+    <div role="tabpanel" class="tab-pane fade" id="comments">
+      <div class="row comments">
+        <%= render "articles/util/comments" %>
+      </div>
+    </div>
+  </div>
+
+
+</div>

@@ -1,0 +1,33 @@
+<!-- Right panel -->
+<div class="col-md-9">
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Canada, Provinces and Territories</h3>
+      <p class="color-grey">Source: Statistics Canada</p>
+    </div>
+
+    <div class="article-body">
+     <%= render "articles/census_bc/canada_provinces_territories" %>
+    </div>
+  </div>
+
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Population Change (2011-2016) in Census Divisions</h3>
+      <p class="color-grey">Source: Statistics Canada</p>
+    </div>
+
+    <div class="article-body">
+     <%= render "articles/census_bc/census_divisions_map" %>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Left panel -->
+<div class="col-md-3">
+  <%= render "articles/util/right_panel_detail" %>
+</div>
