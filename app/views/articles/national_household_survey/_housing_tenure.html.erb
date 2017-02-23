@@ -1,0 +1,208 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="national_household_survey_data" value="<%= @national_household_survey_data %>" type="hidden" />
+
+<div class="row canvases">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h4 class="color-grey">Total - Housing Tenure Type</h4>
+    <canvas id="total_housing_tenure_type_canvas"></canvas>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+
+<h4 class="color-grey">Total - Structural type of dwelling</h4>
+<canvas id="total_structural_type_dwelling_canvas"></canvas>
+
+<h4 class="color-grey">Owner - Structural type of dwelling</h4>
+<canvas id="owner_structural_type_dwelling_canvas"></canvas>
+
+<h4 class="color-grey">Renter - Structural type of dwelling</h4>
+<canvas id="renter_structural_type_dwelling_canvas"></canvas>
+
+<h4 class="color-grey">Band Housing - Structural type of dwelling</h4>
+<canvas id="band_housing_structural_type_dwelling_canvas"></canvas>
+
+
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+    var options_vertical_comma = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function(label, index, labels) {
+            return label/1000000+'M';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Population (1M=1,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+  // ----- options end -----//
+
+
+
+  var national_household_survey_data = JSON.parse( $("#national_household_survey_data").val() );
+  var housing_tenure = national_household_survey_data['housing tenure'];
+
+
+  // Structural type of dwelling
+  var total_structural_type = housing_tenure['Total - Housing Tenure'];
+  var owner_structural_type = housing_tenure['Owner'];
+  var renter_structural_type = housing_tenure['Renter'];
+  var band_housing_structural_type = housing_tenure['Band Housing'];
+
+  var structural_type = [];
+  var total_structural_type_value = [];
+  var owner_structural_type_value = [];
+  var renter_structural_type_value = [];
+  var band_housing_structural_type_value = [];
+
+  for (var i = 0; i < total_structural_type['structural type'].length-1; i++) {
+    var name = total_structural_type['structural type'][i]['name'];
+    var value = total_structural_type['structural type'][i]['value'];
+
+    structural_type.push(name);
+    total_structural_type_value.push(value);
+    owner_structural_type_value.push(owner_structural_type['structural type'][i]['value']);
+    renter_structural_type_value.push(renter_structural_type['structural type'][i]['value']);
+    band_housing_structural_type_value.push(band_housing_structural_type['structural type'][i]['value']);
+  }
+
+  var total_housing_tenure_other_dwelling = total_structural_type['structural type'][3]['sub type'];
+  for (var i = 0; i < total_housing_tenure_other_dwelling.length; i++) {
+    var name = total_housing_tenure_other_dwelling[i]['name'];
+    var value = total_housing_tenure_other_dwelling[i]['value'];
+
+    structural_type.push(name);
+    total_structural_type_value.push(value);
+    owner_structural_type_value.push(owner_structural_type['structural type'][3]['sub type'][i]['value']);
+    renter_structural_type_value.push(renter_structural_type['structural type'][3]['sub type'][i]['value']);
+    band_housing_structural_type_value.push(band_housing_structural_type['structural type'][3]['sub type'][i]['value']);
+  }
+
+
+  new Chart($("#total_structural_type_dwelling_canvas"), {
+    type: "bar",
+    data: {
+      labels: structural_type,
+      datasets: [{
+        label: "Housing Tenure",
+        data: total_structural_type_value,
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+  new Chart($("#owner_structural_type_dwelling_canvas"), {
+    type: "bar",
+    data: {
+      labels: structural_type,
+      datasets: [{
+        label: "Housing Tenure",
+        data: owner_structural_type_value,
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+
+  new Chart($("#renter_structural_type_dwelling_canvas"), {
+    type: "bar",
+    data: {
+      labels: structural_type,
+      datasets: [{
+        label: "Housing Tenure",
+        data: renter_structural_type_value,
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+  new Chart($("#band_housing_structural_type_dwelling_canvas"), {
+    type: "bar",
+    data: {
+      labels: structural_type,
+      datasets: [{
+        label: "Housing Tenure",
+        data: band_housing_structural_type_value,
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+
+  // Total - Housing Tenure Type  
+  new Chart($("#total_housing_tenure_type_canvas"), {
+    type: "pie",
+    data: {
+      labels: ["Owner", "Renter", "Band Housing"],
+      datasets: [{
+        data: [
+          housing_tenure['Owner']['total'], 
+          housing_tenure['Renter']['total'], 
+          housing_tenure['Band Housing']['total']
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9'],
+          colours[2]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_pie
+  });
+
+
+
+
+});
+</script>

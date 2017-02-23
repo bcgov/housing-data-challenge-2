@@ -77,5 +77,12 @@ class ArticlesController < ApplicationController
     @census_divisions_data = File.read("#{Rails.root}/public/data/census_divisions_data.geojson")
   end
 
+  def national_household_survey
+    @colours_json = COLOURS
+    @national_household_survey_data = File.read("#{Rails.root}/public/data/national_household_survey_data.json")
+    @household_mobility_status_data = File.read("#{Rails.root}/public/data/household_mobility_status_data.json")
+    
+  end
+
 
 end

@@ -1,0 +1,225 @@
+{
+  "housing tenure": {
+    "Total - Housing Tenure": {
+      "total": 13319260,
+      "structural type": [
+        {
+          "id": "single_detached_house",
+          "name": "Single-detached House",
+          "value": 7327785
+        },
+        {
+          "id": "apartment_more_storeys",
+          "name": "Apartment, building that has five or more storeys",
+          "value": 1234715
+        },
+        {
+          "id": "movable_dwelling",
+          "name": "Movable Dwelling",
+          "value": 183795
+        },
+        {
+          "id": "other_dwelling",
+          "name": "Other dwelling",
+          "value": 4572965,
+          "sub type": [
+            {
+              "id": "semi_detached_house",
+              "name": "Semi-detached House",
+              "value": 662015
+            },
+            {
+              "id": "row_house",
+              "name": "Row House",
+              "value": 799800
+            },
+            {
+              "id": "aprtment_duplex",
+              "name": "Apartment, duplex",
+              "value": 688145
+            },
+            {
+              "id": "aprtment_less_storeys",
+              "name": "Apartment, building that has fewer than five storeys",
+              "value": 2391165
+            },
+            {
+              "id": "other_single_attached_house",
+              "name": "Other single-attached House",
+              "value": 31840
+            }
+          ]
+        }
+      ]
+    },
+    "Owner": {
+      "total": 9185855,
+      "structural type": [
+        {
+          "id": "single_detached_house",
+          "name": "Single-detached House",
+          "value": 6732800
+        },
+        {
+          "id": "apartment_more_storeys",
+          "name": "Apartment, building that has five or more storeys",
+          "value": 358740
+        },
+        {
+          "id": "movable_dwelling",
+          "name": "Movable Dwelling",
+          "value": 155705
+        },
+        {
+          "id": "other_dwelling",
+          "name": "Other dwelling",
+          "value": 1938610,
+          "sub type": [
+            {
+              "id": "semi_detached_house",
+              "name": "Semi-detached House",
+              "value": 504225
+            },
+            {
+              "id": "row_house",
+              "name": "Row House",
+              "value": 520830
+            },
+            {
+              "id": "aprtment_duplex",
+              "name": "Apartment, duplex",
+              "value": 347440
+            },
+            {
+              "id": "aprtment_less_storeys",
+              "name": "Apartment, building that has fewer than five storeys",
+              "value": 550760
+            },
+            {
+              "id": "other_single_attached_house",
+              "name": "Other single-attached House",
+              "value": 15355
+            }
+          ]
+        }
+      ]
+    },
+    "Renter": {
+      "total": 4078220,
+      "structural type": [
+        {
+          "id": "single_detached_house",
+          "name": "Single-detached House",
+          "value": 547090
+        },
+        {
+          "id": "apartment_more_storeys",
+          "name": "Apartment, building that has five or more storeys",
+          "value": 875965
+        },
+        {
+          "id": "movable_dwelling",
+          "name": "Movable Dwelling",
+          "value": 25640
+        },
+        {
+          "id": "other_dwelling",
+          "name": "Other dwelling",
+          "value": 2629525,
+          "sub type": [
+            {
+              "id": "semi_detached_house",
+              "name": "Semi-detached House",
+              "value": 156210
+            },
+            {
+              "id": "row_house",
+              "name": "Row House",
+              "value": 276870
+            },
+            {
+              "id": "aprtment_duplex",
+              "name": "Apartment, duplex",
+              "value": 340295
+            },
+            {
+              "id": "aprtment_less_storeys",
+              "name": "Apartment, building that has fewer than five storeys",
+              "value": 1839745
+            },
+            {
+              "id": "other_single_attached_house",
+              "name": "Other single-attached House",
+              "value": 16405
+            }
+          ]
+        }
+      ]
+    },
+    "Band Housing": {
+      "total": 55185,
+      "structural type": [
+        {
+          "id": "single_detached_house",
+          "name": "Single-detached House",
+          "value": 47895
+        },
+        {
+          "id": "apartment_more_storeys",
+          "name": "Apartment, building that has five or more storeys",
+          "value": 10
+        },
+        {
+          "id": "movable_dwelling",
+          "name": "Movable Dwelling",
+          "value": 2450
+        },
+        {
+          "id": "other_dwelling",
+          "name": "Other dwelling",
+          "value": 4830,
+          "sub type": [
+            {
+              "id": "semi_detached_house",
+              "name": "Semi-detached House",
+              "value": 1580
+            },
+            {
+              "id": "row_house",
+              "name": "Row House",
+              "value": 2100
+            },
+            {
+              "id": "aprtment_duplex",
+              "name": "Apartment, duplex",
+              "value": 410
+            },
+            {
+              "id": "aprtment_less_storeys",
+              "name": "Apartment, building that has fewer than five storeys",
+              "value": 660
+            },
+            {
+              "id": "other_single_attached_house",
+              "name": "Other single-attached House",
+              "value": 80
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+
+
+    
+    
+    
+    
+
+
+
+
+
+

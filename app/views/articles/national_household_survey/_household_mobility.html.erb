@@ -1,0 +1,253 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="household_mobility_status_data" value="<%= @household_mobility_status_data %>" type="hidden" />
+
+
+<h4 class="color-grey">Total - Household mobility status 5 years ago</h4>
+<canvas id="total_household_mobility_status_canvas"></canvas>
+
+
+<div class="row canvases">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h4 class="color-grey">Comparison of Non-mover households and Mover households in total</h4>
+    <canvas id="non_mover_mover_compare_canvas"></canvas>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+
+<h4 class="color-grey">Comparison of Non-mover households and Mover households by age groups</h4>
+<canvas id="non_mover_mover_stacked_age_groups_canvas"></canvas>
+
+
+<div class="row canvases">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+    <h4 class="color-grey">Detail of Mover households in total</h4>
+    <canvas id="detail_mover_compare_canvas"></canvas>
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+
+<h4 class="color-grey">Detail of Mover households by age groups</h4>
+<canvas id="detail_mover_stacked_age_groups_canvas"></canvas>
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+    var options_vertical_comma = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true,
+          callback: function(label, index, labels) {
+            return label/1000000+'M';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Population (1M=1,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+
+  var options_stack = {
+    responsive: true,
+    scales: {
+      xAxes: [{
+        stacked: true
+      }],
+      yAxes: [{
+        stacked: true
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = data.datasets[2].data[tooltipItem.index];
+
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+  // ----- options end -----//
+
+  var household_mobility_status_data = JSON.parse( $("#household_mobility_status_data").val() );
+  var age_groups = household_mobility_status_data['age groups'];
+
+
+  // Total - Household mobility status 5 years ago
+  new Chart($("#total_household_mobility_status_canvas"), {
+    type: "bar",
+    data: {
+      labels: age_groups,
+      datasets: [{
+        label: "Household mobility status",
+        data: household_mobility_status_data['total household mobility']['data'],
+        backgroundColor: colours[0]['rgba']['opacity-0.9']
+      }]
+    },
+    options: options_vertical_comma
+  });
+
+  // Comparison of Non-mover households and  households in total
+  new Chart($("#non_mover_mover_compare_canvas"), {
+    type: "pie",
+    data: {
+      labels: ["Non-mover", "Mover"],
+      datasets: [{
+        data: [
+          household_mobility_status_data['non-mover households']['total'], 
+          household_mobility_status_data['mover households']['total']
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_pie
+  });
+
+
+  // Comparison of Non-mover households and Mover households by age groups 
+  new Chart($("#non_mover_mover_stacked_age_groups_canvas"), {
+    type: "bar",
+    data: {
+      labels: age_groups,
+      datasets: [
+        {
+          type: "bar",
+          label: "Non-mover households",
+          data: household_mobility_status_data['non-mover households']['data'],
+          backgroundColor: colours[0]['rgba']['opacity-0.9']
+        },
+        {
+          "type": "bar",
+          label: "Mover households",
+          data: household_mobility_status_data['mover households']['data'],
+          backgroundColor: colours[1]['rgba']['opacity-0.9']
+        },
+        {
+          "type": "line",
+          label: "Total Household mobility",
+          data: household_mobility_status_data['total household mobility']['data'],
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 3,
+          borderJoinStyle: 'round',
+          lineTension: 0.1,
+          fill: false
+        }
+      ]
+    },
+    options: options_stack
+  });
+
+
+
+  // Detail of Mover households in total
+  new Chart($("#detail_mover_compare_canvas"), {
+    type: "pie",
+    data: {
+      labels: ["Non-mover", "Mover"],
+      datasets: [{
+        data: [
+          household_mobility_status_data['within the same census subdivision']['total'], 
+          household_mobility_status_data['not within the same census subdivision']['total']
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_pie
+  });
+
+  // Detail of Mover households by age groups
+  new Chart($("#detail_mover_stacked_age_groups_canvas"), {
+    type: "bar",
+    data: {
+      labels: age_groups,
+      datasets: [
+        {
+          type: "bar",
+          label: "Within the same census subdivision",
+          data: household_mobility_status_data['within the same census subdivision']['data'],
+          backgroundColor: colours[0]['rgba']['opacity-0.9']
+        },
+        {
+          "type": "bar",
+          label: "Not within the same census subdivision",
+          data: household_mobility_status_data['not within the same census subdivision']['data'],
+          backgroundColor: colours[1]['rgba']['opacity-0.9']
+        },
+        {
+          "type": "line",
+          label: "Mover households",
+          data: household_mobility_status_data['mover households']['data'],
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 3,
+          borderJoinStyle: 'round',
+          lineTension: 0.1,
+          fill: false
+        }
+      ]
+    },
+    options: options_stack
+  });
+
+
+
+});
+</script>
