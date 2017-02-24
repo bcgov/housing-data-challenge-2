@@ -62,12 +62,12 @@ $(document).ready(function() {
         ticks: {
           beginAtZero: true,
           callback: function(label, index, labels) {
-            return label/1000000+'K';
+            return label/1000+'K';
           }
         },
         scaleLabel: {
           display: true,
-          labelString: 'Population (1K=1,000)'
+          labelString: 'Transactions (1K=1,000)'
         }
       }]
     },
