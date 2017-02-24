@@ -58,7 +58,17 @@ $(document).ready(function() {
         stacked: true
       }],
       yAxes: [{
-        stacked: true
+        stacked: true,
+        ticks: {
+          beginAtZero: true,
+          callback: function(label, index, labels) {
+            return label/1000000+'K';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Population (1K=1,000)'
+        }
       }]
     },
     tooltips: {
