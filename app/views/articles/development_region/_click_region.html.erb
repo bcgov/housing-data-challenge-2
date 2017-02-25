@@ -197,7 +197,6 @@ $(document).ready(function() {
 
 
     // Trend Line for Total Market Transactions
-
     new Chart($("#" + id + "_dev_region_canvas"), {
       type: 'line',
       data: {
@@ -214,6 +213,33 @@ $(document).ready(function() {
             lineTension: 0.1
           }
         ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true,
+              callback: function(label, index, labels) {
+                return label/1000+'K';
+              }
+            },
+            scaleLabel: {
+              display: true,
+              labelString: 'Transactions (1K=1,000)'
+            }
+          }]
+        },
+        tooltips: {
+          callbacks: {
+            label: function(tooltipItem, data) {
+              var dataset = data.datasets[tooltipItem.datasetIndex];
+              return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+              });
+            }
+          }
+        }
       }
     });
 
