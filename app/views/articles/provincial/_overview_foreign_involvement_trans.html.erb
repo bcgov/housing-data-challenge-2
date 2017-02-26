@@ -1,0 +1,365 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="bc_provincial_data" value="<%= @bc_provincial_data %>" type="hidden" />
+
+<div class="row canvases">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h4 class="color-grey">Foreign Involvement Transactions</h4>
+    <canvas id="no_foreign_canvas"></canvas>
+
+    <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
+    <canvas id="sum_FMV_foreign_canvas"></canvas>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row canvases">
+  <h4 class="color-grey">Comparsion of Citizen/PR and Foreign Involvement</h4>
+  <div class="col-md-4">
+    <canvas id="no_mkt_trans_no_foreign_compare_pie_canvas"></canvas>
+  </div>
+  <div class="col-md-8">
+    <canvas id="no_mkt_trans_no_foreign_compare_stacked_canvas"></canvas>
+  </div>
+  
+</div>
+
+<div class="row canvases">
+  <h4 class="color-grey">Overview of Foreign Involvement Transactions</h4>
+  <div class="col-md-4">
+    <canvas id="no_foreign_compare_pie_canvas"></canvas>
+  </div>
+  <div class="col-md-8">
+    <canvas id="no_foreign_compare_stacked_canvas"></canvas>
+  </div>
+  
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+  // options
+    var options_vertical_comma_k = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000+'K';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Transactions (1K=1,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+  var options_vertical_comma_dollar = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000000000+'B';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Dollars (1B=1,000,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+
+  var options_pie = {
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
+            return previousValue + currentValue;
+          });
+          var currentValue = dataset.data[tooltipItem.index];
+          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
+          return commaValue + " (" + precentage + "%)";
+        }
+      }
+    }
+  };
+
+  // ----- options end -----//
+
+
+  var bc_provincial_data = JSON.parse( $("#bc_provincial_data").val() );
+  var months = bc_provincial_data['months'];
+
+
+  // Foreign Involvement Transactions 
+  new Chart($("#no_foreign_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: [{
+        label: bc_provincial_data['no_foreign']['name'],
+        data: bc_provincial_data['no_foreign']['monthly'],
+        fill: false,
+        backgroundColor: colours[0]['rgba']['opacity-0.9'],
+        borderColor: colours[0]['rgba']['opacity-1'],
+        borderWidth: 5,
+        borderJoinStyle: "round",
+        lineTension: 0.1
+      }]
+    },
+    options: options_vertical_comma_k
+  });
+
+
+  // FMV sum of Foreign Involvement Transactions
+  new Chart($("#sum_FMV_foreign_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: [{
+        label: bc_provincial_data['sum_FMV_foreign']['name'],
+        data: bc_provincial_data['sum_FMV_foreign']['monthly'],
+        fill: false,
+        backgroundColor: colours[0]['rgba']['opacity-0.9'],
+        borderColor: colours[0]['rgba']['opacity-1'],
+        borderWidth: 5,
+        borderJoinStyle: "round",
+        lineTension: 0.1
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });
+
+
+
+  // Comparsion of Citizen/PR and Foreign Involvement
+  var no_mkt_trans_minus_no_foreign_name = "Citizen/PR Transactions";
+  var no_mkt_trans_minus_no_foreign = [];
+  for (var i = 0; i < bc_provincial_data['no_mkt_trans']['monthly'].length; i++) {
+    var value = bc_provincial_data['no_mkt_trans']['monthly'][i] - bc_provincial_data['no_foreign']['monthly'][i];
+    no_mkt_trans_minus_no_foreign.push( Math.abs(value) );
+  }
+
+  new Chart($("#no_mkt_trans_no_foreign_compare_pie_canvas"), {
+    type: "doughnut",
+    data: {
+      labels: [no_mkt_trans_minus_no_foreign_name, bc_provincial_data['no_foreign']['name']],
+      datasets: [{
+        data: [
+          bc_provincial_data['no_mkt_trans']['total'] - bc_provincial_data['no_foreign']['total'],
+          bc_provincial_data['no_foreign']['total']
+        ],
+        backgroundColor: [ colours[0]['rgba']['opacity-0.9'], colours[1]['rgba']['opacity-0.9'] ]
+      }]
+    },
+    options: options_pie
+  });
+
+  new Chart($("#no_mkt_trans_no_foreign_compare_stacked_canvas"), {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: [
+        {
+          type: "bar",
+          label: no_mkt_trans_minus_no_foreign_name,
+          data: no_mkt_trans_minus_no_foreign,
+          backgroundColor: colours[0]['rgba']['opacity-0.9']
+        },
+        {
+          type: "bar",
+          label: bc_provincial_data['no_foreign']['name'],
+          data: bc_provincial_data['no_foreign']['monthly'],
+          backgroundColor: colours[1]['rgba']['opacity-0.9']
+        },
+        {
+          type: "line",
+          label: bc_provincial_data['no_mkt_trans']['name'],
+          data: bc_provincial_data['no_mkt_trans']['monthly'],
+          fill: false,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 3,
+          borderJoinStyle: 'round',
+          lineTension: 0.1,
+          autoSkip: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000+'K';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Transactions (1K=1,000)'
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = data.datasets[2].data[tooltipItem.index];
+
+            var currentValue = dataset.data[tooltipItem.index];
+            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+            return commaValue + " (" + precentage + "%)";
+          }
+        }
+      }
+    }
+  });
+
+
+  // Comparsion of Foreign Involvement Transactions
+  new Chart($("#no_foreign_compare_pie_canvas"), {
+    type: "doughnut",
+    data: {
+      labels: [
+        bc_provincial_data['no_lt1M_foreign']['name'],
+        bc_provincial_data['no_gt1M_foreign']['name'],
+        bc_provincial_data['no_gt3M_foreign']['name']
+      ],
+      datasets: [{
+        data: [
+          bc_provincial_data['no_lt1M_foreign']['total'],
+          bc_provincial_data['no_gt1M_foreign']['total'],
+          bc_provincial_data['no_gt3M_foreign']['total']
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9'],
+          colours[2]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_pie
+  });
+
+  new Chart($("#no_foreign_compare_stacked_canvas"), {
+    type: "bar",
+    data: {
+      labels: months,
+      datasets: [
+        {
+          type: "bar",
+          label: bc_provincial_data['no_lt1M_foreign']['name'],
+          data: bc_provincial_data['no_lt1M_foreign']['monthly'],
+          backgroundColor: colours[0]['rgba']['opacity-0.9']
+        },
+        {
+          type: "bar",
+          label: bc_provincial_data['no_gt1M_foreign']['name'],
+          data: bc_provincial_data['no_gt1M_foreign']['monthly'],
+          backgroundColor: colours[1]['rgba']['opacity-0.9']
+        },
+        {
+          type: "bar",
+          label: bc_provincial_data['no_gt3M_foreign']['name'],
+          data: bc_provincial_data['no_gt3M_foreign']['monthly'],
+          backgroundColor: colours[2]['rgba']['opacity-0.9']
+        },
+        {
+          type: "line",
+          label: bc_provincial_data['no_foreign']['name'],
+          data: bc_provincial_data['no_foreign']['monthly'],
+          fill: false,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          borderWidth: 3,
+          borderJoinStyle: 'round',
+          lineTension: 0.1,
+          autoSkip: true
+        }
+      ]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        xAxes: [{
+          stacked: true
+        }],
+        yAxes: [{
+          stacked: true,
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000+'K';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Transactions (1K=1,000)'
+          }
+        }]
+      },
+      tooltips: {
+        callbacks: {
+          label: function(tooltipItem, data) {
+            var dataset = data.datasets[tooltipItem.datasetIndex];
+            var total = data.datasets[3].data[tooltipItem.index];
+
+            var currentValue = dataset.data[tooltipItem.index];
+            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
+            return commaValue + " (" + precentage + "%)";
+          }
+        }
+      }
+    }
+  });
+
+
+
+
+});
+</script>

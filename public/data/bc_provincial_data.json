@@ -6,29 +6,85 @@
     "total": 100649
   },
   "no_resid_trans": {
-    "name": "Residential Total",
+    "name": "Residential",
     "monthly": [19007,17446,15807,13505,11128,10942,8817],
     "total": 96652
   },
   "no_comm_tot": {
-    "name": "Commercial Total",
+    "name": "Commercial",
     "monthly": [429,285,301,405,313,313,333],
     "total": 2379
   },
   "no_recr_tot": {
-    "name": "Recreational Total",
+    "name": "Recreational",
     "monthly": [142,122,87,119,108,105,72],
     "total": 755
   },
   "no_farm_tot": {
-    "name": "Recreational Total",
+    "name": "Recreational",
     "monthly": [107,50,76,84,64,74,80],
     "total": 535
   },
   "no_unkn_tot": {
-    "name": "Other/Unknown Total",
+    "name": "Other/Unknown",
     "monthly": [49,48,33,45,75,44,34],
     "total": 328
+  },
+
+  "no_resid_acreage_trans": {
+    "name": "Acreage",
+    "monthly": [890,722,722,681,495,555,424],
+    "total": 4489
+  },
+  "resid_comm_count": {
+    "name": "Commerce",
+    "monthly": [85,69,98,73,52,76,75],
+    "total": 528
+  },
+  "no_resid_farm": {
+    "name": "Farm",
+    "monthly": [193,103,121,105,77,84,60],
+    "total": 743
+  },
+  "no_resid_fam": {
+    "name": "Multi family",
+    "monthly": [136,120,103,107,63,90,67],
+    "total": 686
+  },
+  "no_res_1fam": {
+    "name": "Single Family",
+    "monthly": [10004,9087,8234,6068,4115,4646,3643],
+    "total": 45797
+  },
+  "no_resid_strata": {
+    "name": "StrataL",
+    "monthly": [5796,5478,5038,4126,2671,3537,3118],
+    "total": 29764
+  },
+  "no_resid_non_strata": {
+    "name": "Strata Non-Residential or Rental",
+    "monthly": [277,91,96,120,76,103,169],
+    "total": 932
+  },
+  "no_resid_other": {
+    "name": "Other",
+    "monthly": [1626,1776,1395,2225,3579,1851,1261],
+    "total": 328
+  },
+  "no_comm_comm": {
+    "name": "Commerce",
+    "monthly": [222,123,139,217,107,135,167],
+    "total": 1110
+  },
+  "no_comm_strata_nores": {
+    "name": "Strata Non-Residential",
+    "monthly": [117,106,99,97,46,109,99],
+    "total": 673
+  },
+  "no_comm_other": {
+    "name": "Other",
+    "monthly": [90,56,63,91,160,69,67],
+    "total": 596
   },
   "sum_FMV": {
     "name": "FMV sum",

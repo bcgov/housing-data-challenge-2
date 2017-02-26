@@ -1,0 +1,261 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
+
+
+
+<div class="row canvases">
+  <h4 class="color-grey">Total Market Transactions Monthly</h4>
+  <canvas id="no_mkt_trans_canvas"></canvas>
+
+  <div class="col-md-6">
+    <h4 class="color-grey">Comparison of Housing Types between Vancouver and Chilliwack</h4>
+    <canvas id="compare_van_chilliwack_canvas"></canvas>    
+  </div>
+  <div class="col-md-6">
+    <h4 class="color-grey">Comparison of Housing Types between Vancouver and Surrey</h4>
+    <canvas id="compare_van_surrey_canvas"></canvas>
+  </div>
+</div>
+
+<div class="canvases">
+  <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
+  <canvas id="sum_fmv_canvas"></canvas>
+</div>
+
+<div class="row canvases">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h4 class="color-grey">Total amount of Property Transfer Tax (PTT) paid in Metro Vancouver</h4>
+    <canvas id="sum_ptt_paid_canvas"></canvas>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+    
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+  var options_vertical_comma_dollar = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000000000+'B';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Dollars (1B=1,000,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+
+  var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
+  var months = municipal_transaction_data['months'];
+  var regional_district = municipal_transaction_data['regional_district'];
+
+
+
+  var municipal_monthly_data = {};
+  municipal_monthly_data['labels'] = months;
+  var municipal_dataset = [];
+
+
+  var sum_fmv_monthly_name = [];
+  var sum_fmv_monthly_data = [];
+  var sum_fmv_monthly_bg = [];
+
+  var van_housing_total = [];
+  var chilliwack_housing_total = [];
+  var surrey_housing_total = [];
+
+  var sum_PTT_paid_name = [];
+  var sum_PTT_paid_data = [];
+  var sum_PTT_paid_bg = [];
+
+
+  var c = 0;
+  for (var i = 0; i < regional_district.length; i++) {
+    var municipality = regional_district[i]['municipality'];
+
+    for (var j = 0; j < municipality.length; j++) {
+      
+      if ( !municipality[j]['name'].includes("Rest") ) {
+        municipal_dataset.push({
+          "label": municipality[j]['name'],
+          "data": municipality[j]['transaction_type']['monthly'],
+          "backgroundColor": colours[c]['rgba']['opacity-0.9']
+        });
+      
+        sum_fmv_monthly_name.push(municipality[j]['name']);
+        sum_fmv_monthly_data.push(municipality[j]['fair market value']['sum_FMV']);
+        sum_fmv_monthly_bg.push(colours[0]['rgba']['opacity-0.9']);
+        c += 1; 
+      }
+
+      if (municipality[j]['name'] == "Vancouver") {
+        var housing_type = municipality[j]['transaction_type']['housing_type'];
+        for (var x = 0; x < housing_type.length; x++) {
+          van_housing_total.push(housing_type[x]['total']);
+        }
+      }
+      if (municipality[j]['name'] == "Chilliwack") {
+        var housing_type = municipality[j]['transaction_type']['housing_type'];
+        for (var x = 0; x < housing_type.length; x++) {
+          chilliwack_housing_total.push(housing_type[x]['total']);
+        }
+      }
+      if (municipality[j]['name'] == "Surrey") {
+        var housing_type = municipality[j]['transaction_type']['housing_type'];
+        for (var x = 0; x < housing_type.length; x++) {
+          surrey_housing_total.push(housing_type[x]['total']);
+        }
+      }
+
+
+      var ptt = municipality[j]['property transfer tax'];
+      if (ptt) {
+        sum_PTT_paid_name.push(municipality[j]['name']);
+        sum_PTT_paid_data.push(ptt['sum_PTT_paid']);
+        sum_PTT_paid_bg.push(colours[0]['rgba']['opacity-0.9']);;
+      }
+
+
+    }
+  }
+
+  // Total Market Transactions Monthly
+  municipal_monthly_data['datasets'] = municipal_dataset;
+  new Chart($("#no_mkt_trans_canvas"), {
+    type: "bar",
+    data: municipal_monthly_data
+  });
+
+
+
+  // Comparison of Housing Type between Vancouver and Chilliwack
+  new Chart($("#compare_van_chilliwack_canvas"), {
+    type: "radar",
+    data: {
+      labels: ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"],
+      datasets: [
+        {
+          label: "Vancouver",
+          data: van_housing_total,
+          backgroundColor: colours[0]['rgba']['opacity-0.2'],
+          borderColor: colours[0]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)"
+        },
+        {
+          label: "Chilliwack",
+          data: chilliwack_housing_total,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.2'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(255,99,132,1)",
+        }
+      ]
+    },
+    options: {
+      scale: {
+        reverse: true,
+        ticks: {beginAtZero: true}
+      }
+    }
+  });
+
+
+  // Comparison of Housing Type between Vancouver and Surrey
+  new Chart($("#compare_van_surrey_canvas"), {
+    type: "radar",
+    data: {
+      labels: ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"],
+      datasets: [
+        {
+          label: "Vancouver",
+          data: van_housing_total,
+          backgroundColor: colours[0]['rgba']['opacity-0.2'],
+          borderColor: colours[0]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)"
+        },
+        {
+          label: "Surrey",
+          data: surrey_housing_total,
+          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.2'],
+          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(255,99,132,1)",
+        }
+      ]
+    },
+    options: {
+      scale: {
+        reverse: true,
+        ticks: {beginAtZero: true}
+      }
+    }
+  });
+
+
+  // Sum of Fair Market Value (FMV)
+  new Chart($("#sum_fmv_canvas"), {
+    type: "bar",
+    data: {
+      labels: sum_fmv_monthly_name,
+      datasets: [{
+        label: "Sum of FMV",
+        data: sum_fmv_monthly_data,
+        backgroundColor: sum_fmv_monthly_bg
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });
+
+
+  // Total amount of Property Transfer Tax (PTT) paid in Metro Vancouver
+  new Chart($("#sum_ptt_paid_canvas"), {
+    type: "bar",
+    data: {
+      labels: sum_PTT_paid_name,
+      datasets: [{
+        label: "Sum of FMV",
+        data: sum_PTT_paid_data,
+        backgroundColor: sum_PTT_paid_bg
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });  
+
+
+
+});
+</script>

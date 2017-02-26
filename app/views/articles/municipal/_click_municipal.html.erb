@@ -132,16 +132,16 @@ $(document).ready(function() {
       var region_district_municipality_name = region_district_municipality_json[k]['name'];
       html += '<div class="article">' +
                 '<div class="article-header">' +
-                  '<h3 class="color-darkblue">Overview of ' + region_district_municipality_name + ' Regional Districts</h3>' +
+                  '<h3 class="color-darkblue">Overview of ' + region_district_municipality_name + ' Municipality</h3>' +
                 '</div>' +
                 '<div class="article-body">' +
                   '<div class="row">' +
                     '<div class="col-md-8">' +
-                      '<p class="color-grey make-center make-bold">Property Types</p>' +
+                      '<p class="color-grey make-center make-bold">Housing Types by Monthly</p>' +
                       '<canvas id="region_district_municipality_' + region_district_municipality_id + '_all_type_canvas"></canvas>' +
                     '</div>' +
                     '<div class="col-md-4">' +
-                      '<p class="color-grey make-center make-bold">Percentage of Property Types</p>' +
+                      '<p class="color-grey make-center make-bold">Percentage of Housing Types</p>' +
                       '<canvas id="region_district_municipality_' + region_district_municipality_id + '_type_canvas"></canvas>' +
                     '</div>' +
                   '</div>' +
@@ -192,7 +192,7 @@ $(document).ready(function() {
       var name = region_district_municipality_json[j]['name'];
       var region_district_municipality__dataset = {
         "label": name,
-        "data": region_district_municipality_json[j]['monthly_total_property_types']['monthly'],
+        "data": region_district_municipality_json[j]['transaction_type']['monthly'],
         "backgroundColor": colours[j]['rgba']['opacity-0.9'],
         "borderColor": colours[j]['rgba']['opacity-1'],
         "borderWidth": 3
@@ -200,7 +200,7 @@ $(document).ready(function() {
       region_district_municipality_datasets.push(region_district_municipality__dataset);
 
       region_district_municipality_compare_labels.push(name);
-      region_district_municipality_compare_data.push( region_district_municipality_json[j]['monthly_total_property_types']['total'] );
+      region_district_municipality_compare_data.push( region_district_municipality_json[j]['transaction_type']['total'] );
       region_district_municipality_compare_bg_color.push( colours[j]['rgba']['opacity-0.9'] );
     }
 
@@ -237,33 +237,33 @@ $(document).ready(function() {
       var datasets = [];
       
       // municipal property types
-      var region_district_municipality_property_types = [];
-      var region_district_municipality_property_types_data = [];
-      var region_district_municipality_property_types_bg_colors = [];
+      var region_district_municipality_housing_type = [];
+      var region_district_municipality_housing_type_data = [];
+      var region_district_municipality_housing_type_bg_colors = [];
 
-      var reg_district_municipality_property_types = region_district_municipality_json[j]['monthly_total_property_types']['property_types'];
-      for (var k = 0; k < reg_district_municipality_property_types.length; k++) {
-        var name = reg_district_municipality_property_types[k]['name'];
+      var reg_district_municipality_housing_type = region_district_municipality_json[j]['transaction_type']['housing_type'];
+      for (var k = 0; k < reg_district_municipality_housing_type.length; k++) {
+        var name = reg_district_municipality_housing_type[k]['name'];
 
         var dataset = {
           "type": 'bar',
           "label": name,
-          "data": reg_district_municipality_property_types[k]['monthly'],
+          "data": reg_district_municipality_housing_type[k]['monthly'],
           "backgroundColor": colours[k]['rgba']['opacity-0.9']
         };
         datasets.push(dataset);
 
         // add each property type
-        region_district_municipality_property_types.push(name);
-        region_district_municipality_property_types_data.push( reg_district_municipality_property_types[k]['total'] );
-        region_district_municipality_property_types_bg_colors.push( colours[k]['rgba']['opacity-0.9'] );
+        region_district_municipality_housing_type.push(name);
+        region_district_municipality_housing_type_data.push( reg_district_municipality_housing_type[k]['total'] );
+        region_district_municipality_housing_type_bg_colors.push( colours[k]['rgba']['opacity-0.9'] );
       }
 
       // add trend line
       var trend_line = {
         type: "line",
         label: "Total Market Transactions",
-        data: region_district_municipality_json[j]['monthly_total_property_types']['monthly'],
+        data: region_district_municipality_json[j]['transaction_type']['monthly'],
         fill: false,
         backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
         borderColor: colours[colours.length-1]['rgba']['opacity-1'],
@@ -276,10 +276,10 @@ $(document).ready(function() {
       // Percentage of Total Transactions
       var region_district_municipality_resid_type_labels = [];
 
-      var region_district_municipality_property_types_resid = region_district_municipality_json[j]['monthly_total_property_types']['property_types'][0]['residential_types'];
+      var region_district_municipality_housing_type_resid = region_district_municipality_json[j]['transaction_type']['housing_type'][0]['residential_types'];
 
-      for (var n = 0; n < region_district_municipality_property_types_resid.length; n++) {
-        region_district_municipality_resid_type_labels.push(region_district_municipality_property_types_resid[n]['name']);
+      for (var n = 0; n < region_district_municipality_housing_type_resid.length; n++) {
+        region_district_municipality_resid_type_labels.push(region_district_municipality_housing_type_resid[n]['name']);
       }
 
       // make charts for Property Types 
@@ -296,10 +296,10 @@ $(document).ready(function() {
       new Chart($("#region_district_municipality_" + region_district_municipality_id + "_type_canvas"), {
         type: "doughnut",
         data: {
-          labels: region_district_municipality_property_types,
+          labels: region_district_municipality_housing_type,
           datasets: [{
-            data: region_district_municipality_property_types_data,
-            backgroundColor: region_district_municipality_property_types_bg_colors
+            data: region_district_municipality_housing_type_data,
+            backgroundColor: region_district_municipality_housing_type_bg_colors
           }]
         },
         options: options_pie

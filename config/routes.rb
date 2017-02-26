@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
+
   get 'articles/national_household_survey'
   get 'articles/census_bc'
-  get 'articles/foreign_involvement'
   get 'articles/municipal'
   get 'articles/development_region'
   get 'articles/provincial'

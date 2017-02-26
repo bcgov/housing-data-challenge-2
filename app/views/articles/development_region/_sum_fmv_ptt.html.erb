@@ -1,0 +1,102 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
+
+<div class="canvases">
+  <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
+  <canvas id="fmv_canvas"></canvas>
+
+  <h4 class="color-grey">Total Amount of Property Transfer Tax (PTT)</h4>
+  <canvas id="ptt_canvas"></canvas>
+
+
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+
+  // options
+  var options_vertical_comma_dollar = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000000000+'B';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Dollars (1B=1,000,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+
+  var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
+
+  var months = dev_region_transaction_data['months'];
+  var dev_region = dev_region_transaction_data['development_region'];
+
+
+  var dev_region_name = [];
+  var dev_region_bg = [];
+  var fmv_data = [];
+  var ptt_data = [];
+
+  for (var i = 0; i < dev_region.length; i++) {
+    dev_region_name.push(dev_region[i]['name']);
+    dev_region_bg.push(colours[0]['rgba']['opacity-0.9']);
+    fmv_data.push(dev_region[i]['fair market value']['sum_FMV']);
+    ptt_data.push(dev_region[i]['property transfer tax']['sum_PTT_paid']);
+  }
+
+console.log(dev_region);
+
+  // Sum of Fair Market Value (FMV)
+  new Chart($("#fmv_canvas"), {
+    type: "bar",
+    data: {
+      labels: dev_region_name,
+      datasets: [{
+        label: "Sum of FMV",
+        data: fmv_data,
+        backgroundColor: dev_region_bg
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });  
+
+  // Sum of Property Transfer Tax (PTT)  ptt_canvas
+  new Chart($("#ptt_canvas"), {
+    type: "bar",
+    data: {
+      labels: dev_region_name,
+      datasets: [{
+        label: "Sum of PTT",
+        data: ptt_data,
+        backgroundColor: dev_region_bg
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });  
+
+});
+</script>

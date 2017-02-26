@@ -7,6 +7,35 @@
 
     <h4 class="color-grey">Total Market Transactions</h4>
     <canvas id="no_mkt_trans_canvas"></canvas>
+  
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+<div class="row canvases">
+  <div class="col-md-3"></div>
+  <div class="col-md-6">
+
+    <h4 class="color-grey">Comparison of Housing Types</h4>
+    <canvas id="compare_housing_type_canvas"></canvas>
+
+  </div>
+  <div class="col-md-3"></div>
+</div>
+
+    
+
+<div class="row canvases">
+
+  <h4 class="color-grey">Comparison of Residential Property Type</h4>
+  <canvas id="compare_resid_property_type_canvas"></canvas>
+
+
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+
+    <h4 class="color-grey">Comparison of Commercial Property Type</h4>
+    <canvas id="compare_comm_property_type_canvas"></canvas>
 
     <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
     <canvas id="sum_FMV_canvas"></canvas>   
@@ -17,38 +46,10 @@
     <h4 class="color-grey">Additional Tax Paid</h4>
     <canvas id="add_tax_paid_canvas"></canvas>
 
-    <h4 class="color-grey">Foreign Involvement Transactions</h4>
-    <canvas id="no_foreign_canvas"></canvas>
-
-    <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
-    <canvas id="sum_FMV_foreign_canvas"></canvas>
-
   </div>
   <div class="col-md-2"></div>
 </div>
 
- 
-<div class="row canvases">
-  <h4 class="color-grey">Comparsion of Citizen/PR and Foreign Involvement</h4>
-  <div class="col-md-4">
-    <canvas id="no_mkt_trans_no_foreign_compare_pie_canvas"></canvas>
-  </div>
-  <div class="col-md-8">
-    <canvas id="no_mkt_trans_no_foreign_compare_stacked_canvas"></canvas>
-  </div>
-  
-</div>
-
-<div class="row canvases">
-  <h4 class="color-grey">Comparsion of Foreign Involvement Transactions</h4>
-  <div class="col-md-4">
-    <canvas id="no_foreign_compare_pie_canvas"></canvas>
-  </div>
-  <div class="col-md-8">
-    <canvas id="no_foreign_compare_stacked_canvas"></canvas>
-  </div>
-  
-</div>
 
 <div class="bs-callout bs-callout-warning">
   <h4>Data Dictionary for Provincial</h4>
@@ -56,27 +57,28 @@
 </div>
 
 
-
 <script>
 $(document).ready(function() {
+
 
   // colours
   var colours_json = JSON.parse( $("#colours_json").val() );
   var colours = colours_json['colours'];
 
   // options
-    var options_vertical_comma = {
+    var options_vertical_comma_k = {
     responsive: true,
     scales: {
       yAxes: [{
         ticks: {
+          beginAtZero: true,
           callback: function(label, index, labels) {
             return label/1000+'K';
           }
         },
         scaleLabel: {
           display: true,
-          labelString: 'Transactions (1K=1000)'
+          labelString: 'Transactions (1K=1,000)'
         }
       }]
     },
@@ -162,8 +164,109 @@ $(document).ready(function() {
         lineTension: 0.1
       }]
     },
-    options: options_vertical_comma
+    options: options_vertical_comma_k
   });
+
+  // Comparison of Housing Types
+  new Chart($("#compare_housing_type_canvas"), {
+    type: "pie",
+    data: {
+      labels: [
+        bc_provincial_data['no_resid_trans']['name'],
+        bc_provincial_data['no_comm_tot']['name'],
+        bc_provincial_data['no_recr_tot']['name'],
+        bc_provincial_data['no_farm_tot']['name'],
+        bc_provincial_data['no_unkn_tot']['name'],
+      ],
+      datasets: [{
+        data: [
+          bc_provincial_data['no_resid_trans']['total'],
+          bc_provincial_data['no_comm_tot']['total'],
+          bc_provincial_data['no_recr_tot']['total'],
+          bc_provincial_data['no_farm_tot']['total'],
+          bc_provincial_data['no_unkn_tot']['total'],
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[1]['rgba']['opacity-0.9'],
+          colours[2]['rgba']['opacity-0.9'],
+          colours[3]['rgba']['opacity-0.9'],
+          colours[4]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_pie
+  });
+
+
+  // Comparison of Residential Property Types
+  new Chart($("#compare_resid_property_type_canvas"), {
+    type: "bar",
+    data: {
+      labels: [
+        bc_provincial_data['no_resid_acreage_trans']['name'],
+        bc_provincial_data['resid_comm_count']['name'],
+        bc_provincial_data['no_resid_farm']['name'],
+        bc_provincial_data['no_resid_fam']['name'],
+        bc_provincial_data['no_res_1fam']['name'],
+        bc_provincial_data['no_resid_strata']['name'],
+        bc_provincial_data['no_resid_non_strata']['name'],
+        bc_provincial_data['no_resid_other']['name'],
+      ],
+      datasets: [{
+        label: "Residential Property Types",
+        data: [
+          bc_provincial_data['no_resid_acreage_trans']['total'],
+          bc_provincial_data['resid_comm_count']['total'],
+          bc_provincial_data['no_resid_farm']['total'],
+          bc_provincial_data['no_resid_fam']['total'],
+          bc_provincial_data['no_res_1fam']['total'],
+          bc_provincial_data['no_resid_strata']['total'],
+          bc_provincial_data['no_resid_non_strata']['total'],
+          bc_provincial_data['no_resid_other']['total'],
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_vertical_comma_k
+  });
+
+
+  // Comparison of Commercial Property Types
+  new Chart($("#compare_comm_property_type_canvas"), {
+    type: "bar",
+    data: {
+      labels: [
+        bc_provincial_data['no_comm_comm']['name'],
+        bc_provincial_data['no_comm_strata_nores']['name'],
+        bc_provincial_data['no_comm_other']['name']
+      ],
+      datasets: [{
+        label: "Commercial Property Types",
+        data: [
+          bc_provincial_data['no_comm_comm']['total'],
+          bc_provincial_data['no_comm_strata_nores']['total'],
+          bc_provincial_data['no_comm_other']['total']
+        ],
+        backgroundColor: [
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9'],
+          colours[0]['rgba']['opacity-0.9']
+        ]
+      }]
+    },
+    options: options_vertical_comma_k
+  });
+
 
 
   // Sum of Fair Market Value (FMV)
@@ -223,244 +326,6 @@ $(document).ready(function() {
     },
     options: options_vertical_comma_dollar
   });
-
-
-  // Foreign Involvement Transactions 
-  new Chart($("#no_foreign_canvas"), {
-    type: "line",
-    data: {
-      labels: months,
-      datasets: [{
-        label: bc_provincial_data['no_foreign']['name'],
-        data: bc_provincial_data['no_foreign']['monthly'],
-        fill: false,
-        backgroundColor: colours[0]['rgba']['opacity-0.9'],
-        borderColor: colours[0]['rgba']['opacity-1'],
-        borderWidth: 5,
-        borderJoinStyle: "round",
-        lineTension: 0.1
-      }]
-    },
-    options: options_vertical_comma
-  });
-
-
-  // FMV sum of Foreign Involvement Transactions
-  new Chart($("#sum_FMV_foreign_canvas"), {
-    type: "line",
-    data: {
-      labels: months,
-      datasets: [{
-        label: bc_provincial_data['sum_FMV_foreign']['name'],
-        data: bc_provincial_data['sum_FMV_foreign']['monthly'],
-        fill: false,
-        backgroundColor: colours[0]['rgba']['opacity-0.9'],
-        borderColor: colours[0]['rgba']['opacity-1'],
-        borderWidth: 5,
-        borderJoinStyle: "round",
-        lineTension: 0.1
-      }]
-    },
-    options: options_vertical_comma_dollar
-  });
-
-
-
-  // Comparsion of Citizen/PR and Foreign Involvement
-  var no_mkt_trans_minus_no_foreign_name = "Citizen/PR Transactions";
-  var no_mkt_trans_minus_no_foreign = [];
-  for (var i = 0; i < bc_provincial_data['no_mkt_trans']['monthly'].length; i++) {
-    var value = bc_provincial_data['no_mkt_trans']['monthly'][i] - bc_provincial_data['no_foreign']['monthly'][i];
-    no_mkt_trans_minus_no_foreign.push( Math.abs(value) );
-  }
-
-  new Chart($("#no_mkt_trans_no_foreign_compare_pie_canvas"), {
-    type: "pie",
-    data: {
-      labels: [no_mkt_trans_minus_no_foreign_name, bc_provincial_data['no_foreign']['name']],
-      datasets: [{
-        data: [
-          bc_provincial_data['no_mkt_trans']['total'] - bc_provincial_data['no_foreign']['total'],
-          bc_provincial_data['no_foreign']['total']
-        ],
-        backgroundColor: [ colours[0]['rgba']['opacity-0.9'], colours[1]['rgba']['opacity-0.9'] ]
-      }]
-    },
-    options: options_pie
-  });
-
-
-
-  new Chart($("#no_mkt_trans_no_foreign_compare_stacked_canvas"), {
-    type: "bar",
-    data: {
-      labels: months,
-      datasets: [
-        {
-          type: "bar",
-          label: no_mkt_trans_minus_no_foreign_name,
-          data: no_mkt_trans_minus_no_foreign,
-          backgroundColor: colours[0]['rgba']['opacity-0.9']
-        },
-        {
-          type: "bar",
-          label: bc_provincial_data['no_foreign']['name'],
-          data: bc_provincial_data['no_foreign']['monthly'],
-          backgroundColor: colours[1]['rgba']['opacity-0.9']
-        },
-        {
-          type: "line",
-          label: bc_provincial_data['no_mkt_trans']['name'],
-          data: bc_provincial_data['no_mkt_trans']['monthly'],
-          fill: false,
-          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
-          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
-          borderWidth: 3,
-          borderJoinStyle: 'round',
-          lineTension: 0.1,
-          autoSkip: true
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000+'K';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Transactions (1K=1000)'
-          }
-        }]
-      },
-      tooltips: {
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = data.datasets[2].data[tooltipItem.index];
-
-            var currentValue = dataset.data[tooltipItem.index];
-            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-            });
-            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
-            return commaValue + " (" + precentage + "%)";
-          }
-        }
-      }
-    }
-  });
-
-
-
-
-  // Comparsion of Foreign Involvement Transactions
-  new Chart($("#no_foreign_compare_pie_canvas"), {
-    type: "pie",
-    data: {
-      labels: [
-        bc_provincial_data['no_lt1M_foreign']['name'],
-        bc_provincial_data['no_gt1M_foreign']['name'],
-        bc_provincial_data['no_gt3M_foreign']['name']
-      ],
-      datasets: [{
-        data: [
-          bc_provincial_data['no_lt1M_foreign']['total'],
-          bc_provincial_data['no_gt1M_foreign']['total'],
-          bc_provincial_data['no_gt3M_foreign']['total']
-        ],
-        backgroundColor: [
-          colours[0]['rgba']['opacity-0.9'],
-          colours[1]['rgba']['opacity-0.9'],
-          colours[2]['rgba']['opacity-0.9']
-        ]
-      }]
-    },
-    options: options_pie
-  });
-
-  new Chart($("#no_foreign_compare_stacked_canvas"), {
-    type: "bar",
-    data: {
-      labels: months,
-      datasets: [
-        {
-          type: "bar",
-          label: bc_provincial_data['no_lt1M_foreign']['name'],
-          data: bc_provincial_data['no_lt1M_foreign']['monthly'],
-          backgroundColor: colours[0]['rgba']['opacity-0.9']
-        },
-        {
-          type: "bar",
-          label: bc_provincial_data['no_gt1M_foreign']['name'],
-          data: bc_provincial_data['no_gt1M_foreign']['monthly'],
-          backgroundColor: colours[1]['rgba']['opacity-0.9']
-        },
-        {
-          type: "bar",
-          label: bc_provincial_data['no_gt3M_foreign']['name'],
-          data: bc_provincial_data['no_gt3M_foreign']['monthly'],
-          backgroundColor: colours[2]['rgba']['opacity-0.9']
-        },
-        {
-          type: "line",
-          label: bc_provincial_data['no_foreign']['name'],
-          data: bc_provincial_data['no_foreign']['monthly'],
-          fill: false,
-          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
-          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
-          borderWidth: 3,
-          borderJoinStyle: 'round',
-          lineTension: 0.1,
-          autoSkip: true
-        }
-      ]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000+'K';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Transactions (1K=1000)'
-          }
-        }]
-      },
-      tooltips: {
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = data.datasets[3].data[tooltipItem.index];
-
-            var currentValue = dataset.data[tooltipItem.index];
-            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-            });
-            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
-            return commaValue + " (" + precentage + "%)";
-          }
-        }
-      }
-    }
-  });
-
 
 });
 </script>

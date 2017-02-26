@@ -6,11 +6,11 @@ class ArticlesController < ApplicationController
     "colours": [
       {
         "color": "blue",
-        "rgba": {"opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)"}
+        "rgba": {"opacity-0.9":"rgba(54,162,235,0.9)", "opacity-1":"rgba(54,162,235,1)", "opacity-0.2":"rgba(54,162,235,0.2)"}
       },
       {
         "color": "orange",
-        "rgba": {"opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)"}
+        "rgba": {"opacity-0.9":"rgba(255,159,64,0.9)", "opacity-1":"rgba(255,159,64,1)", "opacity-0.2":"rgba(255,159,64,0.2)"}
       },
       {
         "color": "yellow",
@@ -37,9 +37,17 @@ class ArticlesController < ApplicationController
         "rgba": {"opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
       },
       {
+        "color": "grey",
+        "rgba": {"opacity-0.9":"rgba(127,127,130,0.9)", "opacity-1":"rgba(127,127,130,1)"} 
+      },
+      {
+        "color": "pink",
+        "rgba": {"opacity-0.9":"rgba(239,4,173,0.9)", "opacity-1":"rgba(239,4,173,1)"} 
+      },
+      {
         "color": "red",
         "rgba": {"opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"} 
-      }
+      },
     ]
   }.freeze
 
@@ -63,12 +71,6 @@ class ArticlesController < ApplicationController
     @colours_json = COLOURS
     @municipal_transaction_data = File.read("#{Rails.root}/public/data/municipal_transaction_data.json")
     @regional_district_geo_data = File.read("#{Rails.root}/public/data/regional_district_geo_data.geojson")
-  end
-
-  def foreign_involvement
-    @colours_json = COLOURS
-    @provincial_data = File.read("#{Rails.root}/public/data/provincial_data.json")
-    @municipal_monthly_no_foreign = File.read("#{Rails.root}/public/data/foreign_involvement.geojson")
   end
 
   def census_bc

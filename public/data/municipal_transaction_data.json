@@ -11,12 +11,12 @@
           "order": 1,
           "id": "Abbotsford",
           "name": "Abbotsford",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [643, 552, 509, 401, 354, 354, 286],
             "total": 3099,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -49,18 +49,21 @@
                 "total": 6
               }
             ]
-          }
+          },
+          "fair market value": {
+            "sum_FMV": 1634060880
+          } 
         },
         {
           "order": 2,
           "id": "Chilliwack",
           "name": "Chilliwack",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [496, 490, 505, 430, 366, 325, 231],
             "total": 2843,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -93,18 +96,21 @@
                 "total": 2
               }
             ]
-          }
+          },
+          "fair market value": {
+            "sum_FMV": 1271841446
+          } 
         },
         {
           "order": 3,
           "id": "RestofFraserValley",
           "name": "Rest of Fraser Valley",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [389, 389, 315, 263, 246, 191, 130],
             "total": 1923,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -137,7 +143,10 @@
                 "total": 30
               }
             ]
-          }
+          },
+          "fair market value": {
+            "sum_FMV": 870153087
+          } 
         }
       ]
     },
@@ -151,12 +160,12 @@
           "order": 1,
           "id": "Burnaby",
           "name": "Burnaby",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [606, 716, 504, 421, 322, 404, 351],
             "total": 3324,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -189,18 +198,28 @@
                 "total": 3
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 2973817508
+          },
+          "property transfer tax": {
+            "sum_PTT_paid": 63290748.1
+          },
+          "foreign involvement": {
+            "no_foreign": 398,
+            "sum_FMV_foreign": 358744483
           }
         },
         {
           "order": 2,
           "id": "RestofMetroVancouver",
           "name": "Rest of Metro Vancouver",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [3782, 3497, 2915, 2377, 1761, 1813, 1442],
             "total": 17587,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -233,18 +252,21 @@
                 "total": 31
               }
             ]
-          }
+          },
+          "fair market value": {
+            "sum_FMV": 15631763296
+          } 
         },
         {
           "order": 3,
           "id": "Richmond",
           "name": "Richmond",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [741, 802, 565, 538, 818, 772, 399],
             "total": 4635,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -277,18 +299,28 @@
                 "total": 3
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 4404874379
+          },
+          "property transfer tax": {
+            "sum_PTT_paid": 98212127.3
+          },
+          "foreign involvement": {
+            "no_foreign": 527,
+            "sum_FMV_foreign": 543121633
           }
         },
         {
           "order": 4,
           "id": "Surrey",
           "name": "Surrey",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [1973, 1936, 1594, 1291, 972, 1001, 1323],
             "total": 10090,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -321,18 +353,28 @@
                 "total": 12
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 7383705001
+          },
+          "property transfer tax": {
+            "sum_PTT_paid": 135359788.8
+          },
+          "foreign involvement": {
+            "no_foreign": 447,
+            "sum_FMV_foreign": 416162697
           }
         },
         {
           "order": 5,
           "id": "Vancouver",
           "name": "Vancouver",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [2190, 2089, 1516, 1241, 966, 1130, 850],
             "total": 9982,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -365,6 +407,16 @@
                 "total": 17
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 14522952537
+          },
+          "property transfer tax": {
+            "sum_PTT_paid": 338719255.5
+          },
+          "foreign involvement": {
+            "no_foreign": 725,
+            "sum_FMV_foreign": 1345272868
           }
         }
       ]
@@ -379,12 +431,12 @@
           "order": 1,
           "id": "RestofSquamishLillooet",
           "name": "Rest of Squamish-Lillooet",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [184, 166, 173, 129, 108, 106, 73],
             "total": 939,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -417,18 +469,21 @@
                 "total": 3
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 517006375
           }
         },
         {
           "order": 2,
           "id": "Whistler",
           "name": "Whistler",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [147, 119, 100, 141, 128, 141, 106],
             "total": 882,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -461,6 +516,9 @@
                 "total": 1
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 654259086
           }
         }
       ]
@@ -475,12 +533,12 @@
           "order": 1,
           "id": "Kelowna",
           "name": "Kelowna",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [780, 694, 775, 661, 519, 506, 411],
             "total": 4346,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -513,18 +571,21 @@
                 "total": 4
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 2307926249
           }
         },
         {
           "order": 2,
           "id": "RestofCentralOkanagan",
           "name": "Rest of Central Okanagan",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [297, 289, 273, 270, 197, 174, 118],
             "total": 1618,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -557,6 +618,9 @@
                 "total": 1
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 854217980
           }
         }
       ]
@@ -571,12 +635,12 @@
           "order": 1,
           "id": "PeninsulaWestshore",
           "name": "Peninsula & Westshore",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [405, 404, 321, 278, 271, 238, 165],
             "total": 2082,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -609,18 +673,21 @@
                 "total": 6
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 1168472868
           }
         },
         {
           "order": 2,
           "id": "VictoriaEsquimaltOakBaySaanichViewRoyal",
           "name": "Victoria, Esquimalt, Oak Bay, Saanich & View Royal",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [1190, 904, 996, 819, 636, 641, 625],
             "total": 5811,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -653,6 +720,9 @@
                 "total": 11
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 3734797890
           }
         }
       ]
@@ -667,12 +737,12 @@
           "order": 1,
           "id": "Nanaimo",
           "name": "Nanaimo",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [571, 380, 524, 440, 387, 327, 215],
             "total": 2844,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -705,18 +775,21 @@
                 "total": 8
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 1117509990
           }
         },
         {
           "order": 2,
           "id": "RestofNanaimoRD",
           "name": "Rest of Nanaimo RD",
-          "monthly_total_property_types": {
+          "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
             "monthly": [347, 303, 234, 195, 164, 134, 105],
             "total": 1482,
-            "property_types": [
+            "housing_type": [
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
@@ -749,6 +822,9 @@
                 "total": 5
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": 621223988
           }
         }
       ]

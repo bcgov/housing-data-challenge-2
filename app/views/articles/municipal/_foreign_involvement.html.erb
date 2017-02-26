@@ -1,0 +1,109 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
+
+
+<div class="row canvases">
+  <div class="col-md-2"></div>
+  <div class="col-md-8">
+    <h4 class="color-grey">Foreign Involvement Transactions in Metro Vancouver</h4>
+    <canvas id="no_foreign_canvas"></canvas>
+
+    <h4 class="color-grey">FMV sum of Foreign Involvement Transactions in Metro Vancouver</h4>
+    <canvas id="sum_FMV_foreign_canvas"></canvas>
+
+  </div>
+  <div class="col-md-2"></div>
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+  // options
+  var options_vertical_comma_dollar = {
+    responsive: true,
+    scales: {
+      yAxes: [{
+        ticks: {
+          callback: function(label, index, labels) {
+            return label/1000000000+'B';
+          }
+        },
+        scaleLabel: {
+          display: true,
+          labelString: 'Dollars (1B=1,000,000,000)'
+        }
+      }]
+    },
+    tooltips: {
+      callbacks: {
+        label: function(tooltipItem, data) {
+          var dataset = data.datasets[tooltipItem.datasetIndex];
+          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
+            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+          });
+        }
+      }
+    }
+  };
+
+
+
+  var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
+  var months = municipal_transaction_data['months'];
+  var regional_district = municipal_transaction_data['regional_district'];
+
+  var no_foreign_name = [];
+  var no_foreign_data = [];
+  var no_foreign_bg = [];
+  var sum_FMV_foreign_data = [];
+  for (var i = 0; i < regional_district.length; i++) {
+    var municipality = regional_district[i]['municipality'];
+
+    for (var j = 0; j < municipality.length; j++) {
+      var foreign = municipality[j]['foreign involvement'];
+      if (foreign) {
+        no_foreign_name.push(municipality[j]['name']);
+        no_foreign_data.push(foreign['no_foreign']);
+        no_foreign_bg.push(colours[0]['rgba']['opacity-0.9']);
+        sum_FMV_foreign_data.push(foreign['sum_FMV_foreign']);
+      }
+
+    }
+  }
+
+
+  // Foreign Involvement Transactions in Metro Vancouver
+  new Chart($("#no_foreign_canvas"), {
+    type: "bar",
+    data: {
+      labels: no_foreign_name,
+      datasets: [{
+        label: "Foreign Involvement Transactions",
+        data: no_foreign_data,
+        backgroundColor: no_foreign_bg
+      }]
+    }
+  });
+
+
+  new Chart($("#sum_FMV_foreign_canvas"), {
+    type: "bar",
+    data: {
+      labels: no_foreign_name,
+      datasets: [{
+        label: "FMV sum of Foreign Involvement Transactions",
+        data: sum_FMV_foreign_data,
+        backgroundColor: no_foreign_bg
+      }]
+    },
+    options: options_vertical_comma_dollar
+  });
+
+
+});
+</script>

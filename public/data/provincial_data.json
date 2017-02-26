@@ -21,7 +21,7 @@
           {
             "order": 1,
             "id": "no_foreign_res",
-            "name": "Foreign Involvement-Residential",
+            "name": "Foreign-Residential",
             "data": {
               "monthly": [1407,1578,228,283,329,350,329],
               "total": 4504
@@ -30,7 +30,7 @@
           {
             "order": 2,
             "id": "no_foreign_comm",
-            "name": "Foreign Involvement-Commercial",
+            "name": "Foreign-Commercial",
             "data": {
               "monthly": [68,21,10,61,26,14,22],
               "total": 222
@@ -39,7 +39,7 @@
           {
             "order": 3,
             "id": "no_foreign_oth",
-            "name": "Foreign Involvement-Other",
+            "name": "Foreign-Other",
             "data": {
               "monthly": [19,21,16,30,23,31,35],
               "total": 175
