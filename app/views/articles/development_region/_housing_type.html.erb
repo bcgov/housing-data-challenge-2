@@ -1,0 +1,144 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
+
+
+<div class="row canvases">
+  <div class="col-md-6">
+    <h4 class="color-grey">Housing Types between Mainland/Southwest and Northeast</h4>
+    <canvas id="housing_type_mainland_northeast_canvas"></canvas>    
+  </div>
+  <div class="col-md-6">
+    <h4 class="color-grey">Housing Types between Mainland/Southwest and Vancouver Island/Coast</h4>
+    <canvas id="housing_type_mainland_van_island_canvas"></canvas>  
+  </div>
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+  // options
+  var options_radar = {
+    scale: {
+      reverse: true,
+      ticks: {
+        beginAtZero: true
+      }
+    }
+  };
+
+
+  var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
+
+  var months = dev_region_transaction_data['months'];
+  var dev_region = dev_region_transaction_data['development_region'];
+
+  var housing_type_labels = ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"];
+
+
+  var mainland_housing_data = [];
+  var northeast_housing_data = [];
+  var van_island_housing_data = []
+
+  for (var i = 0; i < dev_region.length; i++) {
+    var name = dev_region[i]['name'];
+    var housing_type = dev_region[i]['housing type'];
+    if (name == "Mainland/Southwest") {
+      mainland_housing_data.push(housing_type['no_resid_trans']['total']);
+      mainland_housing_data.push(housing_type['no_comm_tot']['total']);
+      mainland_housing_data.push(housing_type['no_recr_tot']['total']);
+      mainland_housing_data.push(housing_type['no_farm_tot']['total']);
+      mainland_housing_data.push(housing_type['no_unkn_tot']['total']);
+    }
+
+    if (name == "Northeast") {
+      northeast_housing_data.push(housing_type['no_resid_trans']['total']);
+      northeast_housing_data.push(housing_type['no_comm_tot']['total']);
+      northeast_housing_data.push(housing_type['no_recr_tot']['total']);
+      northeast_housing_data.push(housing_type['no_farm_tot']['total']);
+      northeast_housing_data.push(housing_type['no_unkn_tot']['total']);
+    }
+
+    if (name == "Vancouver Island/Coast") {
+      van_island_housing_data.push(housing_type['no_resid_trans']['total']);
+      van_island_housing_data.push(housing_type['no_comm_tot']['total']);
+      van_island_housing_data.push(housing_type['no_recr_tot']['total']);
+      van_island_housing_data.push(housing_type['no_farm_tot']['total']);
+      van_island_housing_data.push(housing_type['no_unkn_tot']['total']);
+    }
+    
+  }
+
+
+  // Housing Types between Mainland/Southwest and Northeast
+  new Chart($("#housing_type_mainland_northeast_canvas"), {
+    type: "radar",
+    data: {
+      labels: housing_type_labels,
+      datasets: [
+        {
+          label: "Mainland/Southwest",
+          data: mainland_housing_data,
+          backgroundColor: colours[0]['rgba']['opacity-0.2'],
+          borderColor: colours[0]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)",
+        },
+        {
+          label: "Northeast",
+          data: northeast_housing_data,
+          backgroundColor: colours[1]['rgba']['opacity-0.2'],
+          borderColor: colours[1]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(255,99,132,1)",
+        }
+      ]
+    },
+    options: options_radar
+  });
+
+
+  // Housing Types between Mainland/Southwest and Vancouver Island/Coast
+  new Chart($("#housing_type_mainland_van_island_canvas"), {
+    type: "radar",
+    data: {
+      labels: housing_type_labels,
+      datasets: [
+        {
+          label: "Mainland/Southwest",
+          data: mainland_housing_data,
+          backgroundColor: colours[0]['rgba']['opacity-0.2'],
+          borderColor: colours[0]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(179,181,198,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(179,181,198,1)",
+        },
+        {
+          label: "Vancouver Island/Coast",
+          data: van_island_housing_data,
+          backgroundColor: colours[1]['rgba']['opacity-0.2'],
+          borderColor: colours[1]['rgba']['opacity-1'],
+          pointBackgroundColor: "rgba(255,99,132,1)",
+          pointBorderColor: "#fff",
+          pointHoverBackgroundColor: "#fff",
+          pointHoverBorderColor: "rgba(255,99,132,1)",
+        }
+      ]
+    },
+    options: options_radar
+  });
+
+
+
+});
+</script>

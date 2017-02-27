@@ -11,18 +11,36 @@
     <div class="article-body">
       <%= render "articles/development_region/dev_region_map" %>
     </div>
-
-    <div class="article-footer">
-      <div  class="bs-callout bs-callout-warning">
-        <h4>Data Dictionary</h4>
-        <%= render "articles/util/data_dictionary" %>
-      </div>
-    </div>
   </div>  
+
 
   <div class="article">
     <div class="article-header">
-      <h3 class="color-darkblue">Sum of Fair Market Value (FMV) and Property Transfer Tax (PTT) </h3>
+      <h3 class="color-darkblue">Sum FMV VS. Population with Sum PTT paid</h3>
+      <p class="color-grey">Source: BC Data Catalogue and BC Stats</p>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/development_region/fmv_population" %>
+    </div>
+  </div>
+
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Comparison of Housing Types</h3>
+      <p class="color-grey">Source: BC Data Catalogue</p>
+    </div>
+
+    <div class="article-body">
+      <%= render "articles/development_region/housing_type" %>
+    </div>
+  </div>
+
+
+  <div class="article">
+    <div class="article-header">
+      <h3 class="color-darkblue">Sum of Fair Market Value (FMV) and Property Transfer Tax (PTT)</h3>
       <p class="color-grey">Source: BC Data Catalogue</p>
     </div>
 
@@ -31,17 +49,21 @@
     </div>
   </div>
 
-
-
   <div class="article">
     <div class="article-header">
       <h3 class="color-darkblue">[Reference] B.C. Population in 2016</h3>
-      <p class="color-grey">Source: BC Stats</p>
+      <p class="color-grey">Source: Statistics Canada</p>
     </div>
 
     <div class="article-body">
       <%= render "articles/development_region/dev_region_population" %>
     </div>
+  </div>
+
+
+  <div class="bs-callout bs-callout-warning">
+    <h4>Data Dictionary for Provincial</h4>
+    <%= render "articles/util/data_dictionary_ptt" %>
   </div>
 
 </div>

@@ -68,6 +68,15 @@ $(document).ready(function() {
     }
   };
 
+  var options_radar = {
+    scale: {
+      reverse: true,
+      ticks: {
+        beginAtZero: true
+      }
+    }
+  };
+  
 
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
   var months = municipal_transaction_data['months'];
@@ -84,6 +93,7 @@ $(document).ready(function() {
   var sum_fmv_monthly_data = [];
   var sum_fmv_monthly_bg = [];
 
+  var housing_type_labels = ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"];
   var van_housing_total = [];
   var chilliwack_housing_total = [];
   var surrey_housing_total = [];
@@ -156,7 +166,7 @@ $(document).ready(function() {
   new Chart($("#compare_van_chilliwack_canvas"), {
     type: "radar",
     data: {
-      labels: ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"],
+      labels: housing_type_labels,
       datasets: [
         {
           label: "Vancouver",
@@ -171,8 +181,8 @@ $(document).ready(function() {
         {
           label: "Chilliwack",
           data: chilliwack_housing_total,
-          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.2'],
-          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          backgroundColor: colours[1]['rgba']['opacity-0.2'],
+          borderColor: colours[1]['rgba']['opacity-1'],
           pointBackgroundColor: "rgba(255,99,132,1)",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
@@ -180,12 +190,7 @@ $(document).ready(function() {
         }
       ]
     },
-    options: {
-      scale: {
-        reverse: true,
-        ticks: {beginAtZero: true}
-      }
-    }
+    options: options_radar
   });
 
 
@@ -193,7 +198,7 @@ $(document).ready(function() {
   new Chart($("#compare_van_surrey_canvas"), {
     type: "radar",
     data: {
-      labels: ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"],
+      labels: housing_type_labels,
       datasets: [
         {
           label: "Vancouver",
@@ -208,8 +213,8 @@ $(document).ready(function() {
         {
           label: "Surrey",
           data: surrey_housing_total,
-          backgroundColor: colours[colours.length-1]['rgba']['opacity-0.2'],
-          borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+          backgroundColor: colours[1]['rgba']['opacity-0.2'],
+          borderColor: colours[1]['rgba']['opacity-1'],
           pointBackgroundColor: "rgba(255,99,132,1)",
           pointBorderColor: "#fff",
           pointHoverBackgroundColor: "#fff",
@@ -217,12 +222,7 @@ $(document).ready(function() {
         }
       ]
     },
-    options: {
-      scale: {
-        reverse: true,
-        ticks: {beginAtZero: true}
-      }
-    }
+    options: options_radar
   });
 
 

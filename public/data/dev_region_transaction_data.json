@@ -4,7 +4,32 @@
     {
       "id": "Cariboo",
       "name": "Cariboo",
-      "monthly_total_trans": [638,519,487,463,422,313,253],
+      "no_mkt_trans": {
+        "monthly": [638,519,487,463,422,313,253],
+        "total": 3095
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [567,493,457,442,399,285,238],
+          "total": 2881
+        },
+        "no_comm_tot": {
+          "monthly": [23,11,6,10,14,13,12],
+          "total": 89
+        },
+        "no_recr_tot": {
+          "monthly": [12,9,5,3,5,1],
+          "total": 45
+        },
+        "no_farm_tot": {
+          "monthly": [32,3,13,4,2,8,2],
+          "total": 64
+        },
+        "no_unkn_tot": {
+          "monthly": [6,0,2,2,4,2,0],
+          "total": 16
+        }
+      },
       "fair market value": {
         "sum_FMV": 739716353
       },
@@ -203,7 +228,32 @@
     {
       "id": "Kootenay",
       "name": "Kootenay",
-      "monthly_total_trans": [631,483,442,469,465,422,312],
+      "no_mkt_trans": {
+        "monthly": [631,483,442,469,465,422,312],
+        "total": 3224
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [599,457,413,445,433,380,292],
+          "total": 3019
+        },
+        "no_comm_tot": {
+          "monthly": [20,7,20,14,10,23,10],
+          "total": 104
+        },
+        "no_recr_tot": {
+          "monthly": [11,18,5,9,16,10,7],
+          "total": 76
+        },
+        "no_farm_tot": {
+          "monthly": [1,1,1,0,3,6,2],
+          "total": 14
+        },
+        "no_unkn_tot": {
+          "monthly": [0,0,3,1,3,3,1],
+          "total": 11
+        }
+      },
       "fair market value": {
         "sum_FMV": 868683733
       },
@@ -495,7 +545,32 @@
     {
       "id": "MainlandSouthwest",
       "name": "Mainland/Southwest",
-      "monthly_total_trans": [11417,10973,8838,7363,6116,6314,5257],
+      "no_mkt_trans": {
+        "monthly": [11417,10973,8838,7363,6116,6314,5257],
+        "total": 56278
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [11115,10720,8638,7069,5844,6154,5057],
+          "total": 54597
+        },
+        "no_comm_tot": {
+          "monthly": [219,190,151,233,174,126,156],
+          "total": 1249
+        },
+        "no_recr_tot": {
+          "monthly": [52,33,16,31,27,23,17],
+          "total": 199
+        },
+        "no_farm_tot": {
+          "monthly": [20,11,22,22,26,4,13],
+          "total": 118
+        },
+        "no_unkn_tot": {
+          "monthly": [11,19,11,8,45,7,14],
+          "total": 115
+        }
+      },
       "fair market value": {
         "sum_FMV": 50336741698
       },
@@ -880,7 +955,32 @@
     {
       "id": "NechakoNorthCoast",
       "name": "Nechako & North Coast",
-      "monthly_total_trans": [272,25,196,198,133,154,115],
+      "no_mkt_trans": {
+        "monthly": [272,25,196,198,133,154,115],
+        "total": 1293
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [250,210,184,175,123,147,95],
+          "total": 1184
+        },
+        "no_comm_tot": {
+          "monthly": [14,6,8,5,7,3,7],
+          "total": 50
+        },
+        "no_recr_tot": {
+          "monthly": [5,3,1,1,2,1,3],
+          "total": 16
+        },
+        "no_farm_tot": {
+          "monthly": [2,5,0,4,1,2,4],
+          "total": 18
+        },
+        "no_unkn_tot": {
+          "monthly": [1,1,3,13,0,1,6],
+          "total": 25
+        }
+      },
       "fair market value": {
         "sum_FMV": 259568475
       },
@@ -1172,7 +1272,32 @@
     {
       "id": "Northeast",
       "name": "Northeast",
-      "monthly_total_trans": [142,113,116,127,120,134,118],
+      "no_mkt_trans": {
+        "monthly": [142,113,116,127,120,134,118],
+        "total": 870
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [114,91,93,107,96,108,67],
+          "total": 676
+        },
+        "no_comm_tot": {
+          "monthly": [8,4,14,5,10,10,19],
+          "total": 70
+        },
+        "no_recr_tot": {
+          "monthly": [1,1,1,1,1,0,0],
+          "total": 5
+        },
+        "no_farm_tot": {
+          "monthly": [15,16,7,14,11,16,32],
+          "total": 111
+        },
+        "no_unkn_tot": {
+          "monthly": [4,1,1,0,2,0,0],
+          "total": 8
+        }
+      },
       "fair market value": {
         "sum_FMV": 306910881
       },
@@ -1278,7 +1403,32 @@
     {
       "id": "ThompsonOkanagan",
       "name": "Thompson/Okanagan",
-      "monthly_total_trans": [2740,2399,2535,2367,1833,1757,1312],
+      "no_mkt_trans": {
+        "monthly": [2740,2399,2535,2367,1833,1757,1312],
+        "total": 14943
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [2617,2329,2442,2256,1750,1640,1244],
+          "total": 14278
+        },
+        "no_comm_tot": {
+          "monthly": [60,27,43,65,46,53,39],
+          "total": 333
+        },
+        "no_recr_tot": {
+          "monthly": [22,25,25,28,19,33,15],
+          "total": 167
+        },
+        "no_farm_tot": {
+          "monthly": [30,11,20,13,14,26,10],
+          "total": 124
+        },
+        "no_unkn_tot": {
+          "monthly": [11,7,5,5,4,5,4],
+          "total": 41
+        }
+      },
       "fair market value": {
         "sum_FMV": 6430640044
       },
@@ -1756,7 +1906,32 @@
     {
       "id": "VancouverIslandCoast",
       "name": "Vancouver Island/Coast",
-      "monthly_total_trans": [3647,2996,3075,2612,2180,1971,1625],
+      "no_mkt_trans": {
+        "monthly": [3647,2996,3075,2612,2180,1971,1625],
+        "total": 18106
+      },
+      "housing type": {
+        "no_resid_trans": {
+          "monthly": [3528,2926,3011,2523,2111,1904,1532],
+          "total": 17535
+        },
+        "no_comm_tot": {
+          "monthly": [75,37,49,66,45,51,75],
+          "total": 398
+        },
+        "no_recr_tot": {
+          "monthly": [28,24,8,11,14,8,9],
+          "total": 102
+        },
+        "no_farm_tot": {
+          "monthly": [3,2,2,5,1,2,3],
+          "total": 18
+        },
+        "no_unkn_tot": {
+          "monthly": [13,7,5,7,9,6,6],
+          "total": 53
+        }
+      },
       "fair market value": {
         "sum_FMV": 8675070284
       },

@@ -2,13 +2,33 @@
   "id": "bc",
   "name": "British Columbia",
   "population": [
-    {"development region": "Cariboo", "total": 155203},
-    {"development region": "Kootenay", "total": 149661},
-    {"development region": "Mainland/Southwest", "total": 2930041},
-    {"development region": "Nechako", "total": 41057},
-    {"development region": "North Coast", "total": 53659},
-    {"development region": "Northeast", "total": 72496},
-    {"development region": "Thompson/Okanagan", "total": 549956},
-    {"development region": "Vancouver Island/Coast", "total": 800716}
+    {
+      "development region": "Cariboo", 
+      "total": 156494
+    },
+    {
+      "development region": "Kootenay", 
+      "total": 151403
+    },
+    {
+      "development region": "Mainland/Southwest", 
+      "total": 2832000
+    },
+    {
+      "development region": "Nechako & North Coast", 
+      "total": 75263
+    },
+    {
+      "development region": "Northeast", 
+      "total": 68335
+    },
+    {
+      "development region": "Thompson/Okanagan", 
+      "total": 546287
+    },
+    {
+      "development region": "Vancouver Island/Coast", 
+      "total": 796081
+    }
   ]
 }

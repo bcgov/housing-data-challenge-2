@@ -1,0 +1,84 @@
+<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
+<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
+<input id="bc_population" value="<%= @bc_population %>" type="hidden" />
+
+<div class="canvases">
+  <canvas id="fmv_population_canvas"></canvas>
+  <p class="color-grey">Note: Diameter = Sum of Property Transfer Tax (PTT) paid / 10,000,000</p>
+</div>
+
+
+<script>
+$(document).ready(function() {
+
+  // colours
+  var colours_json = JSON.parse( $("#colours_json").val() );
+  var colours = colours_json['colours'];
+
+  var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
+  var months = dev_region_transaction_data['months'];
+  var dev_region = dev_region_transaction_data['development_region'];
+
+  var bc_population = JSON.parse( $("#bc_population").val() );
+  var dev_region_population_data = bc_population['population'];
+
+  var fmv_population_data = {};
+  var fmv_population_dataset = [];
+
+  var dividend = 10000000;
+  for (var i = 0; i < dev_region.length; i++) {
+    var name = dev_region[i]['name'];
+    var fmv = dev_region[i]['fair market value']['sum_FMV'];
+    var ptt = dev_region[i]['property transfer tax']['sum_PTT_paid'];
+    var population = bc_population['population'][i]['total'];
+
+    fmv_population_dataset.push({
+      label: name,
+      data: [{x: population, y: fmv, r: ptt/dividend}],
+      backgroundColor: colours[i]['rgba']['opacity-0.9'],
+      hoverBackgroundColor: colours[i]['rgba']['opacity-1'],
+    });
+  }
+
+  fmv_population_data['datasets'] = fmv_population_dataset;
+
+  new Chart($("#fmv_population_canvas"), {
+    type: "bubble",
+    data: fmv_population_data,
+    options: {
+      elements: {
+        points: {
+          borderWidth: 1,
+          borderColor: 'rgb(0, 0, 0)'
+        }
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000000+'M';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Population (1M=1,000,000)'
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000000000+'B';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Sum FMV, Dollars (1B=1,000,000,000)'
+          }
+        }]
+      }
+    }
+  });
+
+
+});
+</script>

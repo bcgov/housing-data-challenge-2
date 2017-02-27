@@ -186,11 +186,6 @@ $(document).ready(function() {
               '</div>';
     }
 
-    html += '<div class="bs-callout bs-callout-warning">' +
-              '<h4>Data Dictionary for Regional Districts</h4>' +
-              '<%= j render "articles/util/data_dictionary_region_district" %>'
-            '</div>';
-
 
     $("#" + id + "Canvas").html(html);
     html = '';
@@ -204,7 +199,7 @@ $(document).ready(function() {
         datasets: [
           {
             label: "Total Market Transactions",
-            data: data['monthly_total_trans'],
+            data: data['no_mkt_trans']['monthly'],
             fill: false,
             backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
             borderColor: colours[colours.length-1]['rgba']['opacity-1'],

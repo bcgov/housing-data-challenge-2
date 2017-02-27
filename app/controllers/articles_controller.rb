@@ -14,39 +14,39 @@ class ArticlesController < ApplicationController
       },
       {
         "color": "yellow",
-        "rgba": {"opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)"} 
+        "rgba": {"opacity-0.9":"rgba(244,232,66,0.9)", "opacity-1":"rgba(244,232,66,1)", "opacity-0.2":"rgba(244,232,66,0.2)"} 
       },
       {
         "color": "green",
-        "rgba": {"opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)"}
+        "rgba": {"opacity-0.9":"rgba(80,244,66,0.9)", "opacity-1":"rgba(80,244,66,1)", "opacity-0.2":"rgba(80,244,66,0.2)"}
       },
       {
         "color": "sky-blue",
-        "rgba": {"opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)"}
+        "rgba": {"opacity-0.9":"rgba(66,244,206,0.9)", "opacity-1":"rgba(66,244,206,1)", "opacity-0.2":"rgba(66,244,206,0.2)"}
       },
       {
         "color": "bluish-violet",
-        "rgba": {"opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)"}
+        "rgba": {"opacity-0.9":"rgba(153,102,255,0.9)", "opacity-1":"rgba(153,102,255,1)", "opacity-0.2":"rgba(153,102,255,0.2)"}
       },
       {
         "color": "purple",
-        "rgba": {"opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)"}
+        "rgba": {"opacity-0.9":"rgba(191,66,244,0.9)", "opacity-1":"rgba(191,66,244,1)", "opacity-0.2":"rgba(191,66,244,0.2)"}
       },
       {
         "color": "light-blue",
-        "rgba": {"opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)"}
+        "rgba": {"opacity-0.9":"rgba(75,192,192,0.9)", "opacity-1":"rgba(75,192,192,1)", "opacity-0.2":"rgba(75,192,192,0.2)"}
       },
       {
         "color": "grey",
-        "rgba": {"opacity-0.9":"rgba(127,127,130,0.9)", "opacity-1":"rgba(127,127,130,1)"} 
+        "rgba": {"opacity-0.9":"rgba(127,127,130,0.9)", "opacity-1":"rgba(127,127,130,1)", "opacity-0.2":"rgba(127,127,130,0.2)"} 
       },
       {
         "color": "pink",
-        "rgba": {"opacity-0.9":"rgba(239,4,173,0.9)", "opacity-1":"rgba(239,4,173,1)"} 
+        "rgba": {"opacity-0.9":"rgba(239,4,173,0.9)", "opacity-1":"rgba(239,4,173,1)", "opacity-0.2":"rgba(239,4,173,0.2)"} 
       },
       {
         "color": "red",
-        "rgba": {"opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)"} 
+        "rgba": {"opacity-0.9":"rgba(255,99,132,0.9)", "opacity-1":"rgba(255,99,132,1)", "opacity-0.2":"rgba(255,99,132,0.2)"} 
       },
     ]
   }.freeze
