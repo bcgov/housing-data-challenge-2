@@ -1,0 +1,50 @@
+{
+  "id": "bc",
+  "name": "British Columbia",
+  "population": [
+    {
+      "development region": "Abbotsford", 
+      "total": 141485
+    },
+    {
+      "development region": "Chilliwack", 
+      "total": 90390
+    },
+    {
+      "development region": "Burnaby", 
+      "total": 238728
+    },
+    {
+      "development region": "Richmond", 
+      "total": 213392
+    },
+    {
+      "development region": "Surrey", 
+      "total": 543940
+    },
+    {
+      "development region": "Vancouver", 
+      "total": 653046
+    },
+    {
+      "development region": "Whistler", 
+      "total": 10627
+    },
+    {
+      "development region": "Kelowna", 
+      "total": 125737
+    },
+    {
+      "development region": "Peninsula & Westshore", 
+      "total": 796081
+    },
+    {
+      "development region": "Victoria, Esquimalt, Oak Bay, Saanich & View Royal", 
+      "total": 796081
+    },
+    {
+      "development region": "93351", 
+      "total": 796081
+    }
+  ]
+}

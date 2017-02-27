@@ -1,6 +1,6 @@
 <input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
-
+<input id="municipal_population" value="<%= @municipal_population %>" type="hidden" />
 
 
 <div class="row canvases">
@@ -18,19 +18,18 @@
 </div>
 
 <div class="canvases">
-  <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
+
+  <h4 class="color-grey">Sum of Fair Market Value (FMV) in major citie</h4>
   <canvas id="sum_fmv_canvas"></canvas>
+
+  <h4 class="color-grey">Total amount of Property Transfer Tax (PTT) paid in major cities</h4>
+  <canvas id="sum_ptt_paid_canvas"></canvas>
+
+  <h4 class="color-grey">Sum FMV VS. Population with PTT in major cities</h4>
+  <canvas id="fmv_population_ptt_canvas"></canvas>
+  <p class="color-grey">Note: Diameter = Sum of Property Transfer Tax (PTT) paid / 10,000,000</p>
 </div>
 
-<div class="row canvases">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h4 class="color-grey">Total amount of Property Transfer Tax (PTT) paid in Metro Vancouver</h4>
-    <canvas id="sum_ptt_paid_canvas"></canvas>
-  </div>
-  <div class="col-md-2"></div>
-</div>
-    
 
 <script>
 $(document).ready(function() {
@@ -82,7 +81,7 @@ $(document).ready(function() {
   var months = municipal_transaction_data['months'];
   var regional_district = municipal_transaction_data['regional_district'];
 
-
+  var municipal_population = JSON.parse( $("#municipal_population").val() );
 
   var municipal_monthly_data = {};
   municipal_monthly_data['labels'] = months;
@@ -103,15 +102,22 @@ $(document).ready(function() {
   var sum_PTT_paid_bg = [];
 
 
+  var fmv_population_ptt_data = {};
+  var fmv_population_ptt_dataset = [];
+
+
   var c = 0;
+  var d = 0;
+  var dividend = 10000000;
   for (var i = 0; i < regional_district.length; i++) {
     var municipality = regional_district[i]['municipality'];
 
     for (var j = 0; j < municipality.length; j++) {
-      
-      if ( !municipality[j]['name'].includes("Rest") ) {
+      var name = municipality[j]['name'];
+
+      if ( !name.includes("Rest") ) {
         municipal_dataset.push({
-          "label": municipality[j]['name'],
+          "label": name,
           "data": municipality[j]['transaction_type']['monthly'],
           "backgroundColor": colours[c]['rgba']['opacity-0.9']
         });
@@ -119,6 +125,22 @@ $(document).ready(function() {
         sum_fmv_monthly_name.push(municipality[j]['name']);
         sum_fmv_monthly_data.push(municipality[j]['fair market value']['sum_FMV']);
         sum_fmv_monthly_bg.push(colours[0]['rgba']['opacity-0.9']);
+      
+
+        if (!name.includes("Peninsula & Westshore") && !name.includes("Victoria, Esquimalt, Oak Bay, Saanich & View Royal")) {
+          var fmv = municipality[j]['fair market value']['sum_FMV'];
+          var ptt = municipality[j]['property transfer tax']['sum_PTT_paid'];
+          var population = municipal_population['population'][d]['total'];
+
+          fmv_population_ptt_dataset.push({
+            label: name,
+            data: [{x: population, y: fmv, r: ptt/dividend}],
+            backgroundColor: colours[d]['rgba']['opacity-0.9'],
+            hoverBackgroundColor: colours[d]['rgba']['opacity-1'],
+          });
+          d += 1;
+        }
+
         c += 1; 
       }
 
@@ -254,6 +276,50 @@ $(document).ready(function() {
     },
     options: options_vertical_comma_dollar
   });  
+
+
+
+
+
+  // Sum FMV VS. Population with Sum PTT
+  fmv_population_ptt_data['datasets'] = fmv_population_ptt_dataset;
+  new Chart($("#fmv_population_ptt_canvas"), {
+    type: "bubble",
+    data: fmv_population_ptt_data,
+    options: {
+      elements: {
+        points: {
+          borderWidth: 1,
+          borderColor: 'rgb(0, 0, 0)'
+        }
+      },
+      scales: {
+        xAxes: [{
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000000+'M';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Population (1M=1,000,000)'
+          }
+        }],
+        yAxes: [{
+          ticks: {
+            callback: function(label, index, labels) {
+              return label/1000000000+'B';
+            }
+          },
+          scaleLabel: {
+            display: true,
+            labelString: 'Sum FMV, Dollars (1B=1,000,000,000)'
+          }
+        }]
+      }
+    }
+  });
+
 
 
 

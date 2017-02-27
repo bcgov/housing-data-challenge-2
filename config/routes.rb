@@ -7,7 +7,6 @@ Rails.application.routes.draw do
   get 'articles/provincial'
   get 'articles/index'
 
-  get 'create/index'
   get 'admin/index'
 
   devise_for :admin_users, ActiveAdmin::Devise.config

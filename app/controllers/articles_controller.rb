@@ -1,6 +1,39 @@
 class ArticlesController < ApplicationController
 
+  def index
+  end
+  
+  def provincial
+    @colours_json = COLOURS
+    @bc_provincial_data = File.read("#{Rails.root}/public/data/bc_provincial_data.json")
+  end
 
+  def development_region
+    @colours_json = COLOURS
+    @dev_region_transaction_data = File.read("#{Rails.root}/public/data/dev_region_transaction_data.json")
+    @bc_population = File.read("#{Rails.root}/public/data/bc_population.json")
+    @dev_region_geo_data = File.read("#{Rails.root}/public/data/dev_region_geo_data.geojson")
+  end
+
+  def municipal
+    @colours_json = COLOURS
+    @municipal_transaction_data = File.read("#{Rails.root}/public/data/municipal_transaction_data.json")
+    @municipal_population = File.read("#{Rails.root}/public/data/municipal_population.json")
+    @regional_district_geo_data = File.read("#{Rails.root}/public/data/regional_district_geo_data.geojson")
+  end
+
+  def census_bc
+    @colours_json = COLOURS
+    @census_bc_data = File.read("#{Rails.root}/public/data/census_bc_data.json")
+    @census_divisions_data = File.read("#{Rails.root}/public/data/census_divisions_data.geojson")
+  end
+
+  def national_household_survey
+    @colours_json = COLOURS
+    @national_household_survey_data = File.read("#{Rails.root}/public/data/national_household_survey_data.json")
+    @household_mobility_status_data = File.read("#{Rails.root}/public/data/household_mobility_status_data.json")
+    
+  end
 
   COLOURS = {
     "colours": [
@@ -50,41 +83,6 @@ class ArticlesController < ApplicationController
       },
     ]
   }.freeze
-
-
-  def index
-  end
-  
-  def provincial
-    @colours_json = COLOURS
-    @bc_provincial_data = File.read("#{Rails.root}/public/data/bc_provincial_data.json")
-  end
-
-  def development_region
-    @colours_json = COLOURS
-    @dev_region_transaction_data = File.read("#{Rails.root}/public/data/dev_region_transaction_data.json")
-    @bc_population = File.read("#{Rails.root}/public/data/bc_population.json")
-    @dev_region_geo_data = File.read("#{Rails.root}/public/data/dev_region_geo_data.geojson")
-  end
-
-  def municipal
-    @colours_json = COLOURS
-    @municipal_transaction_data = File.read("#{Rails.root}/public/data/municipal_transaction_data.json")
-    @regional_district_geo_data = File.read("#{Rails.root}/public/data/regional_district_geo_data.geojson")
-  end
-
-  def census_bc
-    @colours_json = COLOURS
-    @census_bc_data = File.read("#{Rails.root}/public/data/census_bc_data.json")
-    @census_divisions_data = File.read("#{Rails.root}/public/data/census_divisions_data.geojson")
-  end
-
-  def national_household_survey
-    @colours_json = COLOURS
-    @national_household_survey_data = File.read("#{Rails.root}/public/data/national_household_survey_data.json")
-    @household_mobility_status_data = File.read("#{Rails.root}/public/data/household_mobility_status_data.json")
-    
-  end
 
 
 end
