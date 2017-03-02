@@ -1,4 +1,3 @@
-<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="bc_population" value="<%= @bc_population %>" type="hidden" />
 
 
@@ -18,36 +17,6 @@
 
 <script>
 $(document).ready(function() {
-
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-  // options
-  var options_population = {
-    scales: {
-      xAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000000+'M';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Population (1M=1,000,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          return Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
 
   var options_population_pie = {
     tooltips: {
@@ -93,7 +62,7 @@ $(document).ready(function() {
         backgroundColor: colours[0]['rgba']['opacity-0.9']
       }]
     },
-    options: options_population
+    options: horizontal_bar_option("Population (1M=1,000,000)", 1000000, "M")
   });
 
   // make a pie chart for population of each development region
@@ -106,7 +75,7 @@ $(document).ready(function() {
         backgroundColor: dev_region_population_pie_bg
       }]
     },
-    options: options_population_pie
+    options: pie_option()
   });
 
 

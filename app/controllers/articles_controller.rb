@@ -35,6 +35,12 @@ class ArticlesController < ApplicationController
     
   end
 
+  def interesting_insights
+    @colours_json = COLOURS
+    @municipal_transaction_data = File.read("#{Rails.root}/public/data/municipal_transaction_data.json")
+  end
+
+
   COLOURS = {
     "colours": [
       {

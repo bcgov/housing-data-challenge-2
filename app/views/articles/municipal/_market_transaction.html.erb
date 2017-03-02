@@ -18,65 +18,22 @@
 </div>
 
 <div class="canvases">
-
-  <h4 class="color-grey">Sum of Fair Market Value (FMV) in major citie</h4>
+  <h4 class="color-grey">Sum of Fair Market Value (FMV) in major cities</h4>
   <canvas id="sum_fmv_canvas"></canvas>
 
   <h4 class="color-grey">Total amount of Property Transfer Tax (PTT) paid in major cities</h4>
   <canvas id="sum_ptt_paid_canvas"></canvas>
 
   <h4 class="color-grey">Sum FMV VS. Population with PTT in major cities</h4>
-  <canvas id="fmv_population_ptt_canvas"></canvas>
   <p class="color-grey">Note: Diameter = Sum of Property Transfer Tax (PTT) paid / 10,000,000</p>
   <p class="color-grey">Population Data Source: BC Stats</p>
+  <canvas id="fmv_population_ptt_canvas"></canvas>
+
 </div>
 
 
 <script>
 $(document).ready(function() {
-
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-
-  // options
-  var options_vertical_comma_dollar = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000000000+'B';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Dollars (1B=1,000,000,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
-
-  var options_radar = {
-    scale: {
-      reverse: true,
-      ticks: {
-        beginAtZero: true
-      }
-    }
-  };
-  
 
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
   var months = municipal_transaction_data['months'];
@@ -124,13 +81,20 @@ $(document).ready(function() {
         });
       
         sum_fmv_monthly_name.push(municipality[j]['name']);
-        sum_fmv_monthly_data.push(municipality[j]['fair market value']['sum_FMV']);
+        sum_fmv_monthly_data.push(municipality[j]['fair market value']['sum_FMV']['total']);
         sum_fmv_monthly_bg.push(colours[0]['rgba']['opacity-0.9']);
       
 
+        var ptt = municipality[j]['property transfer tax'];
+        if (ptt) {
+          sum_PTT_paid_name.push(municipality[j]['name']);
+          sum_PTT_paid_data.push(ptt['sum_PTT_paid']['total']);
+          sum_PTT_paid_bg.push(colours[0]['rgba']['opacity-0.9']);;
+        }
+
         if (!name.includes("Peninsula & Westshore") && !name.includes("Victoria, Esquimalt, Oak Bay, Saanich & View Royal")) {
-          var fmv = municipality[j]['fair market value']['sum_FMV'];
-          var ptt = municipality[j]['property transfer tax']['sum_PTT_paid'];
+          var fmv = municipality[j]['fair market value']['sum_FMV']['total'];
+          var ptt = municipality[j]['property transfer tax']['sum_PTT_paid']['total'];
           var population = municipal_population['population'][d]['total'];
 
           fmv_population_ptt_dataset.push({
@@ -163,15 +127,6 @@ $(document).ready(function() {
           surrey_housing_total.push(housing_type[x]['total']);
         }
       }
-
-
-      var ptt = municipality[j]['property transfer tax'];
-      if (ptt) {
-        sum_PTT_paid_name.push(municipality[j]['name']);
-        sum_PTT_paid_data.push(ptt['sum_PTT_paid']);
-        sum_PTT_paid_bg.push(colours[0]['rgba']['opacity-0.9']);;
-      }
-
 
     }
   }
@@ -213,7 +168,7 @@ $(document).ready(function() {
         }
       ]
     },
-    options: options_radar
+    options: radar_option()
   });
 
 
@@ -245,7 +200,7 @@ $(document).ready(function() {
         }
       ]
     },
-    options: options_radar
+    options: radar_option()
   });
 
 
@@ -260,7 +215,7 @@ $(document).ready(function() {
         backgroundColor: sum_fmv_monthly_bg
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
   });
 
 
@@ -275,7 +230,7 @@ $(document).ready(function() {
         backgroundColor: sum_PTT_paid_bg
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
   });  
 
 
@@ -287,41 +242,8 @@ $(document).ready(function() {
   new Chart($("#fmv_population_ptt_canvas"), {
     type: "bubble",
     data: fmv_population_ptt_data,
-    options: {
-      elements: {
-        points: {
-          borderWidth: 1,
-          borderColor: 'rgb(0, 0, 0)'
-        }
-      },
-      scales: {
-        xAxes: [{
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000000+'M';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Population (1M=1,000,000)'
-          }
-        }],
-        yAxes: [{
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000000000+'B';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Sum FMV, Dollars (1B=1,000,000,000)'
-          }
-        }]
-      }
-    }
+    options: bubble_option("Population (1M=1,000,000)", 1000000, "M", "Sum FMV, Dollars (1B=1,000,000,000)", 1000000000, "B")
   });
-
-
 
 
 });

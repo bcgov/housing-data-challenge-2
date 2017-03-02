@@ -1,4 +1,3 @@
-<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
 
 <% @municipal_transaction_data = JSON.parse(@municipal_transaction_data) %>
@@ -25,61 +24,6 @@
 
 <script>
 $(document).ready(function() {
-
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-
-  // options
-  var options_pie = {
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-            return previousValue + currentValue;
-          });
-          var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
-          return commaValue + " (" + precentage + "%)";
-        }
-      }
-    }
-  };
-
-
-  var options_stack = {
-    responsive: true,
-    scales: {
-      xAxes: [{
-        stacked: true
-      }],
-      yAxes: [{
-        stacked: true
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          var total = data.datasets[5].data[tooltipItem.index];
-
-          var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-          var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
-          return commaValue + " (" + precentage + "%)";
-        }
-      }
-    }
-  };
-
-
 
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
   var months = municipal_transaction_data['months'];
@@ -205,7 +149,8 @@ $(document).ready(function() {
       data: {
         "labels": months,
         "datasets": region_district_municipality_datasets
-      }
+      },
+      options: vertical_option("Transactions (1K=1,000)", 1000, "K")
     });
 
     // Percentage of Total Transactions
@@ -218,7 +163,7 @@ $(document).ready(function() {
           backgroundColor: region_district_municipality_compare_bg_color
         }]
       },
-      options: options_pie
+      options: pie_option()
     });
 
 
@@ -284,7 +229,7 @@ $(document).ready(function() {
           labels: months,
           datasets: datasets
         },
-        options: options_stack
+        options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K")
       });
 
       // make charts for Percentage of Property Types
@@ -297,7 +242,7 @@ $(document).ready(function() {
             backgroundColor: region_district_municipality_housing_type_bg_colors
           }]
         },
-        options: options_pie
+        options: pie_option()
       });
 
     }

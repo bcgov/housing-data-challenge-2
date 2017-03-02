@@ -1,4 +1,3 @@
-<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
 
 
@@ -19,40 +18,6 @@
 <script>
 $(document).ready(function() {
 
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-  // options
-  var options_vertical_comma_dollar = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000000000+'B';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Dollars (1B=1,000,000,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
-
-
-
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
   var months = municipal_transaction_data['months'];
   var regional_district = municipal_transaction_data['regional_district'];
@@ -70,7 +35,7 @@ $(document).ready(function() {
         no_foreign_name.push(municipality[j]['name']);
         no_foreign_data.push(foreign['no_foreign']);
         no_foreign_bg.push(colours[0]['rgba']['opacity-0.9']);
-        sum_FMV_foreign_data.push(foreign['sum_FMV_foreign']);
+        sum_FMV_foreign_data.push(foreign['sum_FMV_foreign']['total']);
       }
 
     }
@@ -87,7 +52,8 @@ $(document).ready(function() {
         data: no_foreign_data,
         backgroundColor: no_foreign_bg
       }]
-    }
+    },
+    options: vertical_option("Transactions (1K=1,000)", 1000, "K", true)
   });
 
 
@@ -101,7 +67,7 @@ $(document).ready(function() {
         backgroundColor: no_foreign_bg
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B", true)
   });
 
 

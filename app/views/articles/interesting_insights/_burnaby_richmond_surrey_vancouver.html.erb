@@ -1,0 +1,303 @@
+<input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
+
+
+<div class="canvases">
+
+  <h4 class="color-grey">Average of FMV VS. Average of Foreign FMV with Additional Tax</h4>
+  <p class="color-grey">Note: Diameter = Additional Tax Paid / 1,000,000</p>
+  <canvas id="avg_fmv_foreign_fmv_add_tax_canvas"></canvas>
+  
+
+
+  <h4 class="color-grey">Fair Market Value (FMV)</h4>
+  <canvas id="fmv_insights_canvas"></canvas>
+
+  <h4 class="color-grey">Property Transfer Tax (PTT)</h4>
+  <canvas id="ptt_insights_canvas"></canvas>
+
+  <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
+  <canvas id="fmv_foreign_insights_canvas"></canvas>
+
+  <h4 class="color-grey">Additional Tax Paid</h4>
+  <canvas id="add_tax_insights_canvas"></canvas>
+
+
+
+  <h4 class="color-grey">Insights in Burnaby</h4>
+  <canvas id="burnaby_insights_canvas"></canvas>
+
+  <h4 class="color-grey">Insights in Richmond</h4>
+  <canvas id="richmond_insights_canvas"></canvas>
+
+  <h4 class="color-grey">Insights in Surrey</h4>
+  <canvas id="surrey_insights_canvas"></canvas>
+
+  <h4 class="color-grey">Insights in Vancouver</h4>
+  <canvas id="vancouver_insights_canvas"></canvas>
+
+
+</div>
+
+
+
+<script>
+$(document).ready(function() {
+
+
+  var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
+  var months = municipal_transaction_data['months'];
+  var regional_district = municipal_transaction_data['regional_district'];
+
+  var dividend = 1000000;
+  var avg_fmv_foreign_fmv_add_tax_dataset = [];
+
+
+  var city_fmv_datasets = [];
+  var city_ptt_datasets = [];
+  var city_fmv_foreign_datasets = [];
+  var city_add_tax_datasets = [];
+  var city_insights_datasets = {};
+
+  var c = 0;
+
+  for (var i = 0; i < regional_district.length; i++) {
+    var municipality = regional_district[i]['municipality'];
+
+    for (var j = 0; j < municipality.length; j++) {
+      var id = municipality[j]['id'];
+      var name = municipality[j]['name'];
+
+      if ( id == "Burnaby" || id == "Richmond" || id == "Surrey" || id == "Vancouver" ) {
+
+
+        var mn_fmv = municipality[j]['fair market value']['mn_FMV']['total'];
+        var mn_fmv_foreign = municipality[j]['foreign involvement']['mn_FMV_foreign']['total'];
+        var add_tax =  municipality[j]['add_tax_paid']['total'];
+
+        avg_fmv_foreign_fmv_add_tax_dataset.push({
+          label: name,
+          data: [{x: mn_fmv, y: mn_fmv_foreign, r: add_tax/dividend}],
+          backgroundColor: colours[c]['rgba']['opacity-0.9'],
+          hoverBackgroundColor: colours[c]['rgba']['opacity-1'],
+        });
+
+        city_fmv_datasets.push({
+          label: name,
+          data: municipality[j]['fair market value']['sum_FMV']['monthly'],
+          fill: false,
+          backgroundColor: colours[c]['rgba']['opacity-0.9'],
+          borderColor: colours[c]['rgba']['opacity-1'],
+          borderWidth: 4,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        });
+
+        city_ptt_datasets.push({
+          label: name,
+          data: municipality[j]['property transfer tax']['sum_PTT_paid']['monthly'],
+          fill: false,
+          backgroundColor: colours[c]['rgba']['opacity-0.9'],
+          borderColor: colours[c]['rgba']['opacity-1'],
+          borderWidth: 4,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        });
+
+        city_fmv_foreign_datasets.push({
+          label: name,
+          data: municipality[j]['foreign involvement']['sum_FMV_foreign']['monthly'],
+          fill: false,
+          backgroundColor: colours[c]['rgba']['opacity-0.9'],
+          borderColor: colours[c]['rgba']['opacity-1'],
+          borderWidth: 4,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        });
+
+        city_add_tax_datasets.push({
+          label: name,
+          data: municipality[j]['add_tax_paid']['monthly'],
+          fill: false,
+          backgroundColor: colours[c]['rgba']['opacity-0.9'],
+          borderColor: colours[c]['rgba']['opacity-1'],
+          borderWidth: 4,
+          borderJoinStyle: 'round',
+          lineTension: 0.1
+        });
+
+        city_insights_datasets[id] = create_each_city_lines_datasets(
+          municipality[j]['fair market value']['sum_FMV']['name'],
+          municipality[j]['fair market value']['sum_FMV']['monthly'],
+          municipality[j]['property transfer tax']['sum_PTT_paid']['name'],
+          municipality[j]['property transfer tax']['sum_PTT_paid']['monthly'],
+          municipality[j]['foreign involvement']['sum_FMV_foreign']['name'],
+          municipality[j]['foreign involvement']['sum_FMV_foreign']['monthly'],
+          municipality[j]['add_tax_paid']['name'],
+          municipality[j]['add_tax_paid']['monthly'],
+          colours
+        );
+
+        c += 1;
+      }
+
+    }
+  
+  }
+
+
+
+  // Average of FMV VS. Average of Foreign FMV with Additional Tax
+  new Chart($("#avg_fmv_foreign_fmv_add_tax_canvas"), {
+    type: "bubble",
+    data: {
+      datasets: avg_fmv_foreign_fmv_add_tax_dataset
+    },
+    options: bubble_option("Average of Sum FMV, Dollar (1M=1,000,000)", 1000000, "M", "Average of Foreign FMV, Dollars (1M=1,000,000)", 1000000, "M")
+  });
+
+
+
+
+  // Fair Market Value
+  new Chart($("#fmv_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_fmv_datasets
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Property Transfer Tax (PTT)
+  new Chart($("#ptt_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_ptt_datasets
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // FMV sum of Foreign Involvement Transactions
+  new Chart($("#fmv_foreign_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_fmv_foreign_datasets
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Additional Tax Paid
+  new Chart($("#add_tax_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_add_tax_datasets
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Insights in Burnaby
+  new Chart($("#burnaby_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_insights_datasets['Burnaby']
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Insights in Richmond
+  new Chart($("#richmond_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_insights_datasets['Richmond']
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Insights in Surrey
+  new Chart($("#surrey_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_insights_datasets['Surrey']
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+  // Insights in Vancouver
+  new Chart($("#vancouver_insights_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: city_insights_datasets['Vancouver']
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
+
+
+
+});
+
+
+
+
+function create_each_city_lines_datasets(fmv_name, fmv_data, ptt_name, ptt_data, fmv_foreign_name, fmv_foreign_data, add_tax_name, add_tax_data, colours) {
+  var datasets = [];
+  datasets.push(
+    {
+      label: fmv_name,
+      data: fmv_data,
+      fill: false,
+      backgroundColor: colours[0]['rgba']['opacity-0.9'],
+      borderColor: colours[0]['rgba']['opacity-1'],
+      borderWidth: 4,
+      borderJoinStyle: 'round',
+      lineTension: 0.1
+    },
+    {
+      label: ptt_name,
+      data: ptt_data,
+      fill: false,
+      backgroundColor: colours[1]['rgba']['opacity-0.9'],
+      borderColor: colours[1]['rgba']['opacity-1'],
+      borderWidth: 4,
+      borderJoinStyle: 'round',
+      lineTension: 0.1
+    },
+    {
+      label: fmv_foreign_name,
+      data: fmv_foreign_data,
+      fill: false,
+      backgroundColor: colours[2]['rgba']['opacity-0.9'],
+      borderColor: colours[2]['rgba']['opacity-1'],
+      borderWidth: 4,
+      borderJoinStyle: 'round',
+      lineTension: 0.1
+    },
+    {
+      label: add_tax_name,
+      data: add_tax_data,
+      fill: false,
+      backgroundColor: colours[3]['rgba']['opacity-0.9'],
+      borderColor: colours[3]['rgba']['opacity-1'],
+      borderWidth: 4,
+      borderJoinStyle: 'round',
+      lineTension: 0.1
+    }
+  );
+  return datasets;
+}
+
+</script>

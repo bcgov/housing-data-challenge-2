@@ -1,4 +1,3 @@
-<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="bc_provincial_data" value="<%= @bc_provincial_data %>" type="hidden" />
 
 <div class="row canvases">
@@ -40,88 +39,6 @@
 <script>
 $(document).ready(function() {
 
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-  // options
-    var options_vertical_comma_k = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000+'K';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Transactions (1K=1,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
-
-  var options_vertical_comma_dollar = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000000000+'B';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Dollars (1B=1,000,000,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
-
-
-  var options_pie = {
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-            return previousValue + currentValue;
-          });
-          var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
-          return commaValue + " (" + precentage + "%)";
-        }
-      }
-    }
-  };
-
-  // ----- options end -----//
-
-
   var bc_provincial_data = JSON.parse( $("#bc_provincial_data").val() );
   var months = bc_provincial_data['months'];
 
@@ -142,7 +59,7 @@ $(document).ready(function() {
         lineTension: 0.1
       }]
     },
-    options: options_vertical_comma_k
+    options: vertical_option("Transactions (1K=1,000)", 1000, "K")
   });
 
 
@@ -162,7 +79,7 @@ $(document).ready(function() {
         lineTension: 0.1
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
   });
 
 
@@ -187,7 +104,7 @@ $(document).ready(function() {
         backgroundColor: [ colours[0]['rgba']['opacity-0.9'], colours[1]['rgba']['opacity-0.9'] ]
       }]
     },
-    options: options_pie
+    options: pie_option()
   });
 
   new Chart($("#no_mkt_trans_no_foreign_compare_stacked_canvas"), {
@@ -221,41 +138,7 @@ $(document).ready(function() {
         }
       ]
     },
-    options: {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000+'K';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Transactions (1K=1,000)'
-          }
-        }]
-      },
-      tooltips: {
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = data.datasets[2].data[tooltipItem.index];
-
-            var currentValue = dataset.data[tooltipItem.index];
-            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-            });
-            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
-            return commaValue + " (" + precentage + "%)";
-          }
-        }
-      }
-    }
+    options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K")
   });
 
 
@@ -281,7 +164,7 @@ $(document).ready(function() {
         ]
       }]
     },
-    options: options_pie
+    options: pie_option()
   });
 
   new Chart($("#no_foreign_compare_stacked_canvas"), {
@@ -321,44 +204,8 @@ $(document).ready(function() {
         }
       ]
     },
-    options: {
-      responsive: true,
-      scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true,
-          ticks: {
-            callback: function(label, index, labels) {
-              return label/1000+'K';
-            }
-          },
-          scaleLabel: {
-            display: true,
-            labelString: 'Transactions (1K=1,000)'
-          }
-        }]
-      },
-      tooltips: {
-        callbacks: {
-          label: function(tooltipItem, data) {
-            var dataset = data.datasets[tooltipItem.datasetIndex];
-            var total = data.datasets[3].data[tooltipItem.index];
-
-            var currentValue = dataset.data[tooltipItem.index];
-            var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-              return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-            });
-            var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
-            return commaValue + " (" + precentage + "%)";
-          }
-        }
-      }
-    }
+    options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K")
   });
-
-
 
 
 });

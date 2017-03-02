@@ -1,4 +1,3 @@
-<input id="colours_json" value="<%= @colours_json.to_json %>" type="hidden" />
 <input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
 
 <div class="canvases">
@@ -13,40 +12,6 @@
 
 <script>
 $(document).ready(function() {
-
-  // colours
-  var colours_json = JSON.parse( $("#colours_json").val() );
-  var colours = colours_json['colours'];
-
-
-  // options
-  var options_vertical_comma_dollar = {
-    responsive: true,
-    scales: {
-      yAxes: [{
-        ticks: {
-          callback: function(label, index, labels) {
-            return label/1000000000+'B';
-          }
-        },
-        scaleLabel: {
-          display: true,
-          labelString: 'Dollars (1B=1,000,000,000)'
-        }
-      }]
-    },
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-        }
-      }
-    }
-  };
-
 
   var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
 
@@ -78,7 +43,7 @@ $(document).ready(function() {
         backgroundColor: dev_region_bg
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
   });  
 
   // Sum of Property Transfer Tax (PTT)  ptt_canvas
@@ -92,7 +57,7 @@ $(document).ready(function() {
         backgroundColor: dev_region_bg
       }]
     },
-    options: options_vertical_comma_dollar
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
   });  
 
 });
