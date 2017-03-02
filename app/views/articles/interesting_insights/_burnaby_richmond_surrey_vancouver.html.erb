@@ -1,41 +1,39 @@
 <input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
 
 
-<div class="canvases">
-
+<div class="row canvases">
   <h4 class="color-grey">Average of FMV VS. Average of Foreign FMV with Additional Tax</h4>
   <p class="color-grey">Note: Diameter = Additional Tax Paid / 1,000,000</p>
   <canvas id="avg_fmv_foreign_fmv_add_tax_canvas"></canvas>
   
 
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <h4 class="color-grey">Fair Market Value (FMV)</h4>
+    <canvas id="fmv_insights_canvas"></canvas>
 
-  <h4 class="color-grey">Fair Market Value (FMV)</h4>
-  <canvas id="fmv_insights_canvas"></canvas>
+    <h4 class="color-grey">Property Transfer Tax (PTT)</h4>
+    <canvas id="ptt_insights_canvas"></canvas>
 
-  <h4 class="color-grey">Property Transfer Tax (PTT)</h4>
-  <canvas id="ptt_insights_canvas"></canvas>
+    <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
+    <canvas id="fmv_foreign_insights_canvas"></canvas>
 
-  <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
-  <canvas id="fmv_foreign_insights_canvas"></canvas>
+    <h4 class="color-grey">Additional Tax Paid</h4>
+    <canvas id="add_tax_insights_canvas"></canvas>
 
-  <h4 class="color-grey">Additional Tax Paid</h4>
-  <canvas id="add_tax_insights_canvas"></canvas>
+    <h4 class="color-grey">Insights in Burnaby</h4>
+    <canvas id="burnaby_insights_canvas"></canvas>
 
+    <h4 class="color-grey">Insights in Richmond</h4>
+    <canvas id="richmond_insights_canvas"></canvas>
 
+    <h4 class="color-grey">Insights in Surrey</h4>
+    <canvas id="surrey_insights_canvas"></canvas>
 
-  <h4 class="color-grey">Insights in Burnaby</h4>
-  <canvas id="burnaby_insights_canvas"></canvas>
-
-  <h4 class="color-grey">Insights in Richmond</h4>
-  <canvas id="richmond_insights_canvas"></canvas>
-
-  <h4 class="color-grey">Insights in Surrey</h4>
-  <canvas id="surrey_insights_canvas"></canvas>
-
-  <h4 class="color-grey">Insights in Vancouver</h4>
-  <canvas id="vancouver_insights_canvas"></canvas>
-
-
+    <h4 class="color-grey">Insights in Vancouver</h4>
+    <canvas id="vancouver_insights_canvas"></canvas>
+  </div>
+  <div class="col-md-1"></div>
 </div>
 
 
@@ -198,7 +196,7 @@ $(document).ready(function() {
       labels: months,
       datasets: city_add_tax_datasets
     },
-    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+    options: vertical_option("Dollars (1M=1,000,000)", 1000000, "M")
   });
 
 
