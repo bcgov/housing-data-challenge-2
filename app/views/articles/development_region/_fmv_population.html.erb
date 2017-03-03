@@ -1,5 +1,5 @@
 <input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
-<input id="bc_population" value="<%= @bc_population %>" type="hidden" />
+<input id="census_population_data" value="<%= @census_population_data %>" type="hidden" />
 
 <div class="canvases">
   <canvas id="fmv_population_canvas"></canvas>
@@ -14,7 +14,7 @@ $(document).ready(function() {
   var months = dev_region_transaction_data['months'];
   var dev_region = dev_region_transaction_data['development_region'];
 
-  var bc_population = JSON.parse( $("#bc_population").val() );
+  var census_population_data = JSON.parse( $("#census_population_data").val() );
 
   var fmv_population_dataset = [];
 
@@ -23,7 +23,7 @@ $(document).ready(function() {
     var name = dev_region[i]['name'];
     var fmv = dev_region[i]['fair market value']['sum_FMV'];
     var ptt = dev_region[i]['property transfer tax']['sum_PTT_paid'];
-    var population = bc_population['population'][i]['total'];
+    var population = census_population_data['canada_provinces_territories'][1]['development regions'][i]['Population, 2016'];
 
     fmv_population_dataset.push({
       label: name,

@@ -762,6 +762,31 @@
                 "total": 66
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": {
+              "name": "Sum of Fair Market Value",
+              "monthly": [],
+              "total": 44917112721
+            },
+            "mn_FMV": {
+              "name": "Average of FMV",
+              "monthly": [],
+              "total": 6761090.9
+            }
+          },
+          "foreign involvement": {
+            "no_foreign": 398,
+            "sum_FMV_foreign": {
+              "name": "FMV sum of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 3779405907
+            },
+            "mn_FMV_foreign": {
+              "name": "FMV Average of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 8801491.4
+            }
           }
         },
         {
@@ -1527,6 +1552,31 @@
                 "total": 5
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": {
+              "name": "Sum of Fair Market Value",
+              "monthly": [],
+              "total": 3162144233
+            },
+            "mn_FMV": {
+              "name": "Average of FMV",
+              "monthly": [],
+              "total": 3722897.5
+            }
+          },
+          "foreign involvement": {
+            "no_foreign": 398,
+            "sum_FMV_foreign": {
+              "name": "FMV sum of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 87542404
+            },
+            "mn_FMV_foreign": {
+              "name": "FMV Average of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 4299371.1
+            }
           }
         },
         {
@@ -2123,6 +2173,31 @@
                 "total": 17
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": {
+              "name": "Sum of Fair Market Value",
+              "monthly": [],
+              "total": 4903270757
+            },
+            "mn_FMV": {
+              "name": "Average of FMV",
+              "monthly": [],
+              "total": 4364804.9
+            }
+          },
+          "foreign involvement": {
+            "no_foreign": 398,
+            "sum_FMV_foreign": {
+              "name": "FMV sum of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 291083282
+            },
+            "mn_FMV_foreign": {
+              "name": "FMV Average of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 5915275.7
+            }
           }
         },
         {
@@ -2495,6 +2570,31 @@
                 "total": 13
               }
             ]
+          },
+          "fair market value": {
+            "sum_FMV": {
+              "name": "Sum of Fair Market Value",
+              "monthly": [],
+              "total": 1738733978
+            },
+            "mn_FMV": {
+              "name": "Average of FMV",
+              "monthly": [],
+              "total": 2813352
+            }
+          },
+          "foreign involvement": {
+            "no_foreign": 398,
+            "sum_FMV_foreign": {
+              "name": "FMV sum of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 99091694
+            },
+            "mn_FMV_foreign": {
+              "name": "FMV Average of Foreign Involvement Transactions",
+              "monthly": [],
+              "total": 3757310.8
+            }
           }
         },
         {

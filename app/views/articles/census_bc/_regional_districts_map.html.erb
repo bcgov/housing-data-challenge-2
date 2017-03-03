@@ -1,0 +1,140 @@
+<input id="census_population_data" value="<%= @census_population_data %>" type="hidden" />
+<input id="census_population_geo_data" value="<%= @census_population_geo_data %>" type="hidden" />
+
+<div id="census_population_map" class="choropleth_map"></div>
+
+
+<div class="click_region">
+  <%= render "articles/census_bc/click_region" %>
+</div>
+
+
+<script>
+$(document).ready(function() {
+  var census_population_data = JSON.parse( $("#census_population_data").val() );
+
+  var map = L.map('census_population_map',{scrollWheelZoom:false}).setView([54.6000,-123.0000], 5);
+
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  
+
+  var census_population_geo_data = $("#census_population_geo_data").val();
+  var geojson;
+  
+  geojson = L.geoJson(JSON.parse(census_population_geo_data), {
+    style: style,
+    onEachFeature: onEachFeature
+  }).addTo(map);
+
+
+  var info = L.control();
+  info.onAdd = function(map) {
+    this._div = L.DomUtil.create('div', 'info');
+    this.update();
+    return this._div;
+  };
+  info.update = function(props) {
+    this._div.innerHTML = '<h4>B.C Population Change (%)</h4>' +  (props ?
+          '<b>' + props.name + '</b><br />' + props.change + ' (%)'
+          : 'Click or hover over each area');
+  };
+  info.addTo(map);
+
+
+  var legend = L.control({position: 'bottomright'});
+
+  legend.onAdd = function(map) {
+
+      var div = L.DomUtil.create('div', 'info legend'),
+          grades = [-15.5, -10.5, -5.5, -0.5, 0.5, 5.5, 10.5, 15.5],
+          labels = [];
+
+      for (var i = 0; i < grades.length; i++) {
+          div.innerHTML +=
+              '<i style="background:' + getColor(grades[i] + 1) + '"></i> ' +
+              grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+      }
+
+      return div;
+  };
+
+  legend.addTo(map);
+
+
+  function getColor(d) {
+    return d > 15.5 ? '#800026' :
+      d > 10.5  ? '#BD0026' :
+      d > 5.5  ? '#E31A1C' :
+      d > 0.5  ? '#FEB24C' :
+      d > -0.5   ? '#FFEDA0' :
+      d > -5.5   ? '#7f95ef' :
+      d > -10.5   ? '#7865f2' :
+      '#0e025b';
+  }
+
+  function style(feature) {
+      return {
+          fillColor: getColor(feature.properties.change),
+          weight: 2,
+          opacity: 1,
+          color: 'white',
+          dashArray: '3',
+          fillOpacity: 0.7
+      };
+  }
+
+  function highlightFeature(e) {
+      var layer = e.target;
+
+      layer.setStyle({
+          weight: 3,
+          color: 'rgba(54, 162, 235, 1)',
+          dashArray: '',
+          fillOpacity: 0.7
+      });
+
+      if (!L.Browser.ie && !L.Browser.opera && !L.Browser.edge) {
+          layer.bringToFront();
+      }
+      info.update(layer.feature.properties);
+  }
+
+  function resetHighlight(e) {
+      geojson.resetStyle(e.target);
+      info.update();
+  }
+
+  function zoomToFeature(e) {
+      map.fitBounds(e.target.getBounds());
+  }
+
+  function onEachFeature(feature, layer) {
+    layer.on({
+      mouseover: highlightFeature,
+      mouseout: resetHighlight,
+      click: clickFeature
+    });
+  }
+
+  function clickFeature(e) {
+    var regions = census_population_data['canada_provinces_territories'][1]['development regions'];
+
+    var id = "Null";
+    for (var i = 0; i < regions.length; i++) {
+      var regional_district = regions[i]['regional district'];
+      for (var j = 0; j < regional_district.length; j++) {
+        if (regional_district[j]['name'] == e.target.feature.properties.name) {
+          id = regional_district[j]['id'];
+        }
+      }
+    }
+
+    if (id == "Null") console.log("There no relevant region");
+    else $("#" + id + "Modal").modal("show");
+  }
+
+
+});
+</script>
