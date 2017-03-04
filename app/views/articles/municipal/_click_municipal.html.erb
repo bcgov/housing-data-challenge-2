@@ -182,7 +182,8 @@ $(document).ready(function() {
       var region_district_municipality_housing_type_bg_colors = [];
 
       var reg_district_municipality_housing_type = region_district_municipality_json[j]['transaction_type']['housing_type'];
-      for (var k = 0; k < reg_district_municipality_housing_type.length; k++) {
+      var k;
+      for (k = 0; k < reg_district_municipality_housing_type.length; k++) {
         var name = reg_district_municipality_housing_type[k]['name'];
 
         var dataset = {
@@ -229,7 +230,7 @@ $(document).ready(function() {
           labels: months,
           datasets: datasets
         },
-        options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K")
+        options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K", k)
       });
 
       // make charts for Percentage of Property Types

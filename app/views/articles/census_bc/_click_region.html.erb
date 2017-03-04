@@ -67,13 +67,21 @@ $(document).ready(function() {
                 '</div>' +
               '</div>' +
               '<div class="row canvases each-modal">' +
-                '<div class="col-md-6">' +
+                '<div class="col-md-2"></div>' +
+                '<div class="col-md-8">' +
                   '<h4 class="color-grey">Population Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
                   '<canvas id="canada_bc_' + id + '_population_change_canvas"></canvas>' +
                 '</div>' +
+                '<div class="col-md-2"></div>' +
+              '</div>' +
+              '<div class="row canvases each-modal">' +
                 '<div class="col-md-6">' +
                   '<h4 class="color-grey">Total private dwellings Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
                   '<canvas id="canada_bc_' + id + '_total_private_dwellings_change_canvas"></canvas>' +
+                '</div>' +
+                '<div class="col-md-6">' +
+                  '<h4 class="color-grey">Private dwellings occupied by usual residents Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
+                  '<canvas id="canada_bc_' + id + '_dwellings_occupied_residents_change_canvas"></canvas>' +
                 '</div>' +
               '</div>' +
               '<div class="row canvases each-modal">' +
@@ -86,8 +94,6 @@ $(document).ready(function() {
                   '<canvas id="canada_bc_' + id + '_population_density_2016_canvas"></canvas>' +
                 '</div>' +
               '</div>';
-
-
 
       $("#" + id + "Canvas").html(html);
       html = '';
@@ -190,9 +196,10 @@ $(document).ready(function() {
         options: vertical_option_basic(true)
       });
 
+
       // Total private dwellings Change (%) in Canada, B.C. between 2011 and 2016
       new Chart($("#canada_bc_" + id + "_total_private_dwellings_change_canvas"), {
-        type: "bar",
+        type: "polarArea",
         data: {
           labels: [
             province[0]['name'], 
@@ -207,13 +214,39 @@ $(document).ready(function() {
               data['Total private dwellings, % change']
             ],
             backgroundColor: [
+              colours[0]['rgba']['opacity-0.9'],
               colours[1]['rgba']['opacity-0.9'],
-              colours[1]['rgba']['opacity-0.9'],
-              colours[1]['rgba']['opacity-0.9']
+              colours[2]['rgba']['opacity-0.9']
             ]
           }]
         },
-        options: vertical_option_basic(true)
+        options: polar_area_option()
+      });
+
+      // Private dwellings occupied by usual residents Change (%) in Canada, B.C. between 2011 and 2016
+      new Chart($("#canada_bc_" + id + "_dwellings_occupied_residents_change_canvas"), {
+        type: "polarArea",
+        data: {
+          labels: [
+            province[0]['name'], 
+            province[1]['name'],
+            data['name']
+          ],
+          datasets: [{
+            label: "Private dwellings occupied by usual residents Change (%)",
+            data: [
+              province[0]['Private dwellings occupied by usual residents, % change'],
+              province[1]['Private dwellings occupied by usual residents, % change'],
+              data['Private dwellings occupied by usual residents, % change']
+            ],
+            backgroundColor: [
+              colours[0]['rgba']['opacity-0.9'],
+              colours[1]['rgba']['opacity-0.9'],
+              colours[2]['rgba']['opacity-0.9']
+            ]
+          }]
+        },
+        options: polar_area_option()
       });
 
 

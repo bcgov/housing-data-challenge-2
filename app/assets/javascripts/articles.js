@@ -125,7 +125,7 @@ function horizontal_bar_option(x_label, x_value, x_symbol) {
 
 
 // usage: vertical stacked bar
-function vertical_stacked_bar_option(y_label, y_value, y_symbol) {
+function vertical_stacked_bar_option(y_label, y_value, y_symbol, num) {
   return {
     responsive: true,
     scales: {
@@ -149,7 +149,7 @@ function vertical_stacked_bar_option(y_label, y_value, y_symbol) {
       callbacks: {
         label: function(tooltipItem, data) {
           var dataset = data.datasets[tooltipItem.datasetIndex];
-          var total = data.datasets[2].data[tooltipItem.index];
+          var total = data.datasets[num].data[tooltipItem.index];
 
           var currentValue = dataset.data[tooltipItem.index];
           var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
@@ -233,6 +233,15 @@ function radar_option() {
       ticks: {
         beginAtZero: true
       }
+    }
+  };
+}
+
+// usage: polar area
+function polar_area_option() {
+  return {
+    elements: {
+      arc: {borderColor: "#fff"}
     }
   };
 }
