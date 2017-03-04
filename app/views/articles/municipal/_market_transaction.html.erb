@@ -41,11 +41,7 @@ $(document).ready(function() {
 
   var municipal_population = JSON.parse( $("#municipal_population").val() );
 
-  var municipal_monthly_data = {};
-  municipal_monthly_data['labels'] = months;
   var municipal_dataset = [];
-
-
   var sum_fmv_monthly_name = [];
   var sum_fmv_monthly_data = [];
   var sum_fmv_monthly_bg = [];
@@ -59,10 +55,7 @@ $(document).ready(function() {
   var sum_PTT_paid_data = [];
   var sum_PTT_paid_bg = [];
 
-
-  var fmv_population_ptt_data = {};
   var fmv_population_ptt_dataset = [];
-
 
   var c = 0;
   var d = 0;
@@ -132,10 +125,12 @@ $(document).ready(function() {
   }
 
   // Total Market Transactions Monthly
-  municipal_monthly_data['datasets'] = municipal_dataset;
   new Chart($("#no_mkt_trans_canvas"), {
     type: "bar",
-    data: municipal_monthly_data
+    data: {
+      labels: months,
+      datasets: municipal_dataset
+    }
   });
 
 
@@ -234,14 +229,10 @@ $(document).ready(function() {
   });  
 
 
-
-
-
   // Sum FMV VS. Population with Sum PTT
-  fmv_population_ptt_data['datasets'] = fmv_population_ptt_dataset;
   new Chart($("#fmv_population_ptt_canvas"), {
     type: "bubble",
-    data: fmv_population_ptt_data,
+    data: {datasets: fmv_population_ptt_dataset},
     options: bubble_option("Population (1M=1,000,000)", 1000000, "M", "Sum FMV, Dollars (1B=1,000,000,000)", 1000000000, "B")
   });
 

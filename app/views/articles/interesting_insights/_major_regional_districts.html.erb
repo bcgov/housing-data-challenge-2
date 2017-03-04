@@ -1,9 +1,310 @@
+<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
 <input id="municipal_transaction_data" value="<%= @municipal_transaction_data %>" type="hidden" />
+<input id="census_population_data" value="<%= @census_population_data %>" type="hidden" />
+
+<div class="canvases">
+  <h4 class="color-grey">Population Density VS. Total Private Dwellings with Sum of FMV</h4>
+  <p class="color-grey">Note: Diameter = Sum of FMV / 1,000,000,000</p>
+  <canvas id="density_dwellings_fmv_canvas"></canvas>
+</div>
+
+
+<div class="canvases">
+  <h4 class="color-grey">Private dwellings occupied by usual residents, % change VS. Foreign Involvement Transactions with PTT Paid Median</h4>
+  <p class="color-grey">Note: Diameter = PTT Paid Median / 1,000</p>
+  <canvas id="occupied_residents_foreign_median_ptt_canvas"></canvas>
+</div>
+
+
+<div class="canvases">
+  <h4 class="color-grey">Population Change VS. Total Private Dwellings Change with Average of FMV Foreign</h4>
+  <p class="color-grey">Note: Diameter = Average of FMV Foreign / 1,000,000</p>
+  <canvas id="population_dwellings_fmv_foreign_canvas"></canvas>
+</div>
+
+<div class="row canvases">
+  <div class="col-md-1"></div>
+  <div class="col-md-10">
+    <h4 class="color-grey">Total private dwellings Change Minus Private dwellings occupied by usual residents Change</h4>
+    <canvas id="total_private_dwellings_dwellings_residents_canvas"></canvas>
+  </div>
+  <div class="col-md-1"></div>
+</div>
+
 
 
 <script>
 $(document).ready(function() {
 
 
+  var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
+  var months = dev_region_transaction_data['months'];
+  var dev_region = dev_region_transaction_data['development_region'];
+
+  var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
+  var regional_district = municipal_transaction_data['regional_district'];
+
+  var census_population_data = JSON.parse( $("#census_population_data").val() );
+  var dev_region_population_data = census_population_data['canada_provinces_territories'][1]['development regions'];
+
+
+  var density_dwellings_fmv_dataset = [];
+  var occupied_residents_foreign_median_ptt_dataset = [];
+  var population_dwellings_fmv_foreign_dataset = [];
+
+  var total_private_dwellings_dwellings_residents_names = [];
+  var total_private_dwellings_dwellings_residents_dataset = [];
+  var total_private_dwellings_dwellings_residents_bg = [];
+
+  var c = 0;
+  for (var i = 0; i < dev_region.length; i++) {
+    var regional_district = dev_region[i]['regional_district'];
+    var regional_district_population = dev_region_population_data[i]['regional district'];
+
+    for (var j = 0; j < regional_district.length; j++) {
+      var id = regional_district[j]['id'];
+      var name = regional_district[j]['name'];
+
+      var population_id = regional_district_population[j]['id'];
+
+      if (id == "MetroVancouver" || population_id == "GreaterVancouver" ) {
+    
+        total_private_dwellings_dwellings_residents_names.push(name);
+        total_private_dwellings_dwellings_residents_dataset.push(
+          regional_district_population[j]['Total private dwellings, % change'] - regional_district_population[j]['Private dwellings occupied by usual residents, % change']
+        );
+
+
+
+        total_private_dwellings_dwellings_residents_bg.push(colours[c]['rgba']['opacity-0.9']);
+
+        density_dwellings_fmv_dataset = create_density_dwellings_fmv_dataset(
+          density_dwellings_fmv_dataset, 
+          name, 
+          regional_district_population[j]['Population density per square kilometre, 2016'], 
+          regional_district_population[j]['Total private dwellings, 2016'], 
+          regional_district[j]['fair market value']['sum_FMV']['total'],
+          c
+        );
+
+        occupied_residents_foreign_median_ptt_dataset = create_occupied_residents_foreign_median_ptt_dataset(
+          occupied_residents_foreign_median_ptt_dataset, 
+          name, 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['no_foreign'],
+          regional_district[j]['property transfer tax']['md_PTT']['total'],
+          c
+        );
+
+
+        population_dwellings_fmv_foreign_dataset = create_population_dwellings_fmv_foreign_dataset(
+          population_dwellings_fmv_foreign_dataset, 
+          name, 
+          regional_district_population[j]['Total private dwellings, % change'], 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['mn_FMV_foreign']['total'],
+          c
+        );
+
+        c += 1;
+
+      } else if ( id == "CentralOkanagan" || population_id == "CentralOkanagan" ) {
+
+        total_private_dwellings_dwellings_residents_names.push(name);
+        total_private_dwellings_dwellings_residents_dataset.push(
+          regional_district_population[j]['Total private dwellings, % change'] - regional_district_population[j]['Private dwellings occupied by usual residents, % change']
+        );
+        total_private_dwellings_dwellings_residents_bg.push(colours[c]['rgba']['opacity-0.9']);
+
+        density_dwellings_fmv_dataset = create_density_dwellings_fmv_dataset(
+          density_dwellings_fmv_dataset, 
+          name, 
+          regional_district_population[j]['Population density per square kilometre, 2016'], 
+          regional_district_population[j]['Total private dwellings, 2016'], 
+          regional_district[j]['fair market value']['sum_FMV']['total'],
+          c
+        );
+
+        occupied_residents_foreign_median_ptt_dataset = create_occupied_residents_foreign_median_ptt_dataset(
+          occupied_residents_foreign_median_ptt_dataset, 
+          name, 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['no_foreign'],
+          regional_district[j]['property transfer tax']['md_PTT']['total'],
+          c
+        );
+
+        population_dwellings_fmv_foreign_dataset = create_population_dwellings_fmv_foreign_dataset(
+          population_dwellings_fmv_foreign_dataset, 
+          name, 
+          regional_district_population[j]['Total private dwellings, % change'], 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['mn_FMV_foreign']['total'],
+          c
+        );
+
+        c += 1;
+      
+      } else if ( id == "Capital" || population_id == "Capital" ) {
+
+        total_private_dwellings_dwellings_residents_names.push(name);
+        total_private_dwellings_dwellings_residents_dataset.push(
+          regional_district_population[j]['Total private dwellings, % change'] - regional_district_population[j]['Private dwellings occupied by usual residents, % change']
+        );
+        total_private_dwellings_dwellings_residents_bg.push(colours[c]['rgba']['opacity-0.9']);
+
+        density_dwellings_fmv_dataset = create_density_dwellings_fmv_dataset(
+          density_dwellings_fmv_dataset, 
+          name, 
+          regional_district_population[j]['Population density per square kilometre, 2016'], 
+          regional_district_population[j]['Total private dwellings, 2016'], 
+          regional_district[j]['fair market value']['sum_FMV']['total'],
+          c
+        );
+
+        occupied_residents_foreign_median_ptt_dataset = create_occupied_residents_foreign_median_ptt_dataset(
+          occupied_residents_foreign_median_ptt_dataset, 
+          name, 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['no_foreign'],
+          regional_district[j]['property transfer tax']['md_PTT']['total'],
+          c
+        );
+
+        population_dwellings_fmv_foreign_dataset = create_population_dwellings_fmv_foreign_dataset(
+          population_dwellings_fmv_foreign_dataset, 
+          name, 
+          regional_district_population[j]['Total private dwellings, % change'], 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['mn_FMV_foreign']['total'], 
+          c
+        );
+
+        c += 1;
+      
+      } else if ( id == "Nanaimo" || population_id == "Nanaimo") {
+
+        total_private_dwellings_dwellings_residents_names.push(name);
+        total_private_dwellings_dwellings_residents_dataset.push(
+          regional_district_population[j]['Total private dwellings, % change'] - regional_district_population[j]['Private dwellings occupied by usual residents, % change']
+        );
+        total_private_dwellings_dwellings_residents_bg.push(colours[c]['rgba']['opacity-0.9']);
+
+        density_dwellings_fmv_dataset = create_density_dwellings_fmv_dataset(
+          density_dwellings_fmv_dataset, 
+          name, 
+          regional_district_population[j]['Population density per square kilometre, 2016'], 
+          regional_district_population[j]['Total private dwellings, 2016'], 
+          regional_district[j]['fair market value']['sum_FMV']['total'],
+          c
+        );
+
+        occupied_residents_foreign_median_ptt_dataset = create_occupied_residents_foreign_median_ptt_dataset(
+          occupied_residents_foreign_median_ptt_dataset, 
+          name, 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['no_foreign'],
+          regional_district[j]['property transfer tax']['md_PTT']['total'],
+          c
+        );
+
+        population_dwellings_fmv_foreign_dataset = create_population_dwellings_fmv_foreign_dataset(
+          population_dwellings_fmv_foreign_dataset, 
+          name, 
+          regional_district_population[j]['Total private dwellings, % change'], 
+          regional_district_population[j]['Private dwellings occupied by usual residents, % change'], 
+          regional_district[j]['foreign involvement']['mn_FMV_foreign']['total'], 
+          c
+        );
+
+        c += 1;
+
+
+      }
+
+    }
+
+  }
+
+
+
+  // Population Density VS. Total Private Dwellings with Sum of FMV
+  new Chart($("#density_dwellings_fmv_canvas"), {
+    type: "bubble",
+    data: {datasets: density_dwellings_fmv_dataset},
+    options: bubble_option("Population density per square kilometre", 1, "", "Total Private Dwellings (1M=1,000,000)", 1000000, "M")
+  });
+
+  // Private dwellings occupied by usual residents, % change VS. Foreign Involvement Transactions with PTT Paid Median
+  new Chart($("#occupied_residents_foreign_median_ptt_canvas"), {
+    type: "bubble",
+    data: {datasets: occupied_residents_foreign_median_ptt_dataset},
+    options: bubble_option("Private dwellings occupied by usual residents Change", 1, "%", "Foreign Involvement Transactions", 1, "")
+  });
+
+
+  // Population Change VS. Total Private Dwellings Change with Average of FMV Foreign
+  new Chart($("#population_dwellings_fmv_foreign_canvas"), {
+    type: "bubble",
+    data: {datasets: population_dwellings_fmv_foreign_dataset},
+    options: bubble_option("Population Change", 1, "%", "Total Private Dwellings Change", 1, "%")
+  });
+
+
+  // Total private dwellings Change Minus Private dwellings occupied by usual residents Change
+  new Chart($("#total_private_dwellings_dwellings_residents_canvas"), {
+    type: "bar",
+    data: {
+      labels: total_private_dwellings_dwellings_residents_names,
+      datasets: [{
+        label: "Total - Occupied by residents",
+        data: total_private_dwellings_dwellings_residents_dataset,
+        backgroundColor: colours[0]['rgba']['opacity-0.9'],
+        hoverBackgroundColor: colours[0]['rgba']['opacity-1']
+      }]
+    }
+  });
+
+
+
+
 });
+
+// Helper functions
+
+function create_density_dwellings_fmv_dataset(dataset, name, density, dwellings, fmv, c) {
+  var dividend = 1000000000;
+  dataset.push({
+    label: name,
+    data: [{x: density, y: dwellings, r: fmv/dividend}],
+    backgroundColor: colours[c]['rgba']['opacity-0.9'],
+    hoverBackgroundColor: colours[c]['rgba']['opacity-1'],
+  });
+  return dataset;
+}
+
+
+function create_occupied_residents_foreign_median_ptt_dataset(dataset, name, residents, foreign, ptt, c) {
+  var dividend = 1000;
+  dataset.push({
+    label: name,
+    data: [{x: residents, y: foreign, r: ptt/dividend}],
+    backgroundColor: colours[c]['rgba']['opacity-0.9'],
+    hoverBackgroundColor: colours[c]['rgba']['opacity-1'],
+  });
+  return dataset;
+}
+
+
+function create_population_dwellings_fmv_foreign_dataset(dataset, name, population, dwellings, fmv_foreign, c) {
+  var dividend = 1000000;
+  dataset.push({
+    label: name,
+    data: [{x: population, y: dwellings, r: fmv_foreign/dividend}],
+    backgroundColor: colours[c]['rgba']['opacity-0.9'],
+    hoverBackgroundColor: colours[c]['rgba']['opacity-1'],
+  });
+  return dataset;
+}
+
 </script>

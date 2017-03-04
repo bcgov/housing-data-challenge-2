@@ -775,8 +775,14 @@
               "total": 6761090.9
             }
           },
+          "property transfer tax": {
+            "md_PTT": {
+              "name": "PTT Paid Median",
+              "total": 67139.35
+            }
+          },
           "foreign involvement": {
-            "no_foreign": 398,
+            "no_foreign": 2982,
             "sum_FMV_foreign": {
               "name": "FMV sum of Foreign Involvement Transactions",
               "monthly": [],
@@ -1565,8 +1571,14 @@
               "total": 3722897.5
             }
           },
+          "property transfer tax": {
+            "md_PTT": {
+              "name": "PTT Paid Median",
+              "total": 43162
+            }
+          },
           "foreign involvement": {
-            "no_foreign": 398,
+            "no_foreign": 137,
             "sum_FMV_foreign": {
               "name": "FMV sum of Foreign Involvement Transactions",
               "monthly": [],
@@ -2186,8 +2198,14 @@
               "total": 4364804.9
             }
           },
+          "property transfer tax": {
+            "md_PTT": {
+              "name": "PTT Paid Median",
+              "total": 52368.3
+            }
+          },
           "foreign involvement": {
-            "no_foreign": 398,
+            "no_foreign": 338,
             "sum_FMV_foreign": {
               "name": "FMV sum of Foreign Involvement Transactions",
               "monthly": [],
@@ -2583,8 +2601,14 @@
               "total": 2813352
             }
           },
+          "property transfer tax": {
+            "md_PTT": {
+              "name": "PTT Paid Median",
+              "total": 33070
+            }
+          },
           "foreign involvement": {
-            "no_foreign": 398,
+            "no_foreign": 192,
             "sum_FMV_foreign": {
               "name": "FMV sum of Foreign Involvement Transactions",
               "monthly": [],

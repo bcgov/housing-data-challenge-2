@@ -30,7 +30,9 @@ class ArticlesController < ApplicationController
   end
 
   def interesting_insights
+    @dev_region_transaction_data = File.read("#{Rails.root}/public/data/dev_region_transaction_data.json")
     @municipal_transaction_data = File.read("#{Rails.root}/public/data/municipal_transaction_data.json")
+    @census_population_data = File.read("#{Rails.root}/public/data/census_population_data.json")
   end
 
 end

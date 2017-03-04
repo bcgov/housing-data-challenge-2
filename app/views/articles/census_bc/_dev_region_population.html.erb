@@ -18,25 +18,6 @@
 <script>
 $(document).ready(function() {
 
-  var options_population_pie = {
-    tooltips: {
-      callbacks: {
-        label: function(tooltipItem, data) {
-          var dataset = data.datasets[tooltipItem.datasetIndex];
-          var total = dataset.data.reduce(function(previousValue, currentValue, currentIndex, array) {
-            return previousValue + currentValue;
-          });
-          var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
-          var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
-          return commaValue + " (" + precentage + "%)";
-        }
-      }
-    }
-  };
-
   // data
   var census_population_data = JSON.parse( $("#census_population_data").val() );
   var dev_region_population_data = census_population_data['canada_provinces_territories'][1]['development regions'];
