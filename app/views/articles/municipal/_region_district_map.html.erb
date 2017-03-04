@@ -35,10 +35,36 @@ $(document).ready(function() {
     this.update();
     return this._div;
   };
+
   info.update = function(props) {
-    this._div.innerHTML = '<h4>Total Market Transactions</h4>' +  (props ?
-          '<b>' + props.name + '</b><br />' + props.ptt + ' Transactions'
-          : 'Click or hover over each area');
+
+    var html = "<h4>Information</h4>";
+
+    if (props) {
+      var trans = add_comma(props.ptt, 0);
+      var pop = add_comma(props.population, 0);
+      var area = add_comma(props.land_area, 2);
+      var density = add_comma(props.density, 1);
+      var national_rank = add_comma(props.national_population_rank, 0);
+      var provincial_rank = add_comma(props.provincial_population_rank, 0);
+      var num_municipality = add_comma(props.num_municipality, 0);
+
+      html += "<div class='color-darkblue'><b>" + props.name + "</b></div>" +
+              "<ul class='map-info'>" +
+                "<li>Total Transactions: " + trans + "</li>" +
+                "<li>Population: " + pop + "</li>" +
+                "<li>Land Area (sq. km): " + area + "</li>" +
+                "<li>Population Density per sq. km: " + density + "</li>" +
+                "<li>National Population Rank: " + national_rank + "</li>" +
+                "<li>Provincial Population Rank: " + provincial_rank + "</li>" +
+                "<li>Num of Municipality: " + num_municipality + "</li>" +
+              "</ul>";
+
+    } else {
+      html += "Click or hover over each area";
+    }
+
+    this._div.innerHTML = html;
   };
   info.addTo(map);
 

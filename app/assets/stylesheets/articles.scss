@@ -29,6 +29,13 @@
   .choropleth_map {
     width: auto;
     height: 500px;
+    .map-info {
+      padding-left: 20px;
+      margin-top: 7px;
+      li {
+      margin-bottom: 3px;
+      }
+    }
   }
   .canvases {
     canvas {

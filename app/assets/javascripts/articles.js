@@ -85,9 +85,7 @@ function vertical_option(y_label, y_value, y_symbol, beginAtZero) {
       callbacks: {
         label: function(tooltipItem, data) {
           var dataset = data.datasets[tooltipItem.datasetIndex];
-          return dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
+          return add_comma(dataset.data[tooltipItem.index], 0);
         }
       }
     }
@@ -114,9 +112,7 @@ function horizontal_bar_option(x_label, x_value, x_symbol) {
     tooltips: {
       callbacks: {
         label: function(tooltipItem, data) {
-          return Number(tooltipItem.xLabel).toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
+          return add_comma(tooltipItem.xLabel, 0);
         }
       }
     }
@@ -152,9 +148,7 @@ function vertical_stacked_bar_option(y_label, y_value, y_symbol, num) {
           var total = data.datasets[num].data[tooltipItem.index];
 
           var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
+          var commaValue = add_comma(dataset.data[tooltipItem.index], 0);
           var precentage = Math.floor( ((currentValue/total) * 100) + 0.5 );
           return commaValue + " (" + precentage + "%)";
         }
@@ -175,9 +169,7 @@ function pie_option() {
             return previousValue + currentValue;
           });
           var currentValue = dataset.data[tooltipItem.index];
-          var commaValue = dataset.data[tooltipItem.index].toFixed(0).replace(/./g, function(c, i, a) {
-            return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-          });
+          var commaValue = add_comma(dataset.data[tooltipItem.index], 0);
           var precentage = Math.floor(((currentValue/total) * 100) + 0.5);
           return commaValue + " (" + precentage + "%)";
         }
@@ -244,4 +236,12 @@ function polar_area_option() {
       arc: {borderColor: "#fff"}
     }
   };
+}
+
+
+// Helper function
+function add_comma(num, precision) {
+  return Number(num).toFixed(precision).replace(/./g, function(c, i, a) {
+    return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+  });
 }
