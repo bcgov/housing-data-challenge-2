@@ -1212,7 +1212,7 @@
           "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
-            "monthly": [54,33,96,59,44,45,29],
+            "monthly": [29,30,45,48,40,42,27],
             "total": 261,
             "housing_type": [
               {
