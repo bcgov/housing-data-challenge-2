@@ -1369,7 +1369,7 @@
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
-                "monthly": [243,214,192,194,158,117,98],
+                "monthly": [93,107,96,114,91,108,67],
                 "total": 1216,
                 "residential_types": [
                   {
@@ -1443,7 +1443,7 @@
               {
                 "id": "unkn_tot",
                 "name": "Other/Unknown",
-                "monthly": [1,0,2,4,1,0,0],
+                "monthly": [1,0,2,4,0,0,0],
                 "total": 8
               }
             ]

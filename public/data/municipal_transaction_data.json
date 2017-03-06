@@ -30,7 +30,7 @@
               {
                 "id": "no_resid_trans",
                 "name": "Residential",
-                "monthly": [35, 541, 494, 387, 348, 347, 272],
+                "monthly": [635,541,494,387,348,347,272],
                 "total": 3024,
                 "residential_types": []
               },
@@ -738,7 +738,7 @@
           "transaction_type": {
             "id": "no_mkt_trans",
             "name": "Total Market Transactions",
-            "monthly": [780, 694, 775, 661, 519, 506, 411],
+            "monthly": [775,661,519,780,694,506,411],
             "total": 4346,
             "housing_type": [
               {
