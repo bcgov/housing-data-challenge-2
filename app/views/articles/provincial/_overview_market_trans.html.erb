@@ -1,38 +1,27 @@
-<input id="bc_provincial_data" value="<%= @bc_provincial_data %>" type="hidden" />
-
 <div class="row canvases">
   <div class="col-md-2"></div>
   <div class="col-md-8">
-
     <h4 class="color-grey">Total Market Transactions</h4>
     <canvas id="no_mkt_trans_canvas"></canvas>
-  
   </div>
   <div class="col-md-2"></div>
 </div>
 
 <div class="row canvases">
-  <div class="col-md-3"></div>
-  <div class="col-md-6">
-
+  <div class="col-md-3 col-xs-6"></div>
+  <div class="col-md-6 col-xs-6">
     <h4 class="color-grey">Comparison of Housing Types</h4>
     <canvas id="compare_housing_type_canvas"></canvas>
-
   </div>
-  <div class="col-md-3"></div>
+  <div class="col-md-3 col-xs-6"></div>
 </div>
 
-    
-
 <div class="row canvases">
-
   <h4 class="color-grey">Comparison of Residential Property Type</h4>
   <canvas id="compare_resid_property_type_canvas"></canvas>
 
-
   <div class="col-md-2"></div>
   <div class="col-md-8">
-
     <h4 class="color-grey">Comparison of Commercial Property Type</h4>
     <canvas id="compare_comm_property_type_canvas"></canvas>
 
@@ -44,7 +33,6 @@
 
     <h4 class="color-grey">Additional Tax Paid</h4>
     <canvas id="add_tax_paid_canvas"></canvas>
-
   </div>
   <div class="col-md-2"></div>
 </div>
@@ -52,9 +40,6 @@
 
 <script>
 $(document).ready(function() {
-
-
-
 
   var bc_provincial_data = JSON.parse( $("#bc_provincial_data").val() );
   var months = bc_provincial_data['months'];

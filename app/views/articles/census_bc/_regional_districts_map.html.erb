@@ -1,13 +1,8 @@
-<input id="census_population_data" value="<%= @census_population_data %>" type="hidden" />
-<input id="census_population_geo_data" value="<%= @census_population_geo_data %>" type="hidden" />
-
 <div id="census_population_map" class="choropleth_map"></div>
-
 
 <div class="click_region">
   <%= render "articles/census_bc/click_region" %>
 </div>
-
 
 <script>
 $(document).ready(function() {
