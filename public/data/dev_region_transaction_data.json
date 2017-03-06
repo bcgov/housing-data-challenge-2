@@ -4,6 +4,10 @@
     {
       "id": "Cariboo",
       "name": "Cariboo",
+      "description": "Located in central B.C., the Cariboo region is an area of vast landscapes and outstanding outdoor recreational opportunities. Resource-based industries such as mining and forestry play a strong role in the area’s economy. The region includes the city of Prince George, a service centre for the northern half of British Columbia. <www.welcomebc.ca>",
+      "population":156494,
+      "land_area":131285.85,
+      "num_rd":2,
       "no_mkt_trans": {
         "monthly": [638,519,487,463,422,313,253],
         "total": 3095
@@ -228,6 +232,10 @@
     {
       "id": "Kootenay",
       "name": "Kootenay",
+      "description": "Located in the southeast corner of B.C., the Kootenay region is one of Canada’s leading destinations for outdoor pursuits. Tourism is a major driver of the economy, including hiking, mountain biking, skiing, fishing and river rafting. Coal production, mining and logging are important industries in this area. <www.welcomebc.ca>",
+      "population":151403,
+      "land_area":57721.3,
+      "num_rd":3,
       "no_mkt_trans": {
         "monthly": [631,483,442,469,465,422,312],
         "total": 3224
@@ -545,6 +553,10 @@
     {
       "id": "MainlandSouthwest",
       "name": "Mainland/Southwest",
+      "description": "With 2.8 million people, this dynamic metropolitan area is B.C.’s most populous region. It is home to one of the most ethnically diverse regions in Canada. It offers economic opportunities, a mild climate, an active lifestyle and all the amenities of a vibrant urban centre. Major industry sectors include trade and financial services, transportation, education, secondary manufacturing, tourism and agriculture. <www.welcomebc.ca>",
+      "population":2832000,
+      "land_area":36303.31,
+      "num_rd":4,
       "no_mkt_trans": {
         "monthly": [11417,10973,8838,7363,6116,6314,5257],
         "total": 56278
@@ -986,6 +998,10 @@
     {
       "id": "NechakoNorthCoast",
       "name": "Nechako & North Coast",
+      "description": "Bordering the Pacific Ocean, the northern coastal region is an area of forests, mountains and rugged coastlines. It offers easy access to outdoor pursuits, a relaxed lifestyle and growing economy. In addition to commercial fishing, logging and mining, the economy has expanded at the Port of Prince Rupert, the aluminium smelter in Kitimat and preparations for liquefied natural gas projects. With a vast area and low population, Nechako’s remote wilderness is popular with outdoor enthusiasts and those who enjoy rural living. Natural resources, particularly mining and forestry, are important in the area’s economy, with oil and gas growing in importance. Many companies are actively exploring for minerals in the area. <www.welcomebc.ca>",
+      "population":94136,
+      "land_area":316264.55,
+      "num_rd":3,
       "no_mkt_trans": {
         "monthly": [272,25,196,198,133,154,115],
         "total": 1293
@@ -1303,6 +1319,10 @@
     {
       "id": "Northeast",
       "name": "Northeast",
+      "description": "Lying east of the Rocky Mountains, B.C.’s Northeast region is a remote area of mountains, foothills, forests, lakes and the fertile Peace River valley. The region’s rapidly growing economy is based on natural resources, particularly natural gas production and coal mining. Other important industries include utilities, logging, wood products manufacturing and agriculture. <www.welcomebc.ca>",
+      "population":68335,
+      "land_area":202498.62,
+      "num_rd":1,
       "no_mkt_trans": {
         "monthly": [142,113,116,127,120,134,118],
         "total": 870
@@ -1434,6 +1454,10 @@
     {
       "id": "ThompsonOkanagan",
       "name": "Thompson/Okanagan",
+      "description": "Located in the interior of B.C., the Thompson-Okanagan region is a popular tourist destination with a sunny climate, beautiful landscapes and relaxed lifestyle. Its diverse economy is based on agriculture, the service sector, logging and manufacturing. <www.welcomebc.ca>",
+      "population":546287,
+      "land_area":94197.75,
+      "num_rd":5,
       "no_mkt_trans": {
         "monthly": [2740,2399,2535,2367,1833,1757,1312],
         "total": 14943
@@ -1968,6 +1992,10 @@
     {
       "id": "VancouverIslandCoast",
       "name": "Vancouver Island/Coast",
+      "description": "The Vancouver Island/Coast region features temperate climate, unspoiled wilderness and beautiful coastlines. It includes B.C.’s capital city of Victoria, several medium-sized cities and many smaller oceanside communities. The service sector plays a major role in the region’s economy, including health care, public administration, accommodation and tourism. Logging and fishing are also important industries. <www.welcomebc.ca>",
+      "population":796081,
+      "land_area":59739.76,
+      "num_rd":8,
       "no_mkt_trans": {
         "monthly": [3647,2996,3075,2612,2180,1971,1625],
         "total": 18106

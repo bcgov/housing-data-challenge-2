@@ -5,7 +5,17 @@
       "order": 1,
       "id": "FraserValley",
       "name": "Fraser Valley",
-      "monthly_total_trans": [1528,1431,1329,1094,966,870,647],
+      "description": "A description to be added here",
+      "population":295934,
+      "land_area":13335.28,
+      "density":22.2,
+      "national_population_rank":24,
+      "provincial_population_rank": 3,
+      "num_municipality":3,
+      "no_mkt_trans": {
+        "monthly": [1528,1431,1329,1094,966,870,647],
+        "total": 7865
+      },
       "municipality": [
         {
           "order": 1,
@@ -181,7 +191,17 @@
       "order": 2,
       "id": "MetroVancouver",
       "name": "Metro Vancouver",
-      "monthly_total_trans": [9292,9040,7094,5868,4839,5120,4365],
+      "description": "A description to be added here",
+      "population":2463431,
+      "land_area":2882.68,
+      "density":854.6,
+      "national_population_rank":2,
+      "provincial_population_rank": 1,
+      "num_municipality":5,
+      "no_mkt_trans": {
+        "monthly": [9292,9040,7094,5868,4839,5120,4365],
+        "total": 45618
+      },
       "municipality": [
         {
           "order": 1,
@@ -569,7 +589,17 @@
       "order": 3,
       "id": "SquamishLillooet",
       "name": "Squamish-Lillooet",
-      "monthly_total_trans": [331,285,273,270,236,247,179],
+      "description": "A description to be added here",
+      "population":42665,
+      "land_area":16311.62,
+      "density":2.6,
+      "national_population_rank":139,
+      "provincial_population_rank": 18,
+      "num_municipality":2,
+      "no_mkt_trans": {
+        "monthly": [331,285,273,270,236,247,179],
+        "total": 1821
+      },
       "municipality": [
         {
           "order": 1,
@@ -689,7 +719,17 @@
       "order": 4,
       "id": "CentralOkanagan",
       "name": "Central Okanagan",
-      "monthly_total_trans": [1077,983,1048,931,716,680,529],
+      "description": "A description to be added here",
+      "population":194882,
+      "land_area":2904.86,
+      "density":67.1,
+      "national_population_rank":30,
+      "provincial_population_rank": 4,
+      "num_municipality":2,
+      "no_mkt_trans": {
+        "monthly": [1077,983,1048,931,716,680,529],
+        "total": 5964
+      },
       "municipality": [
         {
           "order": 1,
@@ -809,7 +849,17 @@
       "order": 5,
       "id": "Capital",
       "name": "Capital",
-      "monthly_total_trans": [1595,1308,1317,1097,907,879,790],
+      "description": "A description to be added here",
+      "population":383360,
+      "land_area":2340.49,
+      "density":163.8,
+      "national_population_rank":22,
+      "provincial_population_rank": 2,
+      "num_municipality":2,
+      "no_mkt_trans": {
+        "monthly": [1595,1308,1317,1097,907,879,790],
+        "total": 7893
+      },
       "municipality": [
         {
           "order": 1,
@@ -929,7 +979,17 @@
       "order": 6,
       "id": "Nanaimo",
       "name": "Nanaimo",
-      "monthly_total_trans": [918,683,758,635,551,461,320],
+      "description": "A description to be added here",
+      "population":155698,
+      "land_area":2038.04,
+      "density":76.4,
+      "national_population_rank":38,
+      "provincial_population_rank": 5,
+      "num_municipality":2,
+      "no_mkt_trans": {
+        "monthly": [918,683,758,635,551,461,320],
+        "total": 4326
+      },
       "municipality": [
         {
           "order": 1,

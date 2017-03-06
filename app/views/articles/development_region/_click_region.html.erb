@@ -1,22 +1,45 @@
-<input id="dev_region_transaction_data" value="<%= @dev_region_transaction_data %>" type="hidden" />
-
 <% @dev_region_transaction_json = JSON.parse(@dev_region_transaction_data) %>
-
 
 <% @dev_region_transaction_json['development_region'].each do |data| %>
 
   <div id="<%= data['id'] %>Modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
+
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <h3 class="modal-title color-grey" id="myModalLabel">Details of <%= data['name'] %></h3>
+          <h3 class="modal-title color-white" id="myModalLabel">Welcome to <%= data['name'] %></h3>
         </div>
+        
+        <% image_id = "/assets/images/bg/" + data['id'] + ".ashx" %>
+        <% if image_exist(image_id) == false %>
+          <% image_id = "/assets/images/bg/Cariboo.ashx" %>
+        <% end %>
+
+        <!-- summary -->
+        <div class="hori-bar-top"></div>
+        <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+          <div class="row">
+            <div class="col-md-7">
+              <%= data['description'] %>
+            </div>
+            <div class="col-md-5">
+              <ul>
+                <li>Total Market Transactions: <b><%= data['no_mkt_trans']['total'] %></b></li>
+                <li>Population: <b><%= data['population'] %></b></li>
+                <li>Land Area (sq. km): <b><%= data['land_area'] %></b></li>
+                <li>Number of Regional District: <b><%= data['num_rd'] %></b></li>
+              </ul> 
+            </div>
+          </div>
+        </div>
+
         <div class="modal-body">
 
+          <!-- all charts -->
           <div id="<%= data['id'] %>Canvas"></div>
-
         </div>
+
       </div>
     </div>
   </div>

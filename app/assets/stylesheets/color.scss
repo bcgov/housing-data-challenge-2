@@ -1,29 +1,36 @@
 $white: #ffffff;
+$danger: #d2492a;
 $darkblue: #0061aa;
+$lightgreen: #12ad2b;
+$darkgreen: #006852;
 $darkgrey: #333;
+$grey: #555;
 
 
+.color-white {
+  color: $white;
+}
 
 .color-danger {
-  color: #d2492a;
+  color: $danger;
 }
 
 .color-darkblue {
-  color: #0061aa;
+  color: $darkblue;
 }
 
 .color-lightgreen {
-  color: #12ad2b;
+  color: $lightgreen;
 }
 
 .color-darkgreen {
-  color: #006852;
+  color: $darkgreen;
 }
 
 .color-darkgrey {
-  color: #333;
+  color: $darkgrey;
 }
 
 .color-grey {
-  color: #555;
+  color: $grey;
 }

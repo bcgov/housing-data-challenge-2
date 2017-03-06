@@ -1,7 +1,4 @@
-<input id="census_population_data" value="<%= @census_population_data %>" type="hidden" />
-
 <% @census_population_data = JSON.parse(@census_population_data) %>
-
 
 <% @census_population_data['canada_provinces_territories'][1]['development regions'].each do |regions| %>
   <% regions['regional district'].each do |data| %>
@@ -9,15 +6,42 @@
     <div id="<%= data['id'] %>Modal" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <h3 class="modal-title color-grey" id="myModalLabel">Details of <%= data['name'] %></h3>
+            <h3 class="modal-title color-white" id="myModalLabel">Welcome to <%= data['name'] %></h3>
           </div>
+
+          <% image_id = "/assets/images/bg/" + data['id'] + ".ashx" %>
+          <% if image_exist(image_id) == false %>
+            <% image_id = "/assets/images/bg/Cariboo.ashx" %>
+          <% end %>
+
+          <!-- summary -->
+          <div class="hori-bar-top"></div>
+          <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+            <div class="row">
+              <div class="col-md-6">
+                <%= data['description'] %>
+              </div>
+              <div class="col-md-6">
+                <ul>
+                  <li>Population Change (%): <b><%= data['Population, % change'] %></b></li>
+                  <li>Population 2016: <b><%= data['Population, 2016'] %></b></li>
+                  <li>Land Area (sq. km): <b><%= data['Population density per square kilometre, 2016'] %></b></li>
+                  <li>National Population Rank 2016: <b><%= data['National population rank, 2016'] %></b></li>
+                  <li>Provincial/Territorial Population Rank 2016: <b><%= data['Provincial/territorial population rank, 2016'] %></b></li>
+                </ul> 
+              </div>
+            </div>
+          </div>
+
           <div class="modal-body">
 
+            <!-- all charts -->
             <div id="<%= data['id'] %>Canvas"></div>
-
           </div>
+          
         </div>
       </div>
     </div>
