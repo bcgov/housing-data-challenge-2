@@ -24,5 +24,13 @@ Testing Link: [Testing Link]
 - To run: docker run exponentian/data-visualization
 
 
+### Structure:
+- View pages: ./app/views/articles
+- Controllers: ./app/controllers/articles_controller
+- JS and CSS: ./app/assets/javascripts/articles.js and ./app/assets/stylesheets/
+- Public data: ./public/data
+
+
+
 [Testing Link]: <https://data-visualization-hoseokoh.herokuapp.com/>
 [Docker Hub]: <https://hub.docker.com/>
