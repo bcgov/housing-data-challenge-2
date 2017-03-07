@@ -18,7 +18,11 @@ Testing Link: [Testing Link]
 3. Type: rails server
 4. Open your browser at http://localhost:3000/
 
-### Note:
-- It may be slow to open the "Development Region Monthly for Property Transfer Tax" on the list because many visualizations are working
+### Docker Image:
+- I build a Dokcer image and container through a Openshift Platform, and push it to [Docker Hub].
+- To search in Docker Hub: exponentian/data-visualization
+- To run: docker run exponentian/data-visualization
+
 
 [Testing Link]: <https://data-visualization-hoseokoh.herokuapp.com/>
+[Docker Hub]: <https://hub.docker.com/>
