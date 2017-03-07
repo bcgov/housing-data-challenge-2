@@ -1,6 +1,44 @@
 class ArticlesController < ApplicationController
 
   def index
+    @articles = [
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "Provincial Monthly for Property Transfer Tax",
+        "path": articles_provincial_path
+      },
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "Development Region Monthly for Property Transfer Tax",
+        "path": articles_development_region_path
+      },
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "Municipal Monthly for Property Transfer Tax",
+        "path": articles_municipal_path
+      },
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "Census of B.C. 2016",
+        "path": articles_census_bc_path
+      },
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "National Household Survey 2011",
+        "path": articles_national_household_survey_path
+      },
+      {
+        "author": "John Doe",
+        "date": "2017-02-15",
+        "title": "Interesting Insights",
+        "path": articles_interesting_insights_path
+      }
+    ]
   end
   
   def provincial

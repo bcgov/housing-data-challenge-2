@@ -1,51 +1,38 @@
 <%= render "header"%>
 
-<div class="container articles-index">
+<div class="container">
 
   <h3 class="color-darkgrey">List of Articles</h3>
-  <table class="table table-hover table-bordered table-striped">
-    <tr>
-      <th>#</th>
-      <th>Title</th>
-      <th>Author</th>
-      <th>Date</th>
-    </tr>
-    <tr>
-      <td>1</td>
-      <td><%= link_to "Provincial Monthly for Property Transfer Tax", articles_provincial_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td><%= link_to "Development Region Monthly for Property Transfer Tax", articles_development_region_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr>
-    <tr>
-      <td>3</td>
-      <td><%= link_to "Municipal Monthly for Property Transfer Tax", articles_municipal_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr>
-    <tr>
-      <td>4</td>
-      <td><%= link_to "Census of B.C. 2016", articles_census_bc_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr>
-     <tr>
-      <td>5</td>
-      <td><%= link_to "National Household Survey 2011", articles_national_household_survey_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr>
-    <tr>
-      <td>6</td>
-      <td><%= link_to "Interesting Insights", articles_interesting_insights_path %></td>
-      <td>John Doe</td>
-      <td>2017-02-15</td>
-    </tr> 
-  </table>
+
+  <div class="row">
+
+    <% @articles.each_with_index do |article, i| %>
+
+      <div class="col-md-4">
+        <div class="item">
+          <div class="item-header" style="background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/assets/images/article.jpg') no-repeat center center; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+            <span class="badge article-index"><%= i+1 %></span>
+            <div class="symbol">
+              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
+              <div class="hori-bar"></div>
+            </div>
+          </div>
+          <div class="item-body">
+            <%= article[:title] %>
+          </div>
+          <div class="item-footer">
+            <div>
+              <%= article[:date] %> | <a href="#"><%= article[:author] %></a>
+              <span class="read-more"><%= link_to "Click to read", article[:path], :class=>"btn btn-xs btn-success" %></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <% end %>
+
+  </div>
 
 </div>
