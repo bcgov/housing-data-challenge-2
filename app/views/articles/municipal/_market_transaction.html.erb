@@ -1,28 +1,59 @@
-<div class="row canvases">
+<div class="canvases" id="total_market_trans" style="display:none">
   <h4 class="color-grey">Total Market Transactions Monthly</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
   <canvas id="no_mkt_trans_canvas"></canvas>
+</div>
 
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Comparison of Housing Types between Vancouver and Chilliwack</h4>
-    <canvas id="compare_van_chilliwack_canvas"></canvas>    
-  </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Comparison of Housing Types between Vancouver and Surrey</h4>
-    <canvas id="compare_van_surrey_canvas"></canvas>
+<div class="canvases" id="sum_fmv" style="display:none">
+  <h4 class="color-grey">Sum of Fair Market Value (FMV) in major cities</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="sum_fmv_canvas"></canvas>
+</div>
+
+<div class="canvases" id="sum_ptt" style="display:none">
+  <h4 class="color-grey">Sum of Property Transfer Tax (PTT) paid in major cities</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="sum_ptt_paid_canvas"></canvas>
+</div>
+
+
+<div class="canvases" id="housing_types" style="display:none">
+  <h4 class="color-grey">Comparison of Housing Types</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">Vancouver and Chilliwack</h4>
+      <canvas id="compare_van_chilliwack_canvas"></canvas>    
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">Vancouver and Surrey</h4>
+      <canvas id="compare_van_surrey_canvas"></canvas>
+    </div>
   </div>
 </div>
 
-<div class="canvases">
-  <h4 class="color-grey">Sum of Fair Market Value (FMV) in major cities</h4>
-  <canvas id="sum_fmv_canvas"></canvas>
 
-  <h4 class="color-grey">Total amount of Property Transfer Tax (PTT) paid in major cities</h4>
-  <canvas id="sum_ptt_paid_canvas"></canvas>
-
-  <h4 class="color-grey">Sum FMV VS. Population with PTT in major cities</h4>
-  <p class="color-grey">Note: Diameter = Sum of Property Transfer Tax (PTT) paid / 10,000,000</p>
-  <p class="color-grey">Population Data Source: BC Stats</p>
+<div class="canvases" id="fmv_ptt_population" style="display:none">
+  <h4 class="color-grey">Sum of Fair Market Value VS. Population with Sum of Property Transfer Tax</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
   <canvas id="fmv_population_ptt_canvas"></canvas>
+  <p class="color-grey">Population Data Source: BC Stats</p>
+  <p class="color-grey">Note: Diameter = Sum of Property Transfer Tax (PTT) paid / 10,000,000</p>
 </div>
 
 
@@ -124,7 +155,8 @@ $(document).ready(function() {
     data: {
       labels: months,
       datasets: municipal_dataset
-    }
+    },
+    options: vertical_option("Transactions (1K=1,000)", 1000, "K")
   });
 
 

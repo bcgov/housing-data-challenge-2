@@ -1,37 +1,59 @@
-<div class="row canvases">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h4 class="color-grey">Foreign Involvement Transactions</h4>
-    <canvas id="no_foreign_canvas"></canvas>
+<div class="canvases" id="foreign_transactions" style="display:none">
+  <h4 class="color-grey">Total Market Transactions for Foreign Involvement</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="no_foreign_canvas"></canvas>
 
-    <h4 class="color-grey">FMV sum of Foreign Involvement Transactions</h4>
-    <canvas id="sum_FMV_foreign_canvas"></canvas>
+  <h4 class="color-grey">Details of Foreign Involvement Transactions</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">
+      <canvas id="no_foreign_compare_pie_canvas"></canvas>
+    </div>
+    <div class="col-md-8 col-xs-12">
+      <canvas id="no_foreign_compare_stacked_canvas"></canvas>
+    </div>
   </div>
-  <div class="col-md-2"></div>
 </div>
 
-<div class="row canvases">
+<div class="canvases" id="foreign_sum_fmv" style="display:none">
+  <h4 class="color-grey">Sum of Fair Market Value for Foreign Involvement</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="sum_FMV_foreign_canvas"></canvas>
+</div>
+
+<div class="canvases" id="compare_citizen_foreign" style="display:none">
   <h4 class="color-grey">Comparsion of Citizen/PR and Foreign Involvement</h4>
-  <div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">
-    <canvas id="no_mkt_trans_no_foreign_compare_pie_canvas"></canvas>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">
+      <canvas id="no_mkt_trans_no_foreign_compare_pie_canvas"></canvas>
+    </div>
+    <div class="col-md-8 col-xs-12">
+      <canvas id="no_mkt_trans_no_foreign_compare_stacked_canvas"></canvas>
+    </div>
   </div>
-  <div class="col-md-8 col-xs-12">
-    <canvas id="no_mkt_trans_no_foreign_compare_stacked_canvas"></canvas>
-  </div>
-  
 </div>
 
-<div class="row canvases">
-  <h4 class="color-grey">Overview of Foreign Involvement Transactions</h4>
-  <div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">
-    <canvas id="no_foreign_compare_pie_canvas"></canvas>
-  </div>
-  <div class="col-md-8 col-xs-12">
-    <canvas id="no_foreign_compare_stacked_canvas"></canvas>
-  </div>
-  
+<div class="canvases" id="fmv_ptt_add_foreign_fmv" style="display:none">
+  <h4 class="color-grey">Overview of Sum of Fair Market Value, Sum of Property Transfer Tax, Sum of Additional Proferty Transfer Tax, and Sum of Foreign Fair Market Value</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="fmv_ptt_add_foreign_canvas"></canvas>
 </div>
-
 
 
 <script>
@@ -90,6 +112,8 @@ $(document).ready(function() {
     no_mkt_trans_minus_no_foreign.push( Math.abs(value) );
   }
 
+
+  // Comparsion of Citizen/PR and Foreign Involvement
   new Chart($("#no_mkt_trans_no_foreign_compare_pie_canvas"), {
     type: "doughnut",
     data: {
@@ -105,6 +129,8 @@ $(document).ready(function() {
     options: pie_option()
   });
 
+
+  // Overview of Foreign Involvement Transactions
   new Chart($("#no_mkt_trans_no_foreign_compare_stacked_canvas"), {
     type: "bar",
     data: {
@@ -138,6 +164,36 @@ $(document).ready(function() {
     },
     options: vertical_stacked_bar_option("Transactions (1K=1,000)", 1000, "K", 2)
   });
+
+
+
+  // Sum of FMV, Sum of PTT, Additional Tax, Sum of Foreign FMV
+  var fmv_ptt_add_foreign_ids = ["sum_FMV", "sum_PTT_paid", "sum_FMV_foreign", "add_tax_paid"];
+  var fmv_ptt_add_foreign_dataset = [];
+
+  for (var i = 0; i < fmv_ptt_add_foreign_ids.length; i++) {
+    var id = fmv_ptt_add_foreign_ids[i];
+    fmv_ptt_add_foreign_dataset.push({
+      label: bc_provincial_data[id]['name'],
+      data: bc_provincial_data[id]['monthly'],
+      fill: false,
+      backgroundColor: colours[i]['rgba']['opacity-0.9'],
+      borderColor: colours[i]['rgba']['opacity-1'],
+      borderWidth: 4,
+      borderJoinStyle: "round",
+      lineTension: 0.1
+    });
+  }
+
+  new Chart($("#fmv_ptt_add_foreign_canvas"), {
+    type: "line",
+    data: {
+      labels: months,
+      datasets: fmv_ptt_add_foreign_dataset
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });
+
 
 
   // Comparsion of Foreign Involvement Transactions

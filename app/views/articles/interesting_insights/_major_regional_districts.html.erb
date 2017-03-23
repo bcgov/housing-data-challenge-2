@@ -1,31 +1,54 @@
-<div class="canvases">
-  <h4 class="color-grey">Population Density VS. Total Private Dwellings with Sum of FMV</h4>
-  <p class="color-grey">Note: Diameter = Sum of FMV / 1,000,000,000</p>
+<div class="canvases" id="pop_density_dwellings_fmv" style="display:none">
+  <h4 class="color-grey">Population Density VS. Total Private Dwellings with Sum of Fair Market Value</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p> 
   <canvas id="density_dwellings_fmv_canvas"></canvas>
+  <p class="color-grey">Note: Diameter = Sum of Fair Market Value / 1,000,000,000</p>
 </div>
 
 
-<div class="canvases">
-  <h4 class="color-grey">Private dwellings occupied by usual residents, % change VS. Foreign Involvement Transactions with PTT Paid Median</h4>
-  <p class="color-grey">Note: Diameter = PTT Paid Median / 1,000</p>
+<div class="canvases" id="change_dwellings_foreign" style="display:none">
+  <h4 class="color-grey">Change of Private dwellings occupied by usual residents VS. Foreign Involvement Transactions with Median of Property Transfer Tax</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p> 
   <canvas id="occupied_residents_foreign_median_ptt_canvas"></canvas>
+  <p class="color-grey">Note: Diameter = Median of Property Transfer Tax / 1,000</p>
 </div>
 
 
-<div class="canvases">
-  <h4 class="color-grey">Population Change VS. Total Private Dwellings Change with Average of FMV Foreign</h4>
-  <p class="color-grey">Note: Diameter = Average of FMV Foreign / 1,000,000</p>
+<div class="canvases" id="pop_change_change_dwellings_foreign" style="display:none">
+  <h4 class="color-grey">Population Change VS. Change of Total Private Dwellings with Average of Foreign Fair Market Value</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p> 
   <canvas id="population_dwellings_fmv_foreign_canvas"></canvas>
+  <p class="color-grey">Note: Diameter = Average of Foreign  / 1,000,000</p>
 </div>
 
-<div class="row canvases">
-  <div class="col-md-1 col-xs-4"></div>
-  <div class="col-md-10 col-xs-10">
-    <h4 class="color-grey">Total private dwellings Change Minus Private dwellings occupied by usual residents Change</h4>
-    <canvas id="total_private_dwellings_dwellings_residents_canvas"></canvas>
+
+<div class="canvases" id="dwellings_minus_change_dwellings" style="display:none">
+  <h4 class="color-grey">Total private dwellings Change MINUS Change of Private dwellings occupied by usual residents</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p> 
+  <div class="row">
+    <div class="col-md-1 col-xs-4"></div>
+    <div class="col-md-10 col-xs-10">
+      <h4 class="color-grey"></h4>
+      <canvas id="total_private_dwellings_dwellings_residents_canvas"></canvas>
+    </div>
+    <div class="col-md-1 col-xs-4"></div>
   </div>
-  <div class="col-md-1 col-xs-4"></div>
 </div>
+
+
+
 
 <script>
 $(document).ready(function() {

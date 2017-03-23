@@ -1,5 +1,9 @@
 {
   "months": ["June 01","July 01","Aug 01","Sep 01","Oct 01","Nov 01","Dec 01"],
+  "no_mkt_trans": {
+    "monthly": [19734,17951,16304,14158,11688,11478,6336],
+    "total": 100649
+  },
   "development_region": [
     {
       "id": "Cariboo",

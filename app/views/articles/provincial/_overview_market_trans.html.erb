@@ -1,40 +1,59 @@
-<div class="row canvases">
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h4 class="color-grey">Total Market Transactions</h4>
-    <canvas id="no_mkt_trans_canvas"></canvas>
-  </div>
-  <div class="col-md-2"></div>
+<div class="canvases" id="total_market_trans" style="display:none">
+  <h4 class="color-grey">Total Market Transactions</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>  
+  <canvas id="no_mkt_trans_canvas"></canvas>
 </div>
 
-<div class="row canvases">
-  <div class="col-md-3 col-xs-2"></div>
-  <div class="col-md-6 col-xs-8">
-    <h4 class="color-grey">Comparison of Housing Types</h4>
-    <canvas id="compare_housing_type_canvas"></canvas>
-  </div>
-  <div class="col-md-3 col-xs-2"></div>
+<div class="canvases" id="sum_fmv" style="display:none">
+  <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="sum_FMV_canvas"></canvas>
 </div>
 
-<div class="row canvases">
+<div class="canvases" id="sum_ptt" style="display:none">
+  <h4 class="color-grey">Sum of Property Transfer Tax (PTT)</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>  
+  <canvas id="sum_PTT_paid_canvas"></canvas>
+</div>
+
+<div class="canvases" id="sum_additional_ptt" style="display:none">
+  <h4 class="color-grey">Sum of Additional Tax Paid</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>  
+  <canvas id="add_tax_paid_canvas"></canvas>
+</div>
+
+
+<div class="canvases" id="housing_types" style="display:none">
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-3 col-xs-2"></div>
+    <div class="col-md-6 col-xs-8">
+      <h4 class="color-grey">Comparison of Housing Types</h4>
+      <canvas id="compare_housing_type_canvas"></canvas>
+    </div>
+    <div class="col-md-3 col-xs-2"></div>
+  </div>
+
   <h4 class="color-grey">Comparison of Residential Property Type</h4>
   <canvas id="compare_resid_property_type_canvas"></canvas>
 
-  <div class="col-md-2"></div>
-  <div class="col-md-8">
-    <h4 class="color-grey">Comparison of Commercial Property Type</h4>
-    <canvas id="compare_comm_property_type_canvas"></canvas>
-
-    <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
-    <canvas id="sum_FMV_canvas"></canvas>   
-
-    <h4 class="color-grey">Total Amount of Property Transfer Tax (PTT)</h4>
-    <canvas id="sum_PTT_paid_canvas"></canvas>
-
-    <h4 class="color-grey">Additional Tax Paid</h4>
-    <canvas id="add_tax_paid_canvas"></canvas>
-  </div>
-  <div class="col-md-2"></div>
+  <h4 class="color-grey">Comparison of Commercial Property Type</h4>
+  <canvas id="compare_comm_property_type_canvas"></canvas>
 </div>
 
 

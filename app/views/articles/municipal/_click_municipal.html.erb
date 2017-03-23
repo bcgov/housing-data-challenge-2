@@ -18,7 +18,7 @@
 
         <!-- summary -->
         <div class="hori-bar-top"></div>
-        <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+        <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
           <div class="row">
             <div class="col-md-6">
               <%= data['description'] %>
@@ -52,6 +52,8 @@
 <script>
 $(document).ready(function() {
 
+  var start = "#municipal_charts ";
+
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
   var months = municipal_transaction_data['months'];
   var regional_district = municipal_transaction_data['regional_district'];
@@ -61,47 +63,76 @@ $(document).ready(function() {
     var data = regional_district[i];
     var id = data['id'];
     var name = data['name'];
+    var region_district_municipality_json = data['municipality'];
 
     // make charts to be added to a html page
-    html += '<div class="article">' +
-              '<div class="article-header">' +
-                '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
-              '</div>' +
-              '<div class="article-body">' +
-                '<div class="row">' +
-                  '<div class="col-md-2"></div>' +
-                  '<div class="col-md-8">' +
-                    '<canvas id="' + id + '_regional_district_canvas"></canvas>' +
-                  '</div>' +
-                '<div class="col-md-2"></div>' +
-              '</div>' +
-              '</div>' +
+    html += '<select id="municipal_click_region_' + id + '_select">' +
+              '<option value="total_market_trans_' + id + '">Total Market Transactions</option>' +
+              '<option value="compare_municipalities_' + id + '">Comparison of Municipalities</option>';
+
+    for (var t = 0; t < region_district_municipality_json.length; t++) {
+      var region_district_municipality_id = region_district_municipality_json[t]['id'];
+      var region_district_municipality_name = region_district_municipality_json[t]['name'];
+      html += '<option value="' + id + '_' + region_district_municipality_id + '">' + region_district_municipality_name + '</option>';
+    }
+
+    html += '</select>' +
+            '<div class="each-click-canvases ' + id + '" id="total_market_trans_' + id + '">' +
+              '<h3 class="color-darkblue">Total Market Transactions</h3>' +
+              '<p class="description">' +
+                '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                'Please add a DESCRIPTION here' +
+              '</p>' +
+              '<canvas id="' + id + '_regional_district_canvas"></canvas>' +
             '</div>' +
-            '<div class="article">' +
-              '<div class="article-header">' +
-                '<h3 class="color-darkblue">Comparison of Municipalities</h3>' +
-              '</div>' +
-              '<div class="article-body">' +
-                '<div class="row">' +
-                  '<div class="col-md-8 col-xs-12">' +
-                    '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
-                    '<canvas id="' + id + '_regional_district_municipal_canvas"></canvas>' +
-                  '</div>' +
-                  '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
-                    '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
-                    '<canvas id="' + id + '_regional_district_compare_canvas"></canvas>' +
-                  '</div>' +
+            '<div class="each-click-canvases ' + id + '" id="compare_municipalities_' + id + '" style="display:none">' +
+              '<h3 class="color-darkblue">Comparison of Municipalities</h3>' +
+              '<p class="description">' +
+                '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                'Please add a DESCRIPTION here' +
+              '</p>' +
+              '<div class="row">' +
+                '<div class="col-md-8 col-xs-12">' +
+                  '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
+                  '<canvas id="' + id + '_regional_district_municipal_canvas"></canvas>' +
+                '</div>' +
+                '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
+                  '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
+                  '<canvas id="' + id + '_regional_district_compare_canvas"></canvas>' +
                 '</div>' +
               '</div>' +
             '</div>';
 
+    // click event
+    $(start + ".modal-body").on("change", "#municipal_click_region_" + id + "_select", function(e) {
+      var id = e.target.id.split("_");
+      var clicked_id = id[3];
+      var clicked_region = $(this).val();
 
-    var region_district_municipality_json = data['municipality'];
+      if (clicked_region == ("total_market_trans_" + clicked_id)) {
+        $(start + ".modal-body #compare_municipalities_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #total_market_trans_" + clicked_id).show();
+
+      } else if (clicked_region == ("compare_municipalities_" + clicked_id)) {
+        $(start + ".modal-body #total_market_trans_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #compare_municipalities_" + clicked_id).show();
+
+      } else {
+        $(start + ".modal-body #total_market_trans_" + clicked_id).hide();
+        $(start + ".modal-body #compare_municipalities_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #" + clicked_region).show();
+      }
+
+    });
+
 
     for (var k = 0; k < region_district_municipality_json.length; k++) {
       var region_district_municipality_id = region_district_municipality_json[k]['id'];
       var region_district_municipality_name = region_district_municipality_json[k]['name'];
-      html += '<div class="article">' +
+      html += '<div class="each-click-canvases ' + id + '" id="' + id + '_' + region_district_municipality_id + '" style="display:none">' +
                 '<div class="article-header">' +
                   '<h3 class="color-darkblue">Overview of ' + region_district_municipality_name + ' Municipality</h3>' +
                 '</div>' +

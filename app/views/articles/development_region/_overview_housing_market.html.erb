@@ -1,13 +1,48 @@
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Housing Types between Mainland/Southwest and Northeast</h4>
-    <canvas id="housing_type_mainland_northeast_canvas"></canvas>    
-  </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Housing Types between Mainland/Southwest and Vancouver Island/Coast</h4>
-    <canvas id="housing_type_mainland_van_island_canvas"></canvas>  
+<div class="canvases" id="total_market_trans" style="display:none">
+  <h4 class="color-grey">Total Market Transactions</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="total_market_trans_canvas"></canvas>
+</div>
+
+<div class="canvases" id="sum_fmv" style="display:none">
+  <h4 class="color-grey">Sum of Fair Market Value (FMV)</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="fmv_canvas"></canvas>
+</div>
+
+<div class="canvases" id="sum_ptt" style="display:none">
+  <h4 class="color-grey">Sum of Property Transfer Tax (PTT)</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="ptt_canvas"></canvas>
+</div>
+
+<div class="canvases" id="housing_types" style="display:none">
+  <h4 class="color-grey">Comparison of Housing Types</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Mainland/Southwest and Northeast</h4>
+      <canvas id="housing_type_mainland_northeast_canvas"></canvas>    
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Mainland/Southwest and Vancouver Island/Coast</h4>
+      <canvas id="housing_type_mainland_van_island_canvas"></canvas>  
+    </div>
   </div>
 </div>
+
 
 <script>
 $(document).ready(function() {
@@ -17,14 +52,23 @@ $(document).ready(function() {
   var months = dev_region_transaction_data['months'];
   var dev_region = dev_region_transaction_data['development_region'];
 
+
+  var dev_region_name = [];
+  var dev_region_bg = [];
+  var fmv_data = [];
+  var ptt_data = [];
+
   var housing_type_labels = ["Residential", "Commercial", "Recreational", "Farm", "Other/Unknown"];
-
-
   var mainland_housing_data = [];
   var northeast_housing_data = [];
   var van_island_housing_data = []
 
   for (var i = 0; i < dev_region.length; i++) {
+    dev_region_name.push(dev_region[i]['name']);
+    dev_region_bg.push(colours[0]['rgba']['opacity-0.9']);
+    fmv_data.push(dev_region[i]['fair market value']['sum_FMV']);
+    ptt_data.push(dev_region[i]['property transfer tax']['sum_PTT_paid']);
+
     var name = dev_region[i]['name'];
     var housing_type = dev_region[i]['housing type'];
     if (name == "Mainland/Southwest") {
@@ -50,8 +94,58 @@ $(document).ready(function() {
       van_island_housing_data.push(housing_type['no_farm_tot']['total']);
       van_island_housing_data.push(housing_type['no_unkn_tot']['total']);
     }
-    
   }
+
+
+    // Trend Line for Total Market Transactions
+    new Chart($("#total_market_trans_canvas"), {
+      type: 'line',
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "Total Market Transactions",
+            data: dev_region_transaction_data['no_mkt_trans']['monthly'],
+            fill: false,
+            backgroundColor: colours[colours.length-1]['rgba']['opacity-0.9'],
+            borderColor: colours[colours.length-1]['rgba']['opacity-1'],
+            borderWidth: 5,
+            borderJoinStyle: 'round',
+            lineTension: 0.1
+          }
+        ]
+      },
+      options: vertical_option("Transactions (1K=1,000)", 1000, "K")
+    });
+
+
+  // Sum of Fair Market Value (FMV)
+  new Chart($("#fmv_canvas"), {
+    type: "bar",
+    data: {
+      labels: dev_region_name,
+      datasets: [{
+        label: "Sum of Fair Market Value",
+        data: fmv_data,
+        backgroundColor: dev_region_bg
+      }]
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });  
+
+  // Sum of Property Transfer Tax (PTT)
+  new Chart($("#ptt_canvas"), {
+    type: "bar",
+    data: {
+      labels: dev_region_name,
+      datasets: [{
+        label: "Sum of Property Transfer Tax",
+        data: ptt_data,
+        backgroundColor: dev_region_bg
+      }]
+    },
+    options: vertical_option("Dollars (1B=1,000,000,000)", 1000000000, "B")
+  });  
 
 
   // Housing Types between Mainland/Southwest and Northeast
@@ -116,8 +210,6 @@ $(document).ready(function() {
     },
     options: radar_option()
   });
-
-
 
 });
 </script>

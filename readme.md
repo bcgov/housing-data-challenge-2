@@ -13,15 +13,18 @@ Testing Link: [Testing Link]
 
 ### How to run:
 1. Clone or Download this
-1. Go go the folder
-2. Type: bundle install
-3. Type: rails server
-4. Open your browser at http://localhost:3000/
+2. Go go the folder
+3. Open your terminal
+4. Type: bundle install
+5. Type: rails server
+6. Open your browser at http://localhost:3000/
 
-### Docker Image:
-- I build a Dokcer image and container through a Openshift Platform, and push it to [Docker Hub].
+### How to use a Docker Image:
+- Built a Dokcer image and container through a Openshift Platform, and pushed it to [Docker Hub].
 - To search in Docker Hub: exponentian/data-visualization
-- To run: docker run exponentian/data-visualization
+1. Open your terminal
+2. Type to run: docker run -p 8080:8080 exponentian/data-visualization
+3. Open your browser at http://localhost:8080/
 
 
 ### Structure:

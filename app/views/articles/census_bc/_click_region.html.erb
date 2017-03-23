@@ -19,7 +19,7 @@
 
           <!-- summary -->
           <div class="hori-bar-top"></div>
-          <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+          <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
             <div class="row">
               <div class="col-md-6">
                 <%= data['description'] %>
@@ -52,6 +52,8 @@
 <script>
 $(document).ready(function() {
 
+  var start = "#census_bc_charts ";
+
   var census_population_data = JSON.parse( $("#census_population_data").val() );
 
   var years = census_population_data['years'];
@@ -70,54 +72,121 @@ $(document).ready(function() {
       var id = data['id'];
       var name = data['name'];
 
-      html += '<div class="row canvases each-modal">' +
-                '<div class="col-md-6">' +
-                  '<h4 class="color-grey">Population of ' + name + '</h4>' +
-                  '<canvas id="' + id + '_population_canvas"></canvas>' +
-                '</div>' +
-                '<div class="col-md-6">' +
-                  '<h4 class="color-grey">Total Private Dwellings of ' + name + '</h4>' +
-                  '<canvas id="' + id + '_total_private_dwellings_canvas"></canvas>' +
-                '</div>' +
-              '</div>' +
-              '<div class="row canvases each-modal">' +
-                '<div class="col-md-8 col-xs-12">' +
-                  '<h4 class="color-grey">Private dwellings occupied by usual residents of ' + name + '</h4>' +
-                  '<canvas id="' + id + '_private_dwellings_usual_residents_canvas"></canvas>' +
-                '</div>' +
-                '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
-                  '<h4 class="color-grey">Percentage of Private Dwellings between usual residents and others of ' + name + ' in 2016</h4>' +
-                  '<canvas id="' + id + '_percentage_private_dwellings_canvas"></canvas>' +
-                '</div>' +
-              '</div>' +
-              '<div class="row canvases each-modal">' +
-                '<div class="col-md-3 col-xs-2"></div>' +
-                '<div class="col-md-6 col-xs-8">' +
-                  '<h4 class="color-grey">Population Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
-                  '<canvas id="canada_bc_' + id + '_population_change_canvas"></canvas>' +
-                '</div>' +
-                '<div class="col-md-3 col-xs-2"></div>' +
-              '</div>' +
-              '<div class="row canvases each-modal">' +
-                '<div class="col-md-6 col-xs-8 col-md-offset-0 col-xs-offset-2">' +
-                  '<h4 class="color-grey">Total private dwellings Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
-                  '<canvas id="canada_bc_' + id + '_total_private_dwellings_change_canvas"></canvas>' +
-                '</div>' +
-                '<div class="col-md-6 col-xs-8 col-md-offset-0 col-xs-offset-2">' +
-                  '<h4 class="color-grey">Private dwellings occupied by usual residents Change (%) in Canada, B.C. and ' + name + ' between 2011 and 2016</h4>' +
-                  '<canvas id="canada_bc_' + id + '_dwellings_occupied_residents_change_canvas"></canvas>' +
+      html += '<select id="population_regional_district_click_region_' + id + '_select">' +
+                '<option value="population_population_change_' + id + '">Population and Population Change</option>' +
+                '<option value="dwellings_dewellings_change_' + id + '">Total Private Dwellings and Change of Total Private Dwellings</option>' +
+                '<option value="occupied_dwellings_dewellings_change_' + id + '">Private dwellings occupied and Change of Private dwellings occupied</option>' +
+                '<option value="occupied_dwellings_residents_others_' + id + '">Percentage of Private Dwellings between usual residents and others in 2016</option>' +
+                '<option value="land_area_population_density_' + id + '">Land area and Population Density</option>' +
+              '</select>' +
+              '<div class="each-click-canvases ' + id + '" id="population_population_change_' + id + '">' +
+                '<h3 class="color-darkblue">Population and Population Change with Canada and B.C.</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-7">' +
+                    '<canvas id="' + id + '_population_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-5">' +
+                    '<canvas id="canada_bc_' + id + '_population_change_canvas"></canvas>' +
+                  '</div>' +
                 '</div>' +
               '</div>' +
-              '<div class="row canvases each-modal">' +
-                '<div class="col-md-6">' +
-                  '<h4 class="color-grey">Land area in square kilometres of Canada, B.C. and ' + name + ' in 2016</h4>' +
-                  '<canvas id="canada_bc_' + id + '_land_area_2016_canvas"></canvas>' +
+              '<div class="each-click-canvases ' + id + '" id="dwellings_dewellings_change_' + id + '" style="display:none">' +
+                '<h3 class="color-darkblue">Total Private Dwellings and Change of Total Private Dwellings with Canada and B.C.</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-7">' +
+                    '<canvas id="' + id + '_total_private_dwellings_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-5">' +
+                    '<canvas id="canada_bc_' + id + '_total_private_dwellings_change_canvas"></canvas>' +
+                  '</div>' +
                 '</div>' +
-                '<div class="col-md-6">' +
-                  '<h4 class="color-grey">Population density per square kilometre of Canada, B.C. and ' + name + ' in 2016</h4>' +
-                  '<canvas id="canada_bc_' + id + '_population_density_2016_canvas"></canvas>' +
+              '</div>' +
+              '<div class="each-click-canvases ' + id + '" id="occupied_dwellings_dewellings_change_' + id + '" style="display:none">' +
+                '<h3 class="color-darkblue">Private dwellings occupied by usual residents and Change of Private dwellings occupied by usual residents with Canada and B.C.</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-7">' +
+                    '<canvas id="' + id + '_private_dwellings_usual_residents_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-5">' +
+                    '<canvas id="canada_bc_' + id + '_dwellings_occupied_residents_change_canvas"></canvas>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="each-click-canvases ' + id + '" id="occupied_dwellings_residents_others_' + id + '" style="display:none">' +
+                '<h3 class="color-darkblue">Percentage of Private Dwellings between usual residents and others in 2016</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-3 col-xs-2"></div>' +
+                  '<div class="col-md-6 col-xs-8">' +
+                    '<canvas id="' + id + '_percentage_private_dwellings_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-3 col-xs-2"></div>' +
+                '</div>' +
+              '</div>' +
+              '<div class="each-click-canvases ' + id + '" id="land_area_population_density_' + id + '" style="display:none">' +
+                '<h3 class="color-darkblue">Land area in square kilometres and Population density per square kilometre</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-6">' +
+                    '<canvas id="canada_bc_' + id + '_land_area_2016_canvas"></canvas>' +
+                  '</div>' +
+                  '<div class="col-md-6">' +
+                    '<canvas id="canada_bc_' + id + '_population_density_2016_canvas"></canvas>' +
+                  '</div>' +
                 '</div>' +
               '</div>';
+
+
+      // click event
+      $(start + ".modal-body").on("change", "#population_regional_district_click_region_" + id + "_select", function(e) {
+        var id = e.target.id.split("_");
+        var clicked_id = id[5];
+        var clicked_region = $(this).val();
+
+        if (clicked_region == ("population_population_change_" + clicked_id)) {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+          $(start + ".modal-body #population_population_change_" + clicked_id).show();
+        
+        } else if (clicked_region == ("dwellings_dewellings_change_" + clicked_id)) {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+          $(start + ".modal-body #dwellings_dewellings_change_" + clicked_id).show();
+        
+        } else if (clicked_region == ("occupied_dwellings_dewellings_change_" + clicked_id)) {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+          $(start + ".modal-body #occupied_dwellings_dewellings_change_" + clicked_id).show();
+        
+        } else if (clicked_region == ("occupied_dwellings_residents_others_" + clicked_id)) {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+          $(start + ".modal-body #occupied_dwellings_residents_others_" + clicked_id).show();
+        
+        } else if (clicked_region == ("land_area_population_density_" + clicked_id)) {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+          $(start + ".modal-body #land_area_population_density_" + clicked_id).show();
+        
+        } else {
+          $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        }
+
+      });
+
 
       $("#" + id + "Canvas").html(html);
       html = '';
@@ -165,7 +234,7 @@ $(document).ready(function() {
         data: {
           labels: years,
           datasets: [{
-            label: "Total private dwellings",
+            label: "Private Dwellings occupied by usual residents",
             data: [
               data['Private dwellings occupied by usual residents, 2016'],
               data['Private dwellings occupied by usual residents, 2011']

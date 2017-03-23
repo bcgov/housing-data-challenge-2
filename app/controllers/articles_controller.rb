@@ -5,42 +5,60 @@ class ArticlesController < ApplicationController
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "provincial",
         "title": "Provincial Monthly for Property Transfer Tax",
+        "description": "Please add a description here",
+        "tags": ["provincial","property","transfer","tax"],
         "path": articles_provincial_path
       },
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "development_region",
         "title": "Development Region Monthly for Property Transfer Tax",
+        "description": "Please add a description here",
+        "tags": ["development","region","property","transfer","tax"],
         "path": articles_development_region_path
       },
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "municipal",
         "title": "Municipal Monthly for Property Transfer Tax",
+        "description": "Please add a description here",
+        "tags": ["municipal","property","transfer","tax"],
         "path": articles_municipal_path
       },
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "census2016",
         "title": "Census of B.C. 2016",
+        "description": "Please add a description here",
+        "tags": ["census","bc","2016","population"],
         "path": articles_census_bc_path
       },
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "national_household_survey",
         "title": "National Household Survey 2011",
+        "description": "Please add a description here",
+        "tags": ["household","survey","tenure","mobility"],
         "path": articles_national_household_survey_path
       },
       {
         "author": "John Doe",
         "date": "2017-02-15",
+        "id": "interesting_insights",
         "title": "Interesting Insights",
+        "description": "Please add a description here",
+        "tags": ["insights","interesting","bubble"],
         "path": articles_interesting_insights_path
       }
     ]
   end
-  
+
   def provincial
     @bc_provincial_data = File.read("#{Rails.root}/public/data/bc_provincial_data.json")
   end

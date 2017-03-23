@@ -1,38 +1,45 @@
 <%= render "header"%>
 
-<div class="container">
+<div class="container" id="articles-container">
 
   <h3 class="color-darkgrey">List of Articles</h3>
 
-  <div class="row">
+  <div class="row" id="item-list">
 
     <% @articles.each_with_index do |article, i| %>
 
-      <div class="col-md-4">
+      <div class="col-md-12 col-xs-12" id="<%= article[:id] %>">
         <div class="item">
-          <div class="item-header" style="background:linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/assets/images/article.jpg') no-repeat center center; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
-            <span class="badge article-index"><%= i+1 %></span>
-            <div class="symbol">
-              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-              <span class="glyphicon glyphicon-star-empty" aria-hidden="true"></span>
-              <div class="hori-bar"></div>
+          <div class="row">
+            <div class="col-md-6 col-xs-6">
+              <div class="item-header" style="background:linear-gradient(rgba(0,0,0,0.0),rgba(0,0,0,0.0)),url('/assets/images/<%= article[:id] %>.png') no-repeat center center; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+                <span class="badge article-index"><%= i+1 %></span>
+              </div>
             </div>
-          </div>
-          <div class="item-body">
-            <%= article[:title] %>
-          </div>
-          <div class="item-footer">
-            <div>
-              <%= article[:date] %> | <a href="#"><%= article[:author] %></a>
-              <span class="read-more"><%= link_to "Click to read", article[:path], :class=>"btn btn-xs btn-success" %></span>
+            <div class="col-md-6 col-xs-6">
+              <div class="item-body">
+                <div class="item-title"><%= article[:title] %></div>
+                <div class="item-desc"><%= article[:description] %></div>
+              </div>
+              <div class="item-tags">
+                Tags: 
+                <% article[:tags].each do |tag| %>
+                  <span class="tags">#<%= tag %></span>
+                <% end %>
+              </div>
+              <div class="item-footer">
+                <div>
+                  <%= article[:date] %> | <a href="#"><%= article[:author] %></a>
+                  <span class="read-more"><%= link_to "Click to read", article[:path], :class=>"btn btn-xs btn-success" %></span>
+                </div>
+              </div>    
             </div>
           </div>
         </div>
       </div>
 
     <% end %>
-
+    <div id="item_list_msg"></div>
   </div>
 
 </div>

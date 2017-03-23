@@ -1,4 +1,9 @@
-<div id="choropleth_map" class="choropleth_map"></div>
+<p class="description">
+  <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+  Please add a DESCRIPTION here
+</p>
+
+<div id="municipal_map" class="choropleth_map"></div>
 
 <div class="click_features">
   <%= render "articles/municipal/click_municipal" %>  
@@ -10,7 +15,7 @@ $(document).ready(function() {
   var municipal_transaction_data = JSON.parse( $("#municipal_transaction_data").val() );
 
 
-  var map = L.map('choropleth_map',{scrollWheelZoom:false}).setView([49.5800,-122.0000], 7);
+  var map = L.map('municipal_map',{scrollWheelZoom:false}).setView([49.5800,-122.0000], 7);
 
   L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

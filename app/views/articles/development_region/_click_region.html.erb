@@ -18,7 +18,7 @@
 
         <!-- summary -->
         <div class="hori-bar-top"></div>
-        <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.8),rgba(0,0,0,0.8)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
+        <div class="summary" style="background:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url(<%= image_id %>) no-repeat center center fixed; -webkit-background-size:cover; -moz-background-size:cover; -o-background-size:cover; background-size:cover;">
           <div class="row">
             <div class="col-md-7">
               <%= data['description'] %>
@@ -48,75 +48,105 @@
 
 <script>
 $(document).ready(function() {
-
+  var start = "#dev_region_charts ";
+  
   var dev_region_transaction_data = JSON.parse( $("#dev_region_transaction_data").val() );
 
   var months = dev_region_transaction_data['months'];
   var dev_region = dev_region_transaction_data['development_region'];
 
   var html = '';
+
   for (var i = 0; i < dev_region.length; i++) {
     var data = dev_region[i];
     var id = data['id'];
     var name = data['name'];
+    var dev_region_district_json = data['regional_district'];
 
     // make charts to be added to a html page
-    html += '<div class="article">' +
-              '<div class="article-header">' +
-                '<h3 class="color-darkblue">Trend Line for Total Market Transactions</h3>' +
-              '</div>' +
-              '<div class="article-body">' +
-                '<div class="row">' +
-                  '<div class="col-md-2"></div>' +
-                  '<div class="col-md-8">' +
-                    '<canvas id="' + id + '_dev_region_canvas"></canvas>' +
-                  '</div>' +
-                '<div class="col-md-2"></div>' +
-              '</div>' +
-              '</div>' +
+    html += '<select id="dev_region_click_region_' + id + '_select">' +
+              '<option value="total_market_trans_' + id + '">Total Market Transactions</option>' +
+              '<option value="compare_regional_districts_' + id + '">Comparison of Regional Districts</option>';
+
+    for (var t = 0; t < dev_region_district_json.length; t++) {
+      var reg_district_id = dev_region_district_json[t]['id'];
+      var reg_district_name = dev_region_district_json[t]['name'];
+      html += '<option value="' + id + '_' + reg_district_id + '">' + reg_district_name + '</option>';
+    }
+
+    html += '</select>' +
+            '<div class="each-click-canvases ' + id + '" id="total_market_trans_' + id + '">' +
+              '<h3 class="color-darkblue">Total Market Transactions</h3>' +
+              '<p class="description">' +
+                '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                'Please add a DESCRIPTION here' +
+              '</p>' +
+              '<canvas id="' + id + '_dev_region_canvas"></canvas>' +
             '</div>' +
-            '<div class="article">' +
-              '<div class="article-header">' +
-                '<h3 class="color-darkblue">Comparison of Regional Districts</h3>' +
-              '</div>' +
-              '<div class="article-body">' +
-                '<div class="row">' +
-                  '<div class="col-md-8 col-xs-12">' +
-                    '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
-                    '<canvas id="' + id + '_dev_region_district_canvas"></canvas>' +
-                  '</div>' +
-                  '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
-                    '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
-                    '<canvas id="' + id + '_dev_region_compare_canvas"></canvas>' +
-                  '</div>' +
+            '<div class="each-click-canvases ' + id + '" id="compare_regional_districts_' + id + '" style="display:none">' +
+              '<h3 class="color-darkblue">Comparison of Regional Districts</h3>' +
+              '<p class="description">' +
+                '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                'Please add a DESCRIPTION here' +
+              '</p>' +
+              '<div class="row">' +
+               '<div class="col-md-8 col-xs-12">' +
+                  '<p class="color-grey make-center make-bold">Transactions Monthly Summary</p>' +
+                  '<canvas id="' + id + '_dev_region_district_canvas"></canvas>' +
+                '</div>' +
+                '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
+                  '<p class="color-grey make-center make-bold">Percentage of Total Transactions</p>' +
+                  '<canvas id="' + id + '_dev_region_compare_canvas"></canvas>' +
                 '</div>' +
               '</div>' +
             '</div>';
 
+    // click event
+    $(start + ".modal-body").on("change", "#dev_region_click_region_" + id + "_select", function(e) {
+      var id = e.target.id.split("_");
+      var clicked_id = id[4];
+      var clicked_region = $(this).val();
 
-    var dev_region_district_json = data['regional_district'];
+      if (clicked_region == ("total_market_trans_" + clicked_id)) {
+        $(start + ".modal-body #compare_regional_districts_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #total_market_trans_" + clicked_id).show();
+
+      } else if (clicked_region == ("compare_regional_districts_" + clicked_id)) {
+        $(start + ".modal-body #total_market_trans_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #compare_regional_districts_" + clicked_id).show();
+
+      } else {
+        $(start + ".modal-body #total_market_trans_" + clicked_id).hide();
+        $(start + ".modal-body #compare_regional_districts_" + clicked_id).hide();
+        $(start + ".modal-body .each-click-canvases." + clicked_id).hide();
+        $(start + ".modal-body #" + clicked_region).show();
+      }
+
+    });
 
     for (var k = 0; k < dev_region_district_json.length; k++) {
       var reg_district_id = dev_region_district_json[k]['id'];
       var reg_district_name = dev_region_district_json[k]['name'];
-      html += '<div class="article">' +
-                '<div class="article-header">' +
-                  '<h3 class="color-darkblue">Overview of ' + reg_district_name + ' Regional District</h3>' +
-                '</div>' +
-                '<div class="article-body">' +
-                  '<div class="row">' +
-                    '<div class="col-md-8 col-xs-12">' +
-                      '<p class="color-grey make-center make-bold">Housing Types</p>' +
-                      '<canvas id="dev_region_district_' + reg_district_id + '_all_type_canvas"></canvas>' +
-                    '</div>' +
-                    '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
-                      '<p class="color-grey make-center make-bold">Percentage of Housing Types</p>' +
-                      '<canvas id="dev_region_district_' + reg_district_id + '_type_canvas"></canvas>' +
-                    '</div>' +
+      html += '<div class="each-click-canvases ' + id + '" id="' + id + '_' + reg_district_id + '" style="display:none">' +
+                '<h3 class="color-darkblue">Overview of ' + reg_district_name + ' Regional District</h3>' +
+                '<p class="description">' +
+                  '<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>' +
+                  'Please add a DESCRIPTION here' +
+                '</p>' +
+                '<div class="row">' +
+                  '<div class="col-md-8 col-xs-12">' +
+                    '<p class="color-grey make-center make-bold">Housing Types</p>' +
+                    '<canvas id="dev_region_district_' + reg_district_id + '_all_type_canvas"></canvas>' +
                   '</div>' +
-                  '<br /><p class="color-grey make-center make-bold">Detail of Residential Property Type</p>' +
-                  '<canvas id="dev_region_district_' + reg_district_id + '_resid_type_canvas"></canvas>' +
+                  '<div class="col-md-4 col-xs-6 col-md-offset-0 col-xs-offset-3">' +
+                    '<p class="color-grey make-center make-bold">Percentage of Housing Types</p>' +
+                    '<canvas id="dev_region_district_' + reg_district_id + '_type_canvas"></canvas>' +
+                  '</div>' +
                 '</div>' +
+                '<br /><p class="color-grey make-center make-bold">Detail of Residential Property Type</p>' +
+                '<canvas id="dev_region_district_' + reg_district_id + '_resid_type_canvas"></canvas>' +
               '</div>';
     }
 

@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   get 'articles/municipal'
   get 'articles/development_region'
   get 'articles/provincial'
+  
   get 'articles/index'
 
   get 'admin/index'

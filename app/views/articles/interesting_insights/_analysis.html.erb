@@ -1,7 +1,41 @@
-<!-- Right panel -->
-<div class="col-md-9">
+<!-- Left panel -->
+<div class="col-md-9" id="interesting_insights_charts">
 
-  <div class="article">
+  <select id="interesting_insights_select">
+    <option value="">Select</option>
+    <option value="major_regional_districts">Insights of Major Regional Districts</option>
+    <option value="burnaby_richmond_surrey_vancouver">Insights of Bunarby, Richmond, Surrey and Vancovuer</option>
+  </select>
+
+  <select class="sub-select" id="major_regional_districts_select" style="display:none">
+    <option value="">Select</option>
+    <option value="pop_density_dwellings_fmv">Population Density VS. Total Private Dwellings with Sum of Fair Market Value</option>
+    <option value="change_dwellings_foreign">Change of Private dwellings occupied VS. Foreign Involvement with Median of Property Transfer Tax</option>
+    <option value="pop_change_change_dwellings_foreign">Population Change VS. Change of Total Private Dwellings with Average of Foreign Fair Market Value</option>
+    <option value="dwellings_minus_change_dwellings">Total private dwellings Change MINUS Change of Private dwellings occupied</option>
+  </select>
+
+  <select class="sub-select" id="burnaby_richmond_surrey_vancouver_select" style="display:none">
+    <option value="">Select</option>
+    <option value="ave_fmv_avg_foreign_fmv_ptt">Average of Fair Market Value VS. Average of Foreign Fair Market Value with Additional Property Transfer Tax</option>
+    <option value="sum_fmv">Sum of Fair Market Value</option>
+    <option value="sum_ptt">Sum of Property Transfer Tax</option>
+    <option value="sum_foreign_fmv">Sum of Foreign Fair Market Value</option>
+    <option value="sum_additional_ptt">Sum of Additional Property Transfer Tax</option>
+    <option value="insights_burnaby">Insights in Burnaby</option>
+    <option value="insights_richmond">Insights in Richmond</option>
+    <option value="insights_surrey">Insights in Surrey</option>
+    <option value="insights_vancouver">Insights in Vancouver</option>
+  </select>
+
+
+  <div class="empty-div article" id="interesting_insights_empty_div">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please select the dropdown menu to see a chart and description
+  </div>
+
+
+  <div class="article" id="major_regional_districts" style="display:none">
     <div class="article-header">
       <h3 class="color-darkblue">Insights of Major Regional Districts</h3>
       <p class="color-grey">Source: BC Data Catalogue and Statistics Canada</p>
@@ -13,7 +47,7 @@
   </div>
 
 
-  <div class="article">
+  <div class="article" id="burnaby_richmond_surrey_vancouver" style="display:none">
     <div class="article-header">
       <h3 class="color-darkblue">Insights of Bunarby, Richmond, Surrey and Vancovuer</h3>
       <p class="color-grey">Source: BC Data Catalogue</p>
@@ -28,7 +62,112 @@
 </div>
 
 
-<!-- Left panel -->
+<!-- Right panel -->
 <div class="col-md-3">
   <%= render "articles/util/right_panel_detail" %>
 </div>
+
+<script>
+$(document).ready(function() {
+  var start = "#interesting_insights_charts ";
+
+  $(start + "#interesting_insights_select").on("change", function() {
+    var interesting_insights_select = $(this).val();
+
+    if (interesting_insights_select == "major_regional_districts") {
+      $(start + ".article").hide();
+      $(start + "#major_regional_districts").show();
+
+      $(start + ".sub-select").hide();
+      $(start + "#major_regional_districts_select").show();
+    
+    } else if (interesting_insights_select == "burnaby_richmond_surrey_vancouver") {
+      $(start + ".article").hide();
+      $(start + "#burnaby_richmond_surrey_vancouver").show();
+
+      $(start + ".sub-select").hide();
+      $(start + "#burnaby_richmond_surrey_vancouver_select").show();
+    
+    } else {
+      $(start + ".article").hide();
+      $(start + ".sub-select").hide();
+      $(start + "#provincial_empty_div").show();
+    }
+
+  });
+
+
+  $(start + "#major_regional_districts_select").on("change", function() {
+    var major_regional_districts_select = $(this).val();
+
+    if (major_regional_districts_select == "pop_density_dwellings_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#pop_density_dwellings_fmv").show();
+
+    } else if (major_regional_districts_select == "change_dwellings_foreign") {
+      $(start + ".canvases").hide();
+      $(start + "#change_dwellings_foreign").show();
+
+    } else if (major_regional_districts_select == "pop_change_change_dwellings_foreign") {
+      $(start + ".canvases").hide();
+      $(start + "#pop_change_change_dwellings_foreign").show();
+
+    } else if (major_regional_districts_select == "dwellings_minus_change_dwellings") {
+      $(start + ".canvases").hide();
+      $(start + "#dwellings_minus_change_dwellings").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+  $(start + "#burnaby_richmond_surrey_vancouver_select").on("change", function() {
+    var major_regional_districts_select = $(this).val();
+
+    if (major_regional_districts_select == "ave_fmv_avg_foreign_fmv_ptt") {
+      $(start + ".canvases").hide();
+      $(start + "#ave_fmv_avg_foreign_fmv_ptt").show();
+
+    } else if (major_regional_districts_select == "sum_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_fmv").show();
+
+    } else if (major_regional_districts_select == "sum_ptt") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_ptt").show();
+
+    } else if (major_regional_districts_select == "sum_foreign_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_foreign_fmv").show();
+
+    } else if (major_regional_districts_select == "sum_additional_ptt") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_additional_ptt").show();
+
+    } else if (major_regional_districts_select == "insights_burnaby") {
+      $(start + ".canvases").hide();
+      $(start + "#insights_burnaby").show();
+
+    } else if (major_regional_districts_select == "insights_richmond") {
+      $(start + ".canvases").hide();
+      $(start + "#insights_richmond").show();
+
+    } else if (major_regional_districts_select == "insights_surrey") {
+      $(start + ".canvases").hide();
+      $(start + "#insights_surrey").show();
+
+    } else if (major_regional_districts_select == "insights_vancouver") {
+      $(start + ".canvases").hide();
+      $(start + "#insights_vancouver").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+});
+</script>

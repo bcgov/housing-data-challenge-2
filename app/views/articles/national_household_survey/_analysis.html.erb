@@ -1,7 +1,36 @@
-<!-- Right panel -->
-<div class="col-md-9">
+<!-- Left panel -->
+<div class="col-md-9" id="household_survey_charts">
 
-  <div class="article">
+  <select id="household_survey_select">
+    <option value="">Select</option>
+    <option value="housing_tenure">Housing Tenure</option>
+    <option value="household_mobility">Household Mobility</option>
+  </select>
+
+  <select class="sub-select" id="housing_tenure_select" style="display:none">
+    <option value="">Select</option>
+    <option value="tenure_type">Total - Housing Tenure Type</option>
+    <option value="total_structural_type">Total - Structural type of dwelling</option>
+    <option value="owner_structural_type">Owner - Structural type of dwelling</option>
+    <option value="renter_structural_type">Renter - Structural type of dwelling</option>
+    <option value="band_housing_structural_type">Band Housing - Structural type of dwelling</option>
+  </select>
+
+  <select class="sub-select" id="household_mobility_select" style="display:none">
+    <option value="">Select</option>
+    <option value="total_household_mobility_status">Total - Household mobility status 5 years ago</option>
+    <option value="total_compare_non_mover_mover">Comparison of Non-mover households and Mover households in total</option>
+    <option value="age_group_compare_non_mover_mover">Comparison of Non-mover households and Mover households by age groups</option>
+    <option value="total_mover">Detail of Mover households in total</option>
+    <option value="age_group_mover">Detail of Mover households by age groups</option>
+  </select>
+
+  <div class="empty-div article">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please select the dropdown menu to see a chart and description
+  </div>
+
+  <div class="article" id="housing_tenure" style="display:none">
     <div class="article-header">
       <h3 class="color-darkblue">Housing Tenure</h3>
       <p class="color-grey">Source: Statistics Canada</p>
@@ -12,7 +41,7 @@
     </div>
   </div>
 
-  <div class="article">
+  <div class="article" id= "household_mobility" style="display:none">
     <div class="article-header">
       <h3 class="color-darkblue">Household Mobility</h3>
       <p class="color-grey">Source: Statistics Canada</p>
@@ -28,7 +57,98 @@
 </div>
 
 
-<!-- Left panel -->
+<!-- Right panel -->
 <div class="col-md-3">
   <%= render "articles/util/right_panel_detail" %>
 </div>
+
+<script>
+$(document).ready(function() {
+  var start = "#household_survey_charts ";
+
+  $(start + "#household_survey_select").on("change", function() {
+    var household_survey_select = $(this).val();
+
+    if (household_survey_select == "housing_tenure") {
+      $(start + ".article").hide();
+      $(start + "#housing_tenure").show();
+
+      $(start + ".sub-select").hide();
+      $(start + "#housing_tenure_select").show();
+    
+    } else if (household_survey_select == "household_mobility") {
+      $(start + ".article").hide();
+      $(start + "#household_mobility").show();
+
+      $(start + ".sub-select").hide();
+      $(start + "#household_mobility_select").show();
+    
+    } else {
+      $(start + ".article").hide();
+      $(start + ".sub-select").hide();
+    }
+
+  });
+
+
+  $(start + "#housing_tenure_select").on("change", function() {
+    var housing_tenure_select = $(this).val();
+
+    if (housing_tenure_select == "tenure_type") {
+      $(start + ".canvases").hide();
+      $(start + "#tenure_type").show();
+
+    } else if (housing_tenure_select == "total_structural_type") {
+      $(start + ".canvases").hide();
+      $(start + "#total_structural_type").show();
+
+    } else if (housing_tenure_select == "owner_structural_type") {
+      $(start + ".canvases").hide();
+      $(start + "#owner_structural_type").show();
+
+    } else if (housing_tenure_select == "renter_structural_type") {
+      $(start + ".canvases").hide();
+      $(start + "#renter_structural_type").show();
+
+    } else if (housing_tenure_select == "band_housing_structural_type") {
+      $(start + ".canvases").hide();
+      $(start + "#band_housing_structural_type").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+  $(start + "#household_mobility_select").on("change", function() {
+    var household_mobility_select = $(this).val();
+
+    if (household_mobility_select == "total_household_mobility_status") {
+      $(start + ".canvases").hide();
+      $(start + "#total_household_mobility_status").show();
+
+    } else if (household_mobility_select == "total_compare_non_mover_mover") {
+      $(start + ".canvases").hide();
+      $(start + "#total_compare_non_mover_mover").show();
+
+    } else if (household_mobility_select == "age_group_compare_non_mover_mover") {
+      $(start + ".canvases").hide();
+      $(start + "#age_group_compare_non_mover_mover").show();
+
+    } else if (household_mobility_select == "total_mover") {
+      $(start + ".canvases").hide();
+      $(start + "#total_mover").show();
+
+    } else if (household_mobility_select == "age_group_mover") {
+      $(start + ".canvases").hide();
+      $(start + "#age_group_mover").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+});
+</script>

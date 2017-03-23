@@ -1,29 +1,63 @@
-<h4 class="color-grey">Total - Household mobility status 5 years ago</h4>
-<canvas id="total_household_mobility_status_canvas"></canvas>
-
-<div class="row canvases">
-  <div class="col-md-3 col-xs-3"></div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Comparison of Non-mover households and Mover households in total</h4>
-    <canvas id="non_mover_mover_compare_canvas"></canvas>
-  </div>
-  <div class="col-md-3 col-xs-3"></div>
+<div class="canvases" id="total_household_mobility_status" style="display:none">
+  <h4 class="color-grey">Total - Household mobility status 5 years ago</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="total_household_mobility_status_canvas"></canvas>
 </div>
 
-<h4 class="color-grey">Comparison of Non-mover households and Mover households by age groups</h4>
-<canvas id="non_mover_mover_stacked_age_groups_canvas"></canvas>
-
-<div class="row canvases">
-  <div class="col-md-3 col-xs-3"></div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Detail of Mover households in total</h4>
-    <canvas id="detail_mover_compare_canvas"></canvas>
+<div class="canvases" id="total_compare_non_mover_mover" style="display:none">
+  <h4 class="color-grey">Comparison of Non-mover households and Mover households in total</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-3 col-xs-3"></div>
+    <div class="col-md-6 col-xs-6">
+      <canvas id="non_mover_mover_compare_canvas"></canvas>
+    </div>
+    <div class="col-md-3 col-xs-3"></div>
   </div>
-  <div class="col-md-3 col-xs-3"></div>
 </div>
 
-<h4 class="color-grey">Detail of Mover households by age groups</h4>
-<canvas id="detail_mover_stacked_age_groups_canvas"></canvas>
+<div class="canvases" id="age_group_compare_non_mover_mover" style="display:none">
+  <h4 class="color-grey">Comparison of Non-mover households and Mover households by age groups</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="non_mover_mover_stacked_age_groups_canvas"></canvas>
+</div>
+
+<div class="canvases" id="total_mover" style="display:none">
+  <h4 class="color-grey">Detail of Mover households in total</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-3 col-xs-3"></div>
+    <div class="col-md-6 col-xs-6">
+      <canvas id="detail_mover_compare_canvas"></canvas>
+    </div>
+    <div class="col-md-3 col-xs-3"></div>
+  </div>
+</div>
+
+<div class="canvases" id="age_group_mover" style="display:none">
+  <h4 class="color-grey">Detail of Mover households by age groups</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <canvas id="detail_mover_stacked_age_groups_canvas"></canvas>
+</div>
+
+
+
+
 
 
 <script>

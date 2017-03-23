@@ -87,12 +87,12 @@
     "total": 596
   },
   "sum_FMV": {
-    "name": "FMV sum",
+    "name": "Sum of Fair Market Value",
     "monthly": [14629843157,13045955026,11008931056,9586326752,6900292687,7305686989,6213865116],
     "total": 68690900783
   },
   "sum_PTT_paid": {
-    "name": "PTT Paid",
+    "name": "Sum of Property Transfer Tax",
     "monthly": [273602949,237410177,198612617,183939645,130173381,152234331,130160264],
     "total": 1306133364
   },
@@ -102,7 +102,7 @@
     "total": 4901
   },
   "sum_FMV_foreign": {
-    "name": "FMV sum of Foreign Involvement Transactions",
+    "name": "Sum of Foreign Fair Market Value",
     "monthly": [1334731937,1910270115,234150750,481126471,292073102,318507284,291037133],
     "total": 4861896792
   },
@@ -122,7 +122,7 @@
     "total": 249
   },
   "add_tax_paid": {
-    "name": "Additional Tax Paid",
+    "name": "Additional Property Transfer Tax",
     "monthly": [0,0,2342545,8906680,13326867,24064623,15642591],
     "total": 64283306
   }

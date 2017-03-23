@@ -1,9 +1,26 @@
-<!-- Right panel -->
-<div class="col-md-9">
+<!-- Left panel -->
+<div class="col-md-9" id="census_bc_charts">
 
-  <div class="article">
+  <select id="census_bc_select">
+    <option value="regional_district">Population Change in Regional Districts</option>
+    <option value="canada_bc">Overview of Canada and B.C.</option>
+    <option value="dev_region">Overview of Development Regions</option>
+  </select>
+
+  <select id="canada_bc_select" style="display:none">
+    <option value="">Select</option>
+    <option value="population">Population</option>
+    <option value="total_private_dwellings">Total Private Dwellings</option>
+    <option value="private_dwellings_residents_canada_bc">Private dwellings occupied by usual residents of Canada and B.C. in 2016</option>
+    <option value="percentage_private_dwellings_residents_canada_bc">Percentage of Private Dwellings between usual residents and others of Canada and B.C. in 2016</option>
+    <option value="population_change_dwellings_change">Population Change and Total private dwellings Change</option>
+    <option value="population_comparison_bc_rest">Population Comparison of B.C. and Rest</option>
+    <option value="land_area_population_denisty">Land area and Population Density</option>
+  </select>
+
+  <div class="article" id="regional_district">
     <div class="article-header">
-      <h3 class="color-darkblue">Population Change in Regional Districts between 2011 and 2016</h3>
+      <h3 class="color-darkblue">Population Change in Regional Districts</h3>
       <p class="color-grey">Source: Statistics Canada</p>
     </div>
 
@@ -13,7 +30,7 @@
   </div>
 
 
-  <div class="article">
+  <div class="article" id="canada_bc" style="display:none">
     <div class="article-header">
       <h3 class="color-darkblue">Overview of Canada and B.C.</h3>
       <p class="color-grey">Source: Statistics Canada</p>
@@ -25,9 +42,9 @@
   </div>
 
 
-  <div class="article">
+  <div class="article" id="dev_region" style="display:none">
     <div class="article-header">
-      <h3 class="color-darkblue">Development Regions in 2011 and 2016</h3>
+      <h3 class="color-darkblue">Overview of Development Regions</h3>
       <p class="color-grey">Source: Statistics Canada</p>
     </div>
 
@@ -36,14 +53,84 @@
     </div>
   </div>
 
-
-
-
-
 </div>
 
 
-<!-- Left panel -->
+<!-- Right panel -->
 <div class="col-md-3">
   <%= render "articles/util/right_panel_detail" %>
 </div>
+
+
+<script>
+$(document).ready(function() {
+  var start = "#census_bc_charts ";
+
+  $(start + "#census_bc_select").on("change", function() {
+    var census_bc_select = $(this).val();
+    
+    if (census_bc_select == "canada_bc") {
+      $(start + ".article").hide();
+      $(start + "#canada_bc").show();
+
+      $(start + "#canada_bc_select").show();
+
+    } else if (census_bc_select == "dev_region") {
+      $(start + ".article").hide();
+      $(start + "#dev_region").show();
+
+      $(start + "#canada_bc_select").hide();
+
+    } else if (census_bc_select == "regional_district") {
+      $(start + ".article").hide();
+      $(start + "#regional_district").show();
+
+      $(start + "#canada_bc_select").hide();
+
+    } else {
+      $(start + ".article").hide();
+      $(start + "#canada_bc_select").hide();
+    }
+
+  });
+
+  $(start + "#canada_bc_select").on("change", function() {
+    var canada_bc_select = $(this).val();
+
+    if (canada_bc_select == "population") {
+      $(start + ".canvases").hide();
+      $(start + "#population").show();
+
+    } else if (canada_bc_select == "total_private_dwellings") {
+      $(start + ".canvases").hide();
+      $(start + "#total_private_dwellings").show();
+
+    } else if (canada_bc_select == "private_dwellings_residents_canada_bc") {
+      $(start + ".canvases").hide();
+      $(start + "#private_dwellings_residents_canada_bc").show();
+
+    } else if (canada_bc_select == "percentage_private_dwellings_residents_canada_bc") {
+      $(start + ".canvases").hide();
+      $(start + "#percentage_private_dwellings_residents_canada_bc").show();
+
+    } else if (canada_bc_select == "population_change_dwellings_change") {
+      $(start + ".canvases").hide();
+      $(start + "#population_change_dwellings_change").show();
+
+    } else if (canada_bc_select == "population_comparison_bc_rest") {
+      $(start + ".canvases").hide();
+      $(start + "#population_comparison_bc_rest").show();
+
+    } else if (canada_bc_select == "land_area_population_denisty") {
+      $(start + ".canvases").hide();
+      $(start + "#land_area_population_denisty").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+});
+</script>

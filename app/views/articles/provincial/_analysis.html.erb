@@ -1,10 +1,39 @@
 
-<!-- Right panel -->
-<div class="col-md-9">
+<!-- Left panel -->
+<div class="col-md-9" id="provincial_charts">
 
-  <div class="article">
+  <select id="provincial_select">
+    <option value="">Select</option>
+    <option value="overview_housing_market">Overview of Housing Market</option>
+    <option value="overview_foreign_involvement">Overview of Foreign Involvement</option>
+  </select>
+
+  <select class="sub-select" id="overview_housing_market_select" style="display:none">
+    <option value="">Select</option>
+    <option value="total_market_trans">Total Market Transactions</option>
+    <option value="sum_fmv">Sum of Fair Market Value</option>
+    <option value="sum_ptt">Sum of Property Transfer Tax</option>
+    <option value="sum_additional_ptt">Sum of Additional Tax Paid</option>
+    <option value="housing_types">Housing Types</option>
+  </select>
+
+  <select class="sub-select" id="overview_foreign_involvement_select" style="display:none">
+    <option value="">Select</option>
+    <option value="foreign_transactions">Total Market Transactions for Foreign Involvement</option>
+    <option value="foreign_sum_fmv">Sum of Fair Market Valuefor Foreign Involvement</option>
+    <option value="fmv_ptt_add_foreign_fmv">Fair Market Vaue, Property Transfer Tax, Additional Property Transfer Tax, and Foreign Fair Market Value</option>
+    <option value="compare_citizen_foreign">Citizen/PR and Foreign Involvement</option>
+  </select>
+
+  <div class="empty-div article" id="provincial_empty_div">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please select the dropdown menu to see a chart and description
+  </div>
+
+
+  <div class="article" id="overview_housing_market" style="display:none">
     <div class="article-header">
-      <h3 class="color-darkblue">Overview of Market Transactions</h3>
+      <h3 class="color-darkblue">Overview of Housing Market</h3>
       <p class="color-grey">Source: BC Data Catalogue</p>
     </div>
 
@@ -13,9 +42,9 @@
     </div>
   </div>
 
-  <div class="article">
+  <div class="article" id="overview_foreign_involvement" style="display:none">
     <div class="article-header">
-      <h3 class="color-darkblue">Overview of Foreign Involvement Transactions</h3>
+      <h3 class="color-darkblue">Overview of Foreign Involvement</h3>
       <p class="color-grey">Source: BC Data Catalogue</p>
     </div>
 
@@ -24,16 +53,100 @@
     </div>
   </div>
 
-
-  <div class="bs-callout bs-callout-warning">
-    <h4>Data Dictionary for Provincial</h4>
-    <%= render "articles/util/data_dictionary_ptt" %>
-  </div>
-
 </div>
 
 
-<!-- Left panel -->
+<!-- Right panel -->
 <div class="col-md-3">
   <%= render "articles/util/right_panel_detail" %>
 </div>
+
+
+<script>
+$(document).ready(function() {
+  var start = "#provincial_charts ";
+
+  $(start + "#provincial_select").on("change", function() {
+    var provincial_select = $(this).val();
+
+    if (provincial_select == "overview_housing_market") {
+      $(start + ".article").hide();
+      $(start + "#overview_housing_market").show();
+      
+      $(start + ".sub-select").hide();
+      $(start + "#overview_housing_market_select").show();
+    
+    } else if (provincial_select == "overview_foreign_involvement") {
+      $(start + ".article").hide();
+      $(start + "#overview_foreign_involvement").show();
+
+      $(start + ".sub-select").hide();
+      $(start + "#overview_foreign_involvement_select").show();
+    
+    } else {
+      $(start + ".article").hide();
+      $(start + ".sub-select").hide();
+      $(start + "#provincial_empty_div").show();
+    }
+
+  });
+
+
+  $(start + "#overview_housing_market_select").on("change", function() {
+    var overview_housing_market_select = $(this).val();
+
+    if (overview_housing_market_select == "total_market_trans") {
+      $(start + ".canvases").hide();
+      $(start + "#total_market_trans").show();
+      
+    } else if (overview_housing_market_select == "sum_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_fmv").show();
+
+    } else if (overview_housing_market_select == "sum_ptt") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_ptt").show();
+
+    } else if (overview_housing_market_select == "sum_additional_ptt") {
+      $(start + ".canvases").hide();
+      $(start + "#sum_additional_ptt").show();
+
+    } else if (overview_housing_market_select == "housing_types") {
+      $(start + ".canvases").hide();
+      $(start + "#housing_types").show();
+
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+  $(start + "#overview_foreign_involvement_select").on("change", function() {
+    var overview_foreign_involvement_select = $(this).val();
+
+    if (overview_foreign_involvement_select == "foreign_transactions") {
+      $(start + ".canvases").hide();
+      $(start + "#foreign_transactions").show();
+    
+    } else if (overview_foreign_involvement_select == "foreign_sum_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#foreign_sum_fmv").show();
+    
+    } else if (overview_foreign_involvement_select == "fmv_ptt_add_foreign_fmv") {
+      $(start + ".canvases").hide();
+      $(start + "#fmv_ptt_add_foreign_fmv").show();
+    
+    } else if (overview_foreign_involvement_select == "compare_citizen_foreign") {
+      $(start + ".canvases").hide();
+      $(start + "#compare_citizen_foreign").show();
+    
+    } else {
+      $(start + ".canvases").hide();
+    }
+
+  });
+
+
+});
+</script>

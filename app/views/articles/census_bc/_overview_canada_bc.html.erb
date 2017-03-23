@@ -1,85 +1,135 @@
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population of Canada</h4>
-    <canvas id="canada_population_canvas"></canvas>
+<div class="canvases" id="population" style="display:none">
+  <h4 class="color-grey">Population of Canada and B.C.</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">Canada</h4>
+      <canvas id="canada_population_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">B.C.</h4>
+      <canvas id="bc_population_canvas"></canvas>
+    </div>
   </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Total Private Dwellings of Canada</h4>
+</div>
+
+
+<div class="canvases" id="total_private_dwellings" style="display:none">
+  <h4 class="color-grey">Total Private Dwellings of Canada and B.C.</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+    <h4 class="color-grey make-center">Canada</h4>
     <canvas id="canada_total_private_dwellings_canvas"></canvas>
-  </div>
-</div>
-
-<div class="row canvases">
-  <div class="col-md-7 col-xs-7">
-    <h4 class="color-grey">Private dwellings occupied by usual residents of Canada</h4>
-    <canvas id="canada_private_dwellings_usual_residents_canvas"></canvas>
-  </div>
-  <div class="col-md-5 col-xs-5">
-    <h4 class="color-grey">Percentage of Private Dwellings between usual residents and others of Canada in 2016</h4>
-    <canvas id="canada_percentage_private_dwellings_canvas"></canvas>
-  </div>
-</div>
-
-
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population of B.C.</h4>
-    <canvas id="bc_population_canvas"></canvas>
-  </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Total Private Dwellings of B.C.</h4>
+    </div>
+    <div class="col-md-6 col-xs-6">
+    <h4 class="color-grey make-center">B.C.</h4>
     <canvas id="bc_total_private_dwellings_canvas"></canvas>
+    </div>
   </div>
 </div>
 
 
-<div class="row canvases">
-  <div class="col-md-7 col-xs-7">
-    <h4 class="color-grey">Private dwellings occupied by usual residents of B.C.</h4>
-    <canvas id="bc_private_dwellings_usual_residents_canvas"></canvas>
-  </div>
-  <div class="col-md-5 col-xs-5">
-    <h4 class="color-grey">Percentage of Private Dwellings between usual residents and others of B.C. in 2016</h4>
-    <canvas id="bc_percentage_private_dwellings_canvas"></canvas>
-  </div>
-</div>
-
-
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population Change (%) in Canada and B.C. between 2011 and 2016</h4>
-    <canvas id="canada_bc_population_change_canvas"></canvas>
-  </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Total private dwellings Change (%) in Canada and B.C. between 2011 and 2016</h4>
-    <canvas id="canada_bc_total_private_dwellings_change_canvas"></canvas>
+<div class="canvases" id="private_dwellings_residents_canada_bc" style="display:none">
+  <h4 class="color-grey">Private dwellings occupied by usual residents of Canada and B.C. in 2016</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">Canada</h4>
+      <canvas id="canada_private_dwellings_usual_residents_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">B.C.</h4>
+      <canvas id="bc_private_dwellings_usual_residents_canvas"></canvas>
+    </div>
   </div>
 </div>
 
 
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population Comparison of B.C. and Rest in 2016</h4>
-    <canvas id="bc_rest_2016_compare_pie_canvas"></canvas>
+<div class="canvases" id="percentage_private_dwellings_residents_canada_bc" style="display:none">
+  <h4 class="color-grey">Percentage of Private Dwellings between usual residents and others of Canada and B.C. in 2016</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">Canada</h4>
+      <canvas id="canada_percentage_private_dwellings_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">B.c.</h4>
+      <canvas id="bc_percentage_private_dwellings_canvas"></canvas>
+    </div>    
   </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population Comparison of B.C. and Rest in 2011</h4>
-    <canvas id="bc_rest_2011_compare_pie_canvas"></canvas>
+</div>
+
+<div class="canvases" id="population_change_dwellings_change" style="display:none">
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Population Change (%) in Canada and B.C.</h4>
+      <p class="description">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+        Please add a DESCRIPTION here
+      </p>
+      <canvas id="canada_bc_population_change_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Total private dwellings Change (%) in Canada and B.C.</h4>
+      <p class="description">
+        <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+        Please add a DESCRIPTION here
+      </p>
+      <canvas id="canada_bc_total_private_dwellings_change_canvas"></canvas>
+    </div>
+  </div>
+</div>
+
+<div class="canvases" id="population_comparison_bc_rest" style="display:none">
+  <h4 class="color-grey">Population Comparison of B.C. and Rest</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">2016</h4>
+      <canvas id="bc_rest_2016_compare_pie_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey make-center">2011</h4>
+      <canvas id="bc_rest_2011_compare_pie_canvas"></canvas>
+    </div>
   </div>
 </div>
 
 
-<div class="row canvases">
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Land area in square kilometres of Canada and B.C. in 2016</h4>
-    <canvas id="canada_bc_land_area_2016_canvas"></canvas>
-  </div>
-  <div class="col-md-6 col-xs-6">
-    <h4 class="color-grey">Population density per square kilometre of Canada and B.C. in 2016</h4>
-    <canvas id="canada_bc_population_density_2016_canvas"></canvas>
+<div class="canvases" id="land_area_population_denisty" style="display:none">
+  <h4 class="color-grey">Land area and Population Density</h4>
+  <p class="description">
+    <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> 
+    Please add a DESCRIPTION here
+  </p>
+  <div class="row">
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Land area in square kilometres of Canada and B.C. in 2016</h4>
+      <canvas id="canada_bc_land_area_2016_canvas"></canvas>
+    </div>
+    <div class="col-md-6 col-xs-6">
+      <h4 class="color-grey">Population density per square kilometre of Canada and B.C. in 2016</h4>
+      <canvas id="canada_bc_population_density_2016_canvas"></canvas>
+    </div>
   </div>
 </div>
-
 
 <script>
 $(document).ready(function() {
