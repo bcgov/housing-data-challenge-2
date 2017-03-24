@@ -12,21 +12,41 @@ Testing Link: [Testing Link]
 - PostgreSQL
 
 ### How to run:
-1. Clone or Download this
-2. Go go the folder
-3. Open your terminal
-4. Type: bundle install
-5. Type: rake db:create
-6. Type: rake db:migrate
-7. Type: rails server
-8. Open your browser at http://localhost:3000/
+- Clone or Download this
+- Go go the folder
+- Open your terminal, and type the following commands
+
+
+```
+$ bundle install
+```
+
+```
+$ rake db:create
+```
+
+```
+$ rake db:migrate
+```
+
+```
+$ rails server
+```
+
+- Open your browser at http://localhost:3000/
+
 
 ### How to use a Docker Image:
 - Built a Dokcer image and container through a Openshift Platform, and pushed it to [Docker Hub].
 - To search in Docker Hub: exponentian/data-visualization
-1. Open your terminal
-2. Type to run: docker run -p 8080:8080 exponentian/data-visualization
-3. Open your browser at http://localhost:8080/
+
+- Open your terminal, and type the following a command
+
+```
+$ docker run -p 8080:8080 exponentian/data-visualization
+```
+
+- Open your browser at http://localhost:8080/
 
 
 ### Structure:
