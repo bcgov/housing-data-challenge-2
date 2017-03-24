@@ -16,8 +16,10 @@ Testing Link: [Testing Link]
 2. Go go the folder
 3. Open your terminal
 4. Type: bundle install
-5. Type: rails server
-6. Open your browser at http://localhost:3000/
+5. Type: rake db:create
+6. Type: rake db:migrate
+7. Type: rails server
+8. Open your browser at http://localhost:3000/
 
 ### How to use a Docker Image:
 - Built a Dokcer image and container through a Openshift Platform, and pushed it to [Docker Hub].
