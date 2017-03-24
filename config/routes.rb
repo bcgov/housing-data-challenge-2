@@ -5,16 +5,8 @@ Rails.application.routes.draw do
   get 'articles/census_bc'
   get 'articles/municipal'
   get 'articles/development_region'
-  get 'articles/provincial'
-  
+  get 'articles/provincial'  
   get 'articles/index'
-
-  get 'admin/index'
-
-  devise_for :admin_users, ActiveAdmin::Devise.config
-  ActiveAdmin.routes(self)
-  devise_for :users
-  get 'home/index'
   
   root 'articles#index'
   
