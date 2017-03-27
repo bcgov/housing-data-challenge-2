@@ -12,13 +12,50 @@ Testing Link: [Testing Link]
 - PostgreSQL
 
 ### How to run:
-1. Clone or Download this
-2. Go go the folder
-3. Type: bundle install
-4. Type: rails server
-5. Open your browser at http://localhost:3000/
+- Clone or Download this
+- Go go the folder
+- Open your terminal, and type the following commands
 
-### Note:
-- It may be slow to open the "Development Region Monthly for Property Transfer Tax" on the list because many visualizations are working
+
+```
+$ bundle install
+```
+
+```
+$ rake db:create
+```
+
+```
+$ rake db:migrate
+```
+
+```
+$ rails server
+```
+
+- Open your browser at http://localhost:3000/
+
+
+### How to use a Docker Image:
+- Built a Dokcer image and container through a Openshift Platform, and pushed it to [Docker Hub].
+- To search in Docker Hub: exponentian/data-visualization
+
+- Open your terminal, and type the following a command
+
+```
+$ docker run -p 8080:8080 exponentian/data-visualization
+```
+
+- Open your browser at http://localhost:8080/
+
+
+### Structure:
+- View pages: ./app/views/articles
+- Controllers: ./app/controllers/articles_controller
+- JS and CSS: ./app/assets/javascripts/articles.js and ./app/assets/stylesheets/
+- Public data: ./public/data
+
+
 
 [Testing Link]: <https://data-visualization-hoseokoh.herokuapp.com/>
+[Docker Hub]: <https://hub.docker.com/>
