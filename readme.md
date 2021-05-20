@@ -1,3 +1,5 @@
+[![Lifecycle:Retired](https://img.shields.io/badge/Lifecycle-Retired-d45500)](<Redirect-URL>)
+
 # Data Visualization Challenge
 
 #### by Ho Seok (Brandon) Oh
